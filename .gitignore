@@ -8,3 +8,5 @@ WiredIn/*.csproj
 *.pdb
 *.exe.config
 *.manifest
+*.txt
+*.jpg
