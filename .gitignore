@@ -1,0 +1,10 @@
+managedwinapi-0.3/
+*.chm
+Gma.UserActivityMonitor/
+WiredIn/obj/
+WiredIn/*.csproj
+*.mp4
+*.suo
+*.pdb
+*.exe.config
+*.manifest
