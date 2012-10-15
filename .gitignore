@@ -2,11 +2,16 @@ managedwinapi-0.3/
 *.chm
 Gma.UserActivityMonitor/
 WiredIn/obj/
+WiredIn/bin/
+WiredIn/Properties
 WiredIn/*.csproj
 *.mp4
 *.suo
 *.pdb
+*.resx
 *.exe.config
 *.manifest
 *.txt
 *.jpg
+*.sln
+.gitignore
