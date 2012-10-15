@@ -14,4 +14,4 @@ WiredIn/*.csproj
 *.txt
 *.jpg
 *.sln
-.gitignore
+*.gitignore
