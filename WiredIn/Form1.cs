@@ -1,69 +1,70 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Wired_In.UserActivity;
 using ManagedWinapi.Windows;
-using Wired_In.Windows;
 using Wired_In.Analyzer;
-
-using ManagedWinapi.Hooks;
-using WiredIn;
+using Wired_In.UserActivity;
+using Wired_In.Windows;
+using Wired_In;
 
 namespace Wired_In
 {
     public partial class MainForm : Form
     {
-        private ObservableCollection<Activity> activity_queue;
+        private ObservableCollection<Activity> activityQueue;
         
-        private WindowInfo current_window_info;
-        private Judge theJudge;
-        private Logger theLogger;
+        private WindowInfo currentWindowInfo;        
+        
+        private Judge judge;
+        
+        private Logger logger;
 
         public Point lastClick;
-        public bool drag = false;
-
-        public int pic_id;
-
-        public bool IsTimerStarted = false;
         
-        public int number_of_pics;
+        public bool drag = false;       
 
-        private Size currentSize;
+        public bool isTimerStarted = false;                
 
         private FormState formState = new FormState();
 
         public MainForm()
         {
+            this.myView = new Wired_In.View.ImageView();
+            //this.myView = new Wired_In.View.DigitalClockView();
+
             InitializeComponent();
-            activity_queue = new ObservableCollection<Activity>();
-            current_window_info = new WindowInfo();
+            activityQueue = new ObservableCollection<Activity>();
+            currentWindowInfo = new WindowInfo();
             win_watcher_timer.Enabled = false;
-            theJudge = new Judge(activity_queue);
-            activity_queue.CollectionChanged += theJudge.OnActiveQueueChange;
-            theLogger = new Logger(activity_queue);
+            judge = new Judge(activityQueue,myView);
+            activityQueue.CollectionChanged += judge.OnActiveQueueChange;
+            logger = new Logger(activityQueue);
         }
 
-        private void setFormLocation()
+        private void showOnMonitor(int monitor)
         {
-            Rectangle r = Screen.PrimaryScreen.WorkingArea;
-            this.StartPosition = FormStartPosition.Manual;
-            //default location is right bottom
-            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
-        }
+            Screen[] sc;
+            sc = Screen.AllScreens;           
 
+            Screen s = monitor >= sc.Length ? sc[0] : sc[monitor];
+            
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Left = s.Bounds.Left;
+            this.Top = s.Bounds.Top;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(Left, Top);
+            this.Size = s.Bounds.Size;
+            //this.myView.Size = this.Size;
+            this.WindowState = FormWindowState.Normal;
+            //this.WindowState = FormWindowState.Maximized;            
+        }
+       
         private void MainForm_Load(object sender, EventArgs e)
         {
-            countNumberOfFiles();
-            showImage(0.01);
-            setFormLocation(); 
-            
-            this.TopMost = true;
+            showOnMonitor(1);  
+            //updateScore(0.01);                      
+            this.TopMost = false;
         }
 
         /// <summary>
@@ -71,13 +72,13 @@ namespace Wired_In
         /// </summary>
         private void enqueueActivity(Activity a)
         {
-            if (!IsTimerStarted)
+            if (!isTimerStarted)
                 return;
             try
             {
                 lock (this)
                 {
-                    activity_queue.Add(a);
+                    activityQueue.Add(a);
                 }
             }
             catch (System.Exception ex)
@@ -92,17 +93,16 @@ namespace Wired_In
         private void WindowsWatcherTimerTick(object sender, EventArgs e)
         {
             SystemWindow window = SystemWindow.ForegroundWindow;
-            if (!current_window_info.belongToSameProcess(window))
+            if (!currentWindowInfo.belongToSameProcess(window))
             {
                 enqueueActivity(new ProcChanged(window.Process.ProcessName, DateTime.Now));
-                current_window_info.update(window);
+                currentWindowInfo.update(window);
             }
-            if (!current_window_info.WinTitle.Equals(window.Title))
+            if (!currentWindowInfo.WinTitle.Equals(window.Title))
             {
-                current_window_info.update(window);
-            }
-            this.updateScore(theJudge.getCurrentScore());
-            this.theLogger.DequeueActivity();
+                currentWindowInfo.update(window);
+            }           
+            this.logger.DequeueActivity();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -110,16 +110,16 @@ namespace Wired_In
             if (btnStart.Text.Equals("START"))
             {
                 btnStart.Text = "PAUSE";
-                IsTimerStarted = true;
+                isTimerStarted = true;
                 win_watcher_timer.Start();
-                theJudge.StartJudge();
+                judge.StartJudge();
             }
             else
             {
                 btnStart.Text = "START";
-                IsTimerStarted = false;
+                isTimerStarted = false;
                 win_watcher_timer.Stop();
-                theJudge.PauseJudge();
+                judge.PauseJudge();
             }
         }
 
@@ -138,17 +138,17 @@ namespace Wired_In
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             win_watcher_timer.Stop();
-            theJudge.StopJudge();
+            judge.StopJudge();
         }
 
         private void ChangeSize(Size newSize)
         {
-            picBox.Width = newSize.Width / 2;
-            picBox.Height = newSize.Height / 2;
-            this.Size = picBox.Size;
+            myView.Width = newSize.Width / 2;
+            myView.Height = newSize.Height / 2;
+            this.Size = myView.Size;
 
-            pnlControls.Height = (int)Math.Round(picBox.Width * 0.1);
-            pnlControls.Width = (int)Math.Round(picBox.Width * 0.8);
+            pnlControls.Height = (int)Math.Round(myView.Width * 0.1);
+            pnlControls.Width = (int)Math.Round(myView.Width * 0.8);
             btnStart.Width = (int)Math.Round(pnlControls.Width * 0.25);
             btnStart.Height = (int)Math.Round(pnlControls.Height * 0.7);
             btnStart.Left = (int)Math.Round(pnlControls.Width * 0.1);
@@ -158,39 +158,16 @@ namespace Wired_In
             int a = pnlControls.Width / 2 - btnStart.Width - btnStart.Left;
             btnExit.Left = btnStart.Width + 2 * a;
             Point ptControlPanel = new Point();
-            ptControlPanel.X = picBox.Width / 2 - pnlControls.Width / 2;
-            ptControlPanel.Y = picBox.Height - pnlControls.Height - 10;
+            ptControlPanel.X = myView.Width / 2 - pnlControls.Width / 2;
+            ptControlPanel.Y = myView.Height - pnlControls.Height - 10;
             pnlControls.Location = ptControlPanel;
         }
-              
-
-        private void showImage(double score)
-        {
-            if (picBox.Image != null)
-            {
-                Image oldImage = picBox.Image;
-                picBox.Image = null;
-                oldImage.Dispose();
-            }
-
-            pic_id = number_of_pics + 1 - (int)Math.Ceiling(score * number_of_pics);
-
-            string path = Application.StartupPath+"//pics//" + pic_id + ".jpg";
-            Image img = Image.FromFile(path);
-            picBox.Image = img;
-             
-            if (currentSize.Height != img.Size.Height || currentSize.Width != img.Size.Width)
-            {
-                ChangeSize(img.Size);
-            }
-             
-            pnlControls.InvalidateEx();
-        }
-
+         
+        /*
         public void updateScore(double score)
         {
-            showImage(score);
-        }
+            myView.updateView(score);    
+        }*/
 
         private void btn_exit_Click(object sender, EventArgs e)
         {
@@ -216,17 +193,9 @@ namespace Wired_In
         {
             drag = false;
         }
-            
 
-        private void countNumberOfFiles()
-        {
-            String path = Application.StartupPath + "//pics//";
-            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(path);
-            number_of_pics = dir.GetFiles().Length;
-        }
 
-        
-        private void picBox_MouseHover(object sender, EventArgs e)
+        private void myView_MouseHover(object sender, EventArgs e)
         {
             pnlControls.Visible = true;
         }
@@ -234,7 +203,7 @@ namespace Wired_In
         /// <summary>
         ///   mouse leave the picture box
         /// </summary>
-        private void picBox_MouseLeave(object sender, EventArgs e)
+        private void myView_MouseLeave(object sender, EventArgs e)
         {
             if (this.ClientRectangle.Contains(this.PointToClient(Cursor.Position)))
             {
@@ -248,26 +217,7 @@ namespace Wired_In
 
         }
 
-        /// <summary>
-        ///   picture box painting 
-        /// </summary>
-        private void picBox_Paint(object sender, PaintEventArgs e)
-        {
-            double score;
-            if (!IsTimerStarted)
-                score = 0.001;
-            else
-                score = Math.Round(theJudge.getCurrentScore(), 2);
-
-            String str_score = "Score:" + score + " Pic:" + pic_id + ".jpg" +
-                " Proc:" + current_window_info.ProcName +
-                "\nWindow:" + current_window_info.WinTitle;
-            using (Font myFont = new Font("Arial", 11))
-            {
-                e.Graphics.DrawString(str_score, myFont, Brushes.White, new Point(2, 2));
-            }
-
-        }
+       
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -285,9 +235,16 @@ namespace Wired_In
             formState.Maximize(this);
         }
 
+        private void myView_Load(object sender, EventArgs e)
+        {            
+            myView.updateView(false);   
+        }
 
+      
 
-       
+        
+
+                
         
     }
 }

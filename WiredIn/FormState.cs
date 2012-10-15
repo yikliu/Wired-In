@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace WiredIn
+namespace Wired_In
 {
     class FormState
     {

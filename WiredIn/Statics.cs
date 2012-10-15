@@ -6,7 +6,7 @@ using Wired_In.UserActivity;
 namespace Wired_In.Analyzer
 {
     public class Statics{
-        private State current_state;
+        //private State current_state;
 
         public Statics()
         {

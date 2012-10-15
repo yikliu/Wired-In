@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WiredIn
+namespace Wired_In
 {
     public partial class SettingForm : Form
     {

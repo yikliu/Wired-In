@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using Wired_In;
 using Gma.UserActivityMonitor;
+using Wired_In.View;
 namespace Wired_In
 {
     partial class MainForm
@@ -83,17 +84,16 @@ namespace Wired_In
         {
             this.components = new System.ComponentModel.Container();
             this.win_watcher_timer = new System.Windows.Forms.Timer(this.components);
-            this.picBox = new System.Windows.Forms.PictureBox();
             this.mainFormContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sizesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fullScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalEventProvider1 = new Gma.UserActivityMonitor.GlobalEventProvider();
+           
             this.pnlControls = new Wired_In.TransparentPanel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.mainFormContextMenu.SuspendLayout();
             this.pnlControls.SuspendLayout();
             this.SuspendLayout();
@@ -103,26 +103,11 @@ namespace Wired_In
             this.win_watcher_timer.Interval = 1000;
             this.win_watcher_timer.Tick += new System.EventHandler(this.WindowsWatcherTimerTick);
             // 
-            // picBox
-            // 
-            this.picBox.BackColor = System.Drawing.Color.Lime;
-            this.picBox.ContextMenuStrip = this.mainFormContextMenu;
-            this.picBox.Location = new System.Drawing.Point(0, 0);
-            this.picBox.Margin = new System.Windows.Forms.Padding(0);
-            this.picBox.Name = "picBox";
-            this.picBox.Size = new System.Drawing.Size(600, 488);
-            this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBox.TabIndex = 2;
-            this.picBox.TabStop = false;
-            this.picBox.Paint += new System.Windows.Forms.PaintEventHandler(this.picBox_Paint);
-            this.picBox.MouseLeave += new System.EventHandler(this.picBox_MouseLeave);
-            this.picBox.MouseHover += new System.EventHandler(this.picBox_MouseHover);
-            // 
             // mainFormContextMenu
             // 
             this.mainFormContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sizesToolStripMenuItem});
-            this.mainFormContextMenu.Name = "contextMenuStrip1";
+            this.mainFormContextMenu.Name = "contextStrip";
             this.mainFormContextMenu.Size = new System.Drawing.Size(112, 28);
             // 
             // sizesToolStripMenuItem
@@ -138,20 +123,20 @@ namespace Wired_In
             // smallToolStripMenuItem
             // 
             this.smallToolStripMenuItem.Name = "smallToolStripMenuItem";
-            this.smallToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.smallToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
             this.smallToolStripMenuItem.Text = "Small";
             this.smallToolStripMenuItem.Click += new System.EventHandler(this.smallToolStripMenuItem_Click);
             // 
             // mediumToolStripMenuItem
             // 
             this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
             this.mediumToolStripMenuItem.Text = "Medium";
             // 
             // fullScreenToolStripMenuItem
             // 
             this.fullScreenToolStripMenuItem.Name = "fullScreenToolStripMenuItem";
-            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
             this.fullScreenToolStripMenuItem.Text = "FullScreen";
             this.fullScreenToolStripMenuItem.Click += new System.EventHandler(this.fullScreenToolStripMenuItem_Click);
             // 
@@ -160,11 +145,22 @@ namespace Wired_In
             this.globalEventProvider1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.globalEventProvider_MouseUp);
             this.globalEventProvider1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
             // 
+            // myView
+            // 
+            this.myView.ForeColor = System.Drawing.Color.Transparent;
+            this.myView.Location = new System.Drawing.Point(0, 0);
+            this.myView.Name = "myView";
+            this.myView.Size = new System.Drawing.Size(800, 600);
+            this.myView.TabIndex = 7;
+            this.myView.Load += new System.EventHandler(this.myView_Load);
+            this.myView.MouseHover += new System.EventHandler(myView_MouseHover);
+            this.myView.MouseLeave += new System.EventHandler(myView_MouseLeave);
+            // 
             // pnlControls
             // 
             this.pnlControls.Controls.Add(this.btnExit);
             this.pnlControls.Controls.Add(this.btnStart);
-            this.pnlControls.Location = new System.Drawing.Point(75, 209);
+            this.pnlControls.Location = new System.Drawing.Point(203, 255);
             this.pnlControls.Margin = new System.Windows.Forms.Padding(2);
             this.pnlControls.Name = "pnlControls";
             this.pnlControls.Size = new System.Drawing.Size(416, 62);
@@ -205,9 +201,9 @@ namespace Wired_In
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lime;
-            this.ClientSize = new System.Drawing.Size(600, 567);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.pnlControls);
-            this.Controls.Add(this.picBox);
+            this.Controls.Add(this.myView);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -224,7 +220,8 @@ namespace Wired_In
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
-            ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
+            
+
             this.mainFormContextMenu.ResumeLayout(false);
             this.pnlControls.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -235,7 +232,7 @@ namespace Wired_In
 
         private System.Windows.Forms.Timer win_watcher_timer;
 
-        private System.Windows.Forms.PictureBox picBox;
+        //private System.Windows.Forms.PictureBox picBox;
         private Button btnExit;
         private Button btnStart;
         private TransparentPanel pnlControls;
@@ -245,8 +242,9 @@ namespace Wired_In
         private ToolStripMenuItem smallToolStripMenuItem;
         private ToolStripMenuItem mediumToolStripMenuItem;
         private ToolStripMenuItem fullScreenToolStripMenuItem;
-     
-    
+        private AbstractView myView;
+       
+        
     }
 }
 

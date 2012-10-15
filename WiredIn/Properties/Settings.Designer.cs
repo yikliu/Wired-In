@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WiredIn.Properties {
+namespace Wired_In.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -1,4 +1,4 @@
-﻿namespace WiredIn
+﻿namespace Wired_In
 {
     partial class SettingForm
     {
