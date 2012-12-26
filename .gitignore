@@ -3,6 +3,8 @@ managedwinapi-0.3/
 Gma.UserActivityMonitor/
 WiredIn/obj/
 WiredIn/bin/
+WiredIn/bin/Debug/
+WiredIn/bin/Release/
 WiredIn/Properties
 WiredIn/*.csproj
 *.mp4
@@ -15,3 +17,5 @@ WiredIn/*.csproj
 *.jpg
 *.sln
 *.gitignore
+*.exe
+*.dll
