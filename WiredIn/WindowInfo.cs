@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using ManagedWinapi.Windows;
 
-namespace Wired_In.Windows
+namespace WiredIn.Windows
 {
     class WindowInfo
     {

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
-using Wired_In.UserActivity;
+using WiredIn.UserActivity;
 
-namespace Wired_In
+namespace WiredIn
 {
     class Logger
     {

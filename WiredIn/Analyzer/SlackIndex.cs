@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wired_In
+namespace WiredIn
 {
     
     public abstract class SlackIndex

@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Wired_In.View
+namespace WiredIn.View
 {
     public partial class AbstractView : UserControl
     {
         protected Size componentSize;
         protected Bitmap content;
+        protected int numOfPics;
+        protected int currentID = 0;     
 
         public virtual Size getComponentSize()
         {
@@ -29,6 +31,11 @@ namespace Wired_In.View
         {
         }
 
+        public virtual void setSize(Size s) 
+        { 
+            this.Size = s; 
+        }
+
         public virtual void setUp()
         { }
 
@@ -36,6 +43,12 @@ namespace Wired_In.View
 
         public virtual void pause() { }
 
+        protected void countNumberOfFiles()
+        {
+            String path = Application.StartupPath + "//more_pics//";
+            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(path);
+            numOfPics = dir.GetFiles().Length;
+        }
            
 
         protected override void OnPaintBackground(PaintEventArgs e)

@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Timers;
 
 
-namespace Wired_In.View
+namespace WiredIn.View
 {
     public partial class DigitalClockView : AbstractView
     {
@@ -67,8 +67,7 @@ namespace Wired_In.View
                 {
                     //goodWatch.Start();
                     badWatch.Stop();
-                    digClock.DigitColor = System.Drawing.Color.Gray;
-                    
+                    digClock.DigitColor = System.Drawing.Color.Gray;                    
                 }
                 else
                 {

@@ -1,4 +1,4 @@
-﻿namespace Wired_In.View
+﻿namespace WiredIn.View
 {
     partial class AbstractView
     {

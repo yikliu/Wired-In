@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wired_In.Analyzer;
+using WiredIn.Analyzer;
 
-namespace Wired_In.UserActivity
+namespace WiredIn.UserActivity
 {
     abstract public class Activity
     {
@@ -21,6 +21,6 @@ namespace Wired_In.UserActivity
             return this.time.ToShortDateString() +", "+ this.time.ToLongTimeString();
         }
        
-        abstract public void Accept(Judge j);
+        abstract public void Accept(Worker j);
     }
 }

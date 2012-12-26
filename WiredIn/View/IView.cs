@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wired_In.View
+namespace WiredIn.View
 {
     interface IView
     {

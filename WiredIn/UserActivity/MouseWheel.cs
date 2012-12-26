@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wired_In.Analyzer;
+using WiredIn.Analyzer;
 
-namespace Wired_In.UserActivity
+namespace WiredIn.UserActivity
 {
     public class MouseWheel : Activity
     {
@@ -14,7 +14,7 @@ namespace Wired_In.UserActivity
             return "Mouse Wheel Rolled!";
         }
 
-        public override void Accept(Judge j)
+        public override void Accept(Worker j)
         {
             
         }

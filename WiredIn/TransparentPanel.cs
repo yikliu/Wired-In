@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 
-namespace Wired_In
+namespace WiredIn
 {
     public class TransparentPanel : Panel
     {

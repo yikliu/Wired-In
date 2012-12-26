@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 
 
-using Wired_In.View;
+using WiredIn.View;
 
-namespace Wired_In.Command
+namespace WiredIn.Command
 {
     class NormalTransitCommand : TransitionCommand
     {

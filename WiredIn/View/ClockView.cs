@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
-namespace Wired_In.View
+namespace WiredIn.View
 {
     class ClockView : AbstractView
     {

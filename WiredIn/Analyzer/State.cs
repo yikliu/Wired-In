@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using Wired_In.UserActivity;
+using WiredIn.UserActivity;
 
-namespace Wired_In.Analyzer
+namespace WiredIn.Analyzer
 {
     public  enum workstate { On, Off, dormant };
     public class State
@@ -133,8 +133,6 @@ namespace Wired_In.Analyzer
         {
             current_index.updateScore(currentWatch.Elapsed.TotalSeconds);
 
-            // System.Console.WriteLine("Time: " + currentWatch.Elapsed.TotalSeconds
-            //       + " Interval " + CheckDormantInterval + " mod: " + currentWatch.Elapsed.TotalSeconds % CheckDormantInterval);
             if ((int)currentWatch.Elapsed.TotalSeconds % CheckDormantInterval != 0)
             {
                 return;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Wired_In.Properties {
+namespace WiredIn.Properties {
     using System;
     
     

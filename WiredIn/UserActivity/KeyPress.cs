@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Text;
-using Wired_In.Analyzer;
+using WiredIn.Analyzer;
 
-namespace Wired_In.UserActivity
+namespace WiredIn.UserActivity
 {
     public class KeyPress : Activity
     {
@@ -20,7 +20,7 @@ namespace Wired_In.UserActivity
             return  key_ + "KeyPressed";
         }
 
-        public override void Accept(Judge j)
+        public override void Accept(Worker j)
         {
             j.CatchKeyPressActivity(this);
         }

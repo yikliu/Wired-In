@@ -6,7 +6,7 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 
 
-namespace Wired_In
+namespace WiredIn
 {
     public class WiredInServer : MarshalByRefObject
     {

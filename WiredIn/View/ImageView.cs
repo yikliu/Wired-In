@@ -3,17 +3,26 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace Wired_In.View
+namespace WiredIn.View
 {
     class ImageView : AbstractView
     {
-        private int numOfPics = 0;
-        private int currentID = 0;        
+        
+        private System.ComponentModel.IContainer components;
+        
+           
 
         public ImageView()
         {            
             countNumberOfFiles();
-            currentID = numOfPics - 1; //THe last picture is best one
+            if (Constants.Config.OPERAND_CONDITION == Constants.operant_condition.punish)
+            {
+                currentID = numOfPics - 1; // when punish THe last picture is best one
+            }
+            else
+            {
+                currentID = numOfPics / 2; // when reward initial pic was chosen as middle one.
+            }            
         }
     
         public Image getImageByID(int id){                       
@@ -45,7 +54,6 @@ namespace Wired_In.View
             return dest;
         }
 
-
         private delegate void RefreshViewDelegate();
 
         public void RefreshView()
@@ -67,11 +75,10 @@ namespace Wired_In.View
         public override void tearDown() { }
 
         public override void pause() { }
-
         
         public override void updateView(bool goToGood)
         {            
-            if (!goToGood && currentID != 0)
+            if (!goToGood && currentID != 30)
             {
                 currentID--;
                 RefreshView();
@@ -83,23 +90,18 @@ namespace Wired_In.View
 
         //Image image;
 
-        private void countNumberOfFiles()
-        {
-            String path = Application.StartupPath + "//more_pics//";
-            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(path);
-            numOfPics = dir.GetFiles().Length;
-        }
+        
 
         protected override void OnPaint(PaintEventArgs e)
         {
             //base.OnPaint(e);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            this.Height = this.content.Height;
-            this.Width = this.content.Width;
+            //this.Height = this.content.Height;
+            //this.Width = this.content.Width;
             e.Graphics.Clear(this.BackColor);
             if (this.content != null)
             {
-                e.Graphics.DrawImage(this.content, 0, 0,this.content.Width,this.content.Height);
+                e.Graphics.DrawImage(this.content, 0, 0,this.Size.Width,this.Size.Height);
             }
             String str = /*"Score:" + score +*/ "Pic:" + currentID;
             using (Font myFont = new Font("Arial", 13))
@@ -109,7 +111,16 @@ namespace Wired_In.View
             
         }
 
-        
-        
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // ImageView
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.Name = "ImageView";
+            this.ResumeLayout(false);
+        }
+               
     }
 }

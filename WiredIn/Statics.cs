@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Wired_In.UserActivity;
+using WiredIn.UserActivity;
 
-namespace Wired_In.Analyzer
+namespace WiredIn.Analyzer
 {
     public class Statics{
         //private State current_state;
