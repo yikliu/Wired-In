@@ -10,60 +10,71 @@ namespace WiredIn
 {
     class Logger
     {
-        private ObservableCollection<Activity> activity_collection;
+       // private ObservableCollection<Activity> activity_collection;
         private String currentDirectoryString;
         private String path;
         
         private String text;
-        private Activity ac;
-        private String file_name;
+        private String full_path;
 
-        public Logger(ObservableCollection<Activity> queue)
+        private StreamWriter writer;
+
+        public Logger()
         {
-            activity_collection = queue;
-
             currentDirectoryString = System.Windows.Forms.Application.StartupPath;
             path = currentDirectoryString + "\\log\\";
 
             DirectoryInfo di = new DirectoryInfo(path);
 
-            if (di.Exists == false)
+            if (!di.Exists)
                 di.Create();
             
             DateTime now = DateTime.Now;
-            file_name = Environment.MachineName + "-" 
+            String file_name = Environment.MachineName + "-" 
                 + now.Year.ToString() + "-" 
                 + now.Month.ToString() + "-" 
                 + now.Day.ToString() + "-" 
                 + now.Hour.ToString() + "-" 
-                + now.Minute.ToString() + ".txt";
+                + now.Minute.ToString() + ".csv";
+
+            this.full_path = Path.Combine(path, file_name);
         }
 
-        public void DequeueActivity()
-        {
-            if (activity_collection.Count <= 0)
-                return;
+        public void OpenFile() {
+            writer = new StreamWriter(full_path,true);       
+        }
 
-            ac = activity_collection[0];
-            text = ac.When() + "," + ac.What();
-            String file = Path.Combine(path, file_name);
-           
+        public void CloseFile() {
+            writer.Flush();
+            writer.Close();
+        }
+
+        private String FormatLog(Activity ac)
+        {
+            StringBuilder sb = new StringBuilder();
+            DateTime dt = ac.When();
+            sb.Append(dt.ToShortDateString() + ", "+dt.ToLongTimeString());
+            sb.Append(", ");
+            sb.Append(ac.What());            
+            sb.Append(ac.getPreviousACDuration());
+            return sb.ToString();
+        }
+
+        public void Log(Activity ac)
+        {
+            if (writer == null)
+                OpenFile();
+            
+            text = this.FormatLog(ac);
+
             try
             {
-               using (StreamWriter writer = new StreamWriter(file,true))
-               {
-                   writer.WriteLine(text);                  
-               }                               
-               lock(this)
-               {
-                    activity_collection.RemoveAt(0);
-               }
+                   this.writer.WriteLine(text);                  
             }
             catch (System.Exception ex)
             {
                 System.Console.WriteLine(ex.Message);
-            }
-            
+            }            
         }
 
     }

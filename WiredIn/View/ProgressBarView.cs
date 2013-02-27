@@ -16,8 +16,7 @@ namespace WiredIn.View
             InitializeComponent();
             this.bar.Value = full;
             countNumberOfFiles();
-            currentID = numOfPics;
-           
+            currentID = numOfPics;       
         }
 
         protected override void OnResize(EventArgs e)

@@ -29,6 +29,7 @@ namespace WiredIn.View
 
         public virtual void updateView(bool goToGood)
         {
+
         }
 
         public virtual void setSize(Size s) 
@@ -36,8 +37,7 @@ namespace WiredIn.View
             this.Size = s; 
         }
 
-        public virtual void setUp()
-        { }
+        public virtual void setUp(){ }
 
         public virtual void tearDown() { }
 
@@ -49,8 +49,7 @@ namespace WiredIn.View
             System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(path);
             numOfPics = dir.GetFiles().Length;
         }
-           
-
+        
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             //Don't paint background

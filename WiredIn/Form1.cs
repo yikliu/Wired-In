@@ -10,66 +10,137 @@ using WiredIn;
 
 namespace WiredIn
 {
+    /*
+     * The main forms
+     * 
+     */
     public partial class MainForm : Form
     {
+        //The queue storing all keyboard/mouse activity
         private ObservableCollection<Activity> activityQueue;
         
+        //A data structure for storing windows information (See MangedWinapi)
         private WindowInfo currentWindowInfo;        
         
+        //An instance of background worker
         private Worker worker;
         
-        private Logger logger;
+        //An instance of logger for activity loggings
+        
 
+        //Allowing dragging a windows
         public Point lastClick;
         
+        //whether dragging is allowed
         public bool drag = false;       
 
+        //whether the timer has started
         public bool isTimerStarted = false;                
-
-        private FormState formState = new FormState();
+        
+        //private FormState formState = new FormState();
 
         public MainForm()
         {           
+            InitializeComponent();
+            
+            createView();
+            
+            activityQueue = new ObservableCollection<Activity>();
+            
+            currentWindowInfo = new WindowInfo();
+            
+            winWatchTimer.Enabled = false;
+            
+            worker = new Worker(activityQueue,myView);
+            
+            activityQueue.CollectionChanged += worker.OnActiveQueueChange;
+         }
+
+        /*
+         * Initialize the View component based on config file
+         */ 
+        public void createView()
+        {
             switch (Constants.Config.VIS_IMAGE)
             {
                 case Constants.imagery.flower:
+                    if (this.myView is WiredIn.View.ImageView)
+                    {
+                        return;
+                    }
+                    this.Controls.Remove(this.myView);
                     this.myView = new WiredIn.View.ImageView();
                     break;
                 case Constants.imagery.progressbar:
+                    if (this.myView is WiredIn.View.ProgressBarView)
+                        return;
+                    this.Controls.Remove(this.myView);
                     this.myView = new WiredIn.View.ProgressBarView();
                     break;
             }
-
-            InitializeComponent();
-            activityQueue = new ObservableCollection<Activity>();
-            currentWindowInfo = new WindowInfo();
-            winWatchTimer.Enabled = false;
-            worker = new Worker(activityQueue,myView);
-            activityQueue.CollectionChanged += worker.OnActiveQueueChange;
-            logger = new Logger(activityQueue);
+            
+            this.SuspendLayout();
+            this.myView.ForeColor = System.Drawing.Color.Transparent;
+            this.myView.Location = new System.Drawing.Point(0, 0);
+            this.myView.Name = "myView";
+            this.myView.TabIndex = 7;
+            this.myView.Load += new System.EventHandler(this.myView_Load);
+            this.myView.Dock = DockStyle.Fill;
+            this.myView.ContextMenuStrip = menu;
+           
+            this.Controls.Add(this.myView);
+            switchAppSize();
+            this.ResumeLayout();
         }
 
         private void showOnMonitor(int monitor)
         {
             Screen[] sc;
-            sc = Screen.AllScreens;           
-
-            Screen s = monitor >= sc.Length ? sc[0] : sc[monitor];
-            
-            this.FormBorderStyle = FormBorderStyle.None;
+            sc = Screen.AllScreens;        
+            Screen s = monitor >= sc.Length ? sc[0] : sc[monitor];            
             this.Left = s.Bounds.Left;
             this.Top = s.Bounds.Top;
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(Left, Top);
-            this.Size = s.Bounds.Size;      
+            this.Location = new Point(this.Left, this.Top);
+            this.Size = s.Bounds.Size;
             this.WindowState = FormWindowState.Maximized;
-            this.myView.setSize(this.Size);
-            //ChangeSize(this.Size);
+            this.myView.setSize(this.Size);             
         }
-       
+        
+        //place the vis at right-bottom position, shrunk
+        private void showOnRightBottom()
+        {
+            Screen s = Screen.PrimaryScreen;
+            int het = s.WorkingArea.Height / Constants.Config.SHRINK_FACTOR;
+            int wth = s.WorkingArea.Width / Constants.Config.SHRINK_FACTOR;
+
+            this.Size = new Size(wth, het);            
+            this.Left = s.WorkingArea.Right -wth;
+            this.Top = s.WorkingArea.Bottom - het;          
+            this.StartPosition = FormStartPosition.Manual;
+            
+            this.Location = new Point(this.Left, this.Top);
+            this.WindowState = FormWindowState.Normal;
+            this.myView.setSize(this.Size);
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            showOnMonitor(1);              
+            this.FormBorderStyle = FormBorderStyle.None;
+            switchAppSize();
+            currentWindowInfo.update(SystemWindow.ForegroundWindow); //init Current WindowInfo
+        }
+
+        public void switchAppSize()
+        {
+            if (Constants.Config.APP_SIZE == Constants.app_size.small)
+            {
+                showOnRightBottom();
+            }
+            else
+            {
+                showOnMonitor(1);
+            }
         }
 
         /// <summary>
@@ -100,14 +171,13 @@ namespace WiredIn
             SystemWindow window = SystemWindow.ForegroundWindow;
             if (!currentWindowInfo.belongToSameProcess(window))
             {
-                enqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now));
                 currentWindowInfo.update(window);
             }
             if (!currentWindowInfo.WinTitle.Equals(window.Title))
             {
+                enqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now));
                 currentWindowInfo.update(window);
             }           
-            this.logger.DequeueActivity();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -118,7 +188,8 @@ namespace WiredIn
                 start.Text = "Pause";
                 isTimerStarted = true;
                 winWatchTimer.Start();
-                worker.StartJudge();
+                worker.StartWoker();
+                enqueueActivity(new StartUp(DateTime.Now));
             }
             else
             {
@@ -132,7 +203,7 @@ namespace WiredIn
         private void btnSetting_Click(object sender, EventArgs e)
         {
             // Create and display an instance of the dialog box
-            Form setting = new SettingForm();
+            Form setting = new SettingForm(this);
 
             // Show the dialog and determine the state of the 
             // DialogResult property for the form.
@@ -154,53 +225,18 @@ namespace WiredIn
             enqueueActivity(new MouseClick(DateTime.Now));
         }
 
+        /************************************************************************/
+        /* Clean up before exit                                                                     */
+        /************************************************************************/
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            enqueueActivity(new ShutDown(DateTime.Now));
             winWatchTimer.Stop();
-            worker.StopJudge();
+            worker.StopWorker();
         }
-        /*
-        private void ChangeSize(Size newSize)
-        {
-            myView.Width = newSize.Width / 2;
-            myView.Height = newSize.Height / 2;
-            this.Size = myView.Size;
-
-            
-            pnlControls.Height = (int)Math.Round(myView.Width * 0.1);
-            pnlControls.Width = (int)Math.Round(myView.Width * 0.8);
-
-            btnStart.Width = (int)Math.Round(pnlControls.Width * 0.25);
-            btnStart.Height = (int)Math.Round(pnlControls.Height * 0.7);
-           
-
-            btnExit.Width = (int)Math.Round(pnlControls.Width * 0.25);
-            btnExit.Height = (int)Math.Round(pnlControls.Height * 0.7);            
-
-            btnSetting.Width = (int)Math.Round(pnlControls.Width * 0.25);
-            btnSetting.Height = (int)Math.Round(pnlControls.Height * 0.7);
-
-
-            int a = (pnlControls.Width - 3 * btnStart.Width) / 4;
-            btnStart.Left = a;
-            btnExit.Left = btnStart.Width + 2 * a;
-            btnSetting.Left = 2*btnStart.Width + 3 * a;
-
-            Point ptControlPanel = new Point();
-            ptControlPanel.X = this.Size.Width / 2 - pnlControls.Width / 2;
-            ptControlPanel.Y = this.Size.Height / 2;
-            pnlControls.Location = ptControlPanel;
-            
-        }
-         */
-        /*
-        public void updateScore(double score)
-        {
-            myView.updateView(score);    
-        }*/
-
+       
         private void btn_exit_Click(object sender, EventArgs e)
-        {
+        {            
             Application.Exit();
         }
         
@@ -224,6 +260,10 @@ namespace WiredIn
             drag = false;
         }
 
+        /************************************************************************/
+        /* Refresh view when loaded
+         */ 
+        /************************************************************************/
         private void myView_Load(object sender, EventArgs e)
         {            
             myView.updateView(false);   

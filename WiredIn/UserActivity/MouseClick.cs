@@ -14,9 +14,14 @@ namespace WiredIn.UserActivity
 
         public override String What()
         {
-            return "MouseClicked!";
+            return "M";
         }
 
+        /************************************************************************/
+        /* Visitor Pattern
+         * Accept Method 
+         */
+        /************************************************************************/
         public override void Accept(Worker j)
         {
             j.CatchMouseClickActivity(this);

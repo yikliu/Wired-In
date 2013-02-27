@@ -6,11 +6,8 @@ using System.Drawing.Drawing2D;
 namespace WiredIn.View
 {
     class ImageView : AbstractView
-    {
-        
-        private System.ComponentModel.IContainer components;
-        
-           
+    {        
+        private System.ComponentModel.IContainer components;          
 
         public ImageView()
         {            
@@ -29,13 +26,7 @@ namespace WiredIn.View
             string path = Application.StartupPath + "//more_pics//" + id + ".jpg";
             return Image.FromFile(path);
         }
-               
-        /*
-        public int getCurrentID(double score){
-             return numOfPics + 1 - (int)Math.Ceiling(score * numOfPics);
-        }
-        */
-
+         
         public void disposeImage(Bitmap p)
         {
             if (p != null)
@@ -70,6 +61,8 @@ namespace WiredIn.View
             }
         }
 
+        
+
         public override void setUp() { }
 
         public override void tearDown() { }
@@ -88,16 +81,10 @@ namespace WiredIn.View
             }
         }
 
-        //Image image;
-
-        
-
         protected override void OnPaint(PaintEventArgs e)
         {
             //base.OnPaint(e);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            //this.Height = this.content.Height;
-            //this.Width = this.content.Width;
             e.Graphics.Clear(this.BackColor);
             if (this.content != null)
             {
@@ -107,8 +94,7 @@ namespace WiredIn.View
             using (Font myFont = new Font("Arial", 13))
             {
                 e.Graphics.DrawString(str, myFont, Brushes.Yellow, new Point(2, 2));
-            }    
-            
+            }           
         }
 
         private void InitializeComponent()

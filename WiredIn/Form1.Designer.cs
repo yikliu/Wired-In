@@ -101,19 +101,7 @@ namespace WiredIn
             // 
             this.globalEventProvider1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.globalEventProvider_MouseUp);
             this.globalEventProvider1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
-            // 
-            // myView
-            // 
-            this.myView.ForeColor = System.Drawing.Color.Transparent;
-            this.myView.Location = new System.Drawing.Point(0, 0);
-            this.myView.Name = "myView";
-            this.myView.Size = new System.Drawing.Size(800, 600);
-            this.myView.TabIndex = 7;
-            this.myView.Load += new System.EventHandler(this.myView_Load);
-            //this.myView.MouseHover += new System.EventHandler(myView_MouseHover);
-            //this.myView.MouseLeave += new System.EventHandler(myView_MouseLeave);
-            this.myView.Dock = DockStyle.Fill;
-
+            
             ToolStripMenuItem mnuStart = new ToolStripMenuItem("Start");
             ToolStripMenuItem mnuExit = new ToolStripMenuItem("Exit");
             ToolStripMenuItem mnuSetting = new ToolStripMenuItem("Settings");
@@ -123,13 +111,7 @@ namespace WiredIn
             mnuSetting.Click += new System.EventHandler(this.btnSetting_Click);
             //Add to main context menu
             this.menu.Items.AddRange(new ToolStripItem[] { mnuStart, mnuExit, mnuSetting });
-            
-            myView.ContextMenuStrip = menu;
-            
-            
-
-            
-
+           
             // 
             // MainForm
             // 
@@ -138,7 +120,6 @@ namespace WiredIn
             this.BackColor = System.Drawing.Color.Lime;
             this.ClientSize = new System.Drawing.Size(800, 600);
            
-            this.Controls.Add(this.myView);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -156,7 +137,6 @@ namespace WiredIn
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
            
-          
             this.ResumeLayout(false);
         }
 
@@ -164,14 +144,9 @@ namespace WiredIn
 
         private System.Windows.Forms.Timer winWatchTimer;
 
-        //private System.Windows.Forms.PictureBox picBox;
-      
-       
         private ContextMenuStrip menu;
         private GlobalEventProvider globalEventProvider1;        
-        private AbstractView myView;
-       
-        
+        private AbstractView myView;       
     }
 }
 

@@ -16,11 +16,15 @@ namespace WiredIn.Analyzer
     public class Worker
     {
         private ObservableCollection<Activity> theActivityQueue;
+        
         private TransitionCommand transitCommand;
 
-        private Judge judge;
+        private Judge judge; //Judge attentive state
+
+        private Logger logger; //Logger
         
-        private Timer judgeTimer;
+        private Timer transitTimer; // Timer used to sync the image transition
+        private Timer loggerTimer;
 
         private AbstractView view;
 
@@ -39,7 +43,7 @@ namespace WiredIn.Analyzer
             theActivityQueue = q;
             this.view = v;
             
-            judgeTimer = new Timer();
+            transitTimer = new Timer();
             judge = new Judge();
 
             switch (Constants.Config.OPERAND_CONDITION)
@@ -55,38 +59,44 @@ namespace WiredIn.Analyzer
             }
             dormantInterval = Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS;
 
-            judgeTimer.Interval = badInterval;
-            judgeTimer.Stop();
-            judgeTimer.Elapsed += new ElapsedEventHandler(JudgeTimerTick);
+            transitTimer.Interval = badInterval;
+            transitTimer.Stop();
+            transitTimer.Elapsed += new ElapsedEventHandler(JudgeTimerTick);
 
             transitCommand = new NormalTransitCommand(this.view, false);
             lastHitTime = DateTime.Now;
+
+            logger = new Logger();
+            loggerTimer = new Timer();
+            loggerTimer.Interval = 1000; // Try to log every second
+            loggerTimer.Elapsed += new ElapsedEventHandler(this.LoggerTimerTick);
         }
 
-        public void setTimerInterval(int millSec)
+        public void setTransitionTimerInterval(int millSec)
         {
-            judgeTimer.Interval = millSec;
+            transitTimer.Interval = millSec;
         }
 
-        public void StartJudge()
+        public void StartWoker()
         {
-            judgeTimer.Start();
+            transitTimer.Start();
+            loggerTimer.Start();
             this.view.setUp();
-            //theState.StartWatch();
         }
 
-        public void StopJudge()
+        public void StopWorker()
         {
-            judgeTimer.Stop();
+            transitTimer.Stop();
+            loggerTimer.Stop();
             this.view.tearDown();
-            //theState.Clear();
+            this.DequeueAll();
+            logger.CloseFile();
         }
 
         public void PauseJudge()
         {
-            judgeTimer.Stop();
+            transitTimer.Stop();
             this.view.pause();
-            //theState.PauseWatch();
         }
 
         /// <summary>
@@ -106,6 +116,18 @@ namespace WiredIn.Analyzer
                     System.Console.WriteLine("More than one items added at once!");
                 }
             }
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                if (e.OldItems.Count == 1)
+                {
+                    Activity ac = (Activity)e.OldItems[0];
+                    logger.Log(ac);
+                }
+                else
+                {
+                    System.Console.WriteLine("More than one items removed at once!");
+                }
+            }
         }        
         
         private void JudgeTimerTick(Object sender, ElapsedEventArgs e)
@@ -114,32 +136,51 @@ namespace WiredIn.Analyzer
             //System.Console.WriteLine("State: "+ StateString);
             if (IsOnTask && diff.TotalSeconds >= Constants.Config.DORMANT_INTERVAL_SECONDS)
             {
-                if (this.judgeTimer.Interval != dormantInterval)
+                if (this.transitTimer.Interval != dormantInterval)
                 {
                     this.transitCommand.setDirection(false);
-                    this.judgeTimer.Interval = dormantInterval;
+                    this.transitTimer.Interval = dormantInterval;
                     StateString = "Dormant";
                 }
             }
             else if(IsOnTask)
             {
-                if (this.judgeTimer.Interval != goodInterval)
+                if (this.transitTimer.Interval != goodInterval)
                 {
                     this.transitCommand.setDirection(true);
-                    this.judgeTimer.Interval = goodInterval;
+                    this.transitTimer.Interval = goodInterval;
                     StateString = "Good";
                 }
             }
             else
             {
-                if (this.judgeTimer.Interval != badInterval)
+                if (this.transitTimer.Interval != badInterval)
                 {
                     this.transitCommand.setDirection(false);
-                    this.judgeTimer.Interval = badInterval;
+                    this.transitTimer.Interval = badInterval;
                     StateString = "Bad";
                 }
             }
             this.transitCommand.transit();            
+        }
+
+        private void LoggerTimerTick(Object sender, ElapsedEventArgs e)
+        {
+            if (theActivityQueue.Count >= 1)
+            {
+                lock (this)
+                {
+                    theActivityQueue.RemoveAt(0);
+                }
+            }
+        }
+
+        private void DequeueAll()
+        {
+            while (theActivityQueue.Count > 0)
+            {
+                theActivityQueue.RemoveAt(0);
+            }
         }
 
         public void CatchKeyPressActivity(KeyPress key_press_activity)
@@ -153,7 +194,15 @@ namespace WiredIn.Analyzer
             //AddMouseHit();
             lastHitTime = DateTime.Now;
         }
-        
+
+        public void CatchStartUpActivity(StartUp su)
+        {
+        }
+
+        public void CatchShutDownActivity(ShutDown sd)
+        {
+        }
+
         private bool CheckOnOrOff(String proc_name,String w_title)
         {
             return judge.checkOnTask(proc_name, w_title);
@@ -175,7 +224,7 @@ namespace WiredIn.Analyzer
                     this.transitCommand.setDirection(false);
                     StateString = "Off";
                 }
-                this.judgeTimer.Interval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
+                this.transitTimer.Interval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
             }            
         }
 

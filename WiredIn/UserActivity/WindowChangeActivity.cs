@@ -8,6 +8,8 @@ namespace WiredIn.UserActivity
 {
     public class WindowChangeActivity : Activity
     {
+        public static DateTime LAST_WINDOW_CHANGE = DateTime.Now;
+        
         String _newWinTitle = "";
         String _newProcName = "";
 
@@ -16,7 +18,6 @@ namespace WiredIn.UserActivity
             get{return this._newWinTitle;}
             set { this._newWinTitle = value; }
         }
-
 
         public String NewProcName
         {
@@ -30,9 +31,19 @@ namespace WiredIn.UserActivity
             _newWinTitle = w_title;
         }
 
+        /*
+         *	This calculates duration of previous activity
+         */
+        public override String getPreviousACDuration()
+        {
+            TimeSpan span = this.When() - LAST_WINDOW_CHANGE;
+            LAST_WINDOW_CHANGE = this.When();
+            return ", "+ span.TotalSeconds.ToString();
+        }
+
         public override String What()
         {
-            return "Window Changed to " + _newWinTitle + "Of Process: "+_newProcName;
+            return "WC, " + _newProcName + ", " + _newWinTitle;
         }
 
         public override void Accept(Worker j)

@@ -14,10 +14,10 @@ namespace WiredIn.UserActivity
         {
             key_ = key;
         }
-        
+
         public override String What()
         {
-            return  key_ + "KeyPressed";
+            return "K";
         }
 
         public override void Accept(Worker j)

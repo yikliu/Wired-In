@@ -10,12 +10,12 @@ namespace WiredIn.Analyzer
     {
         public bool checkOnTask(String procName, String winTitle)
         {
-            if (Constants.Config.WHITE_WIN.Contains(winTitle))
+            if (Constants.Config.WHITE_WIN.Contains(winTitle.ToLower()))
             {
                 return true;
             }
 
-            if(Constants.Config.WHITE_PROC.Contains(procName))
+            if(Constants.Config.WHITE_PROC.Contains(procName.ToLower()))
             {
                 return true;
             }
