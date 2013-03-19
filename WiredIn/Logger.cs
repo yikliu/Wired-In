@@ -7,10 +7,12 @@ using System.Collections.ObjectModel;
 using WiredIn.UserActivity;
 
 namespace WiredIn
-{
-    class Logger
+{   
+    /// <summary>
+    /// Logger writes user activity + time to log file
+    /// </summary>
+    public class Logger
     {
-       // private ObservableCollection<Activity> activity_collection;
         private String currentDirectoryString;
         private String path;
         
@@ -49,6 +51,11 @@ namespace WiredIn
             writer.Close();
         }
 
+        /// <summary>
+        /// Format each line of log
+        /// </summary>
+        /// <param name="ac">Activity instance that is being logged</param>
+        /// <returns></returns>
         private String FormatLog(Activity ac)
         {
             StringBuilder sb = new StringBuilder();
@@ -60,6 +67,10 @@ namespace WiredIn
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Log an activity
+        /// </summary>
+        /// <param name="ac">the activity instance that is being logged</param>
         public void Log(Activity ac)
         {
             if (writer == null)
@@ -69,7 +80,7 @@ namespace WiredIn
 
             try
             {
-                   this.writer.WriteLine(text);                  
+                this.writer.WriteLine(text);                  
             }
             catch (System.Exception ex)
             {

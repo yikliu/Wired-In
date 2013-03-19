@@ -10,10 +10,9 @@ using WiredIn;
 
 namespace WiredIn
 {
-    /*
-     * The main forms
-     * 
-     */
+    /// <summary>
+    /// Main Form
+    /// </summary>
     public partial class MainForm : Form
     {
         //The queue storing all keyboard/mouse activity
@@ -24,9 +23,6 @@ namespace WiredIn
         
         //An instance of background worker
         private Worker worker;
-        
-        //An instance of logger for activity loggings
-        
 
         //Allowing dragging a windows
         public Point lastClick;
@@ -36,8 +32,6 @@ namespace WiredIn
 
         //whether the timer has started
         public bool isTimerStarted = false;                
-        
-        //private FormState formState = new FormState();
 
         public MainForm()
         {           
@@ -55,10 +49,10 @@ namespace WiredIn
             
             activityQueue.CollectionChanged += worker.OnActiveQueueChange;
          }
-
-        /*
-         * Initialize the View component based on config file
-         */ 
+        
+        /// <summary>
+        /// Init the view based on config setting
+        /// </summary>
         public void createView()
         {
             switch (Constants.Config.VIS_IMAGE)
@@ -89,11 +83,15 @@ namespace WiredIn
             this.myView.ContextMenuStrip = menu;
            
             this.Controls.Add(this.myView);
-            switchAppSize();
+            SwitchAppSize();
             this.ResumeLayout();
         }
 
-        private void showOnMonitor(int monitor)
+        /// <summary>
+        /// Show on first extended monitor
+        /// </summary>
+        /// <param name="monitor"></param>
+        private void ShowOnMonitor(int monitor)
         {
             Screen[] sc;
             sc = Screen.AllScreens;        
@@ -107,7 +105,9 @@ namespace WiredIn
             this.myView.setSize(this.Size);             
         }
         
-        //place the vis at right-bottom position, shrunk
+        /// <summary>
+        /// Show on right-bottom of the primary screen
+        /// </summary>
         private void showOnRightBottom()
         {
             Screen s = Screen.PrimaryScreen;
@@ -115,9 +115,11 @@ namespace WiredIn
             int wth = s.WorkingArea.Width / Constants.Config.SHRINK_FACTOR;
 
             this.Size = new Size(wth, het);            
-            this.Left = s.WorkingArea.Right -wth;
+            this.Left = s.WorkingArea.Right - wth;
             this.Top = s.WorkingArea.Bottom - het;          
             this.StartPosition = FormStartPosition.Manual;
+
+            this.TopMost = true;
             
             this.Location = new Point(this.Left, this.Top);
             this.WindowState = FormWindowState.Normal;
@@ -127,26 +129,26 @@ namespace WiredIn
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.None;
-            switchAppSize();
+            SwitchAppSize();
             currentWindowInfo.update(SystemWindow.ForegroundWindow); //init Current WindowInfo
         }
 
-        public void switchAppSize()
+        public void SwitchAppSize()
         {
             if (Constants.Config.APP_SIZE == Constants.app_size.small)
             {
-                showOnRightBottom();
+                showOnRightBottom();                
             }
             else
             {
-                showOnMonitor(1);
+                ShowOnMonitor(1);
             }
         }
 
         /// <summary>
         ///   Put an user activity in the end of the activity queue
         /// </summary>
-        private void enqueueActivity(Activity a)
+        private void EnqueueActivity(Activity a)
         {
             if (!isTimerStarted)
                 return;
@@ -166,16 +168,18 @@ namespace WiredIn
             }
         }
 
+        /// <summary>
+        /// Check the topmost window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WindowsWatcherTimerTick(object sender, EventArgs e)
         {
             SystemWindow window = SystemWindow.ForegroundWindow;
-            if (!currentWindowInfo.belongToSameProcess(window))
-            {
-                currentWindowInfo.update(window);
-            }
+            
             if (!currentWindowInfo.WinTitle.Equals(window.Title))
             {
-                enqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now));
+                EnqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now));
                 currentWindowInfo.update(window);
             }           
         }
@@ -189,7 +193,7 @@ namespace WiredIn
                 isTimerStarted = true;
                 winWatchTimer.Start();
                 worker.StartWoker();
-                enqueueActivity(new StartUp(DateTime.Now));
+                EnqueueActivity(new StartUp(DateTime.Now));
             }
             else
             {
@@ -216,21 +220,23 @@ namespace WiredIn
         private void globalEventProvider_KeyUp(object sender, KeyEventArgs e)
         {
             //System.Console.WriteLine("Key: " + e.KeyCode);
-            enqueueActivity(new KeyPress(e.KeyCode, DateTime.Now));
+            EnqueueActivity(new KeyPress(e.KeyCode, DateTime.Now));
         }
 
         private void globalEventProvider_MouseUp(object sender, MouseEventArgs e)
         {
             // System.Console.WriteLine("Mouse Clicked: " + e.Location.ToString());
-            enqueueActivity(new MouseClick(DateTime.Now));
+            EnqueueActivity(new MouseClick(DateTime.Now));
         }
 
-        /************************************************************************/
-        /* Clean up before exit                                                                     */
-        /************************************************************************/
+        /// <summary>
+        /// Clean up before exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>       
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            enqueueActivity(new ShutDown(DateTime.Now));
+            EnqueueActivity(new ShutDown(DateTime.Now));
             winWatchTimer.Stop();
             worker.StopWorker();
         }
@@ -260,10 +266,11 @@ namespace WiredIn
             drag = false;
         }
 
-        /************************************************************************/
-        /* Refresh view when loaded
-         */ 
-        /************************************************************************/
+        /// <summary>
+        /// Refresh the view when loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void myView_Load(object sender, EventArgs e)
         {            
             myView.updateView(false);   

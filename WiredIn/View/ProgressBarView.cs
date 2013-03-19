@@ -37,20 +37,11 @@ namespace WiredIn.View
             }
         }
 
-        public override void setUp()
-        {
-           
-        }
+        public override void setUp() {}
 
-        public override void tearDown()
-        {
-            
-        }
+        public override void tearDown() {}
 
-        public override void pause()
-        {
-           
-        }
+        public override void pause() {}
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {

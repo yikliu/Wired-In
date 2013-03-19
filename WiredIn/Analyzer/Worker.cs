@@ -13,6 +13,10 @@ using WiredIn.Constants;
 
 namespace WiredIn.Analyzer
 {
+    /// <summary>
+    /// A worker is responsible for monitoring the activity queue and determining the transition direction
+    /// and speed of the visualization
+    /// </summary>
     public class Worker
     {
         private ObservableCollection<Activity> theActivityQueue;
@@ -38,7 +42,12 @@ namespace WiredIn.Analyzer
         private int badInterval = 0;
         private int dormantInterval = 0;
 
-        public Worker(ObservableCollection<Activity> q,AbstractView v)
+        /// <summary>
+        /// Worker constructor
+        /// </summary>
+        /// <param name="q">The queue storing all activities</param>
+        /// <param name="v">View instance</param>
+        public Worker(ObservableCollection<Activity> q, AbstractView v)
         {
             theActivityQueue = q;
             this.view = v;
@@ -61,7 +70,7 @@ namespace WiredIn.Analyzer
 
             transitTimer.Interval = badInterval;
             transitTimer.Stop();
-            transitTimer.Elapsed += new ElapsedEventHandler(JudgeTimerTick);
+            transitTimer.Elapsed += new ElapsedEventHandler(TransitionTimerTick);
 
             transitCommand = new NormalTransitCommand(this.view, false);
             lastHitTime = DateTime.Now;
@@ -72,11 +81,18 @@ namespace WiredIn.Analyzer
             loggerTimer.Elapsed += new ElapsedEventHandler(this.LoggerTimerTick);
         }
 
+        /// <summary>
+        /// Adjust the transition rate by setting timer interval
+        /// </summary>
+        /// <param name="millSec">timer interval in milliseconds</param>
         public void setTransitionTimerInterval(int millSec)
         {
             transitTimer.Interval = millSec;
         }
 
+        /// <summary>
+        /// Start worker
+        /// </summary>
         public void StartWoker()
         {
             transitTimer.Start();
@@ -84,6 +100,9 @@ namespace WiredIn.Analyzer
             this.view.setUp();
         }
 
+        /// <summary>
+        /// Stop worker
+        /// </summary>
         public void StopWorker()
         {
             transitTimer.Stop();
@@ -93,11 +112,15 @@ namespace WiredIn.Analyzer
             logger.CloseFile();
         }
 
+        /// <summary>
+        /// Pause the judge for a moment 
+        /// (disabled for the moment,  pausing will disrupt all the time diff calculation.)
+        /// </summary>
         public void PauseJudge()
         {
-            transitTimer.Stop();
-            this.view.pause();
-        }
+//             transitTimer.Stop();
+//             this.view.pause();
+         }
 
         /// <summary>
         ///   Called when a new activity is enqueued
@@ -130,10 +153,14 @@ namespace WiredIn.Analyzer
             }
         }        
         
-        private void JudgeTimerTick(Object sender, ElapsedEventArgs e)
+        /// <summary>
+        /// Callback function for transition timer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TransitionTimerTick(Object sender, ElapsedEventArgs e)
         {           
             TimeSpan diff = DateTime.Now - lastHitTime;
-            //System.Console.WriteLine("State: "+ StateString);
             if (IsOnTask && diff.TotalSeconds >= Constants.Config.DORMANT_INTERVAL_SECONDS)
             {
                 if (this.transitTimer.Interval != dormantInterval)
@@ -166,7 +193,7 @@ namespace WiredIn.Analyzer
 
         private void LoggerTimerTick(Object sender, ElapsedEventArgs e)
         {
-            if (theActivityQueue.Count >= 1)
+            if (theActivityQueue.Count >= 1 && theActivityQueue[0].Catched)
             {
                 lock (this)
                 {
@@ -175,9 +202,12 @@ namespace WiredIn.Analyzer
             }
         }
 
+        /// <summary>
+        ///  Dump the remaining elements in activity queue before exiting
+        /// </summary>
         private void DequeueAll()
         {
-            while (theActivityQueue.Count > 0)
+            while (theActivityQueue.Count > 0 && theActivityQueue[0].Catched)
             {
                 theActivityQueue.RemoveAt(0);
             }
@@ -185,22 +215,24 @@ namespace WiredIn.Analyzer
 
         public void CatchKeyPressActivity(KeyPress key_press_activity)
         {
-            //AddKeyHit();
+            key_press_activity.Catched = true;
             lastHitTime = DateTime.Now;
         }
 
         public void CatchMouseClickActivity(MouseClick mouse_click_activity)
         {
-            //AddMouseHit();
+            mouse_click_activity.Catched = true;
             lastHitTime = DateTime.Now;
         }
 
         public void CatchStartUpActivity(StartUp su)
         {
+            su.Catched = true;
         }
 
         public void CatchShutDownActivity(ShutDown sd)
         {
+            sd.Catched = true;
         }
 
         private bool CheckOnOrOff(String proc_name,String w_title)
@@ -210,7 +242,9 @@ namespace WiredIn.Analyzer
 
         public void CatchWindowChangeActivity(WindowChangeActivity ac)
         {
+            
             bool b = CheckOnOrOff(ac.NewProcName,ac.NewWinTitle);
+            //System.Console.WriteLine("Caught!" + ac.What() + "on: "+b);           
             if (IsOnTask != b)
             {
                 IsOnTask = b;
@@ -225,9 +259,9 @@ namespace WiredIn.Analyzer
                     StateString = "Off";
                 }
                 this.transitTimer.Interval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
-            }            
+            }
+            ac.Catched = true;
         }
 
-        
     }
 }

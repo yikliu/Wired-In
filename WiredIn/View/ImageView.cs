@@ -7,14 +7,18 @@ namespace WiredIn.View
 {
     class ImageView : AbstractView
     {        
-        private System.ComponentModel.IContainer components;          
+        private System.ComponentModel.IContainer components;
+        
+        private string good = "bad";
+
+        private double aspectRatio = 0.0;
 
         public ImageView()
         {            
             countNumberOfFiles();
             if (Constants.Config.OPERAND_CONDITION == Constants.operant_condition.punish)
             {
-                currentID = numOfPics - 1; // when punish THe last picture is best one
+                currentID = numOfPics - 2; // when punish THe last picture is best one
             }
             else
             {
@@ -24,7 +28,9 @@ namespace WiredIn.View
     
         public Image getImageByID(int id){                       
             string path = Application.StartupPath + "//more_pics//" + id + ".jpg";
-            return Image.FromFile(path);
+            Image img = Image.FromFile(path);
+            this.aspectRatio = (double)img.Height / (double)img.Width;
+            return img;
         }
          
         public void disposeImage(Bitmap p)
@@ -38,9 +44,10 @@ namespace WiredIn.View
         public static Bitmap CreateFastBitmap(Image src)
         {
             Bitmap dest = new Bitmap(src.Width, src.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            
             using (Graphics gr = Graphics.FromImage(dest))
             {
-                gr.DrawImage(src, 0, 0, src.Width, src.Height);
+                gr.DrawImage(src, 0, 0, src.Width, src.Height);                
             }           
             return dest;
         }
@@ -61,24 +68,24 @@ namespace WiredIn.View
             }
         }
 
-        
-
         public override void setUp() { }
 
         public override void tearDown() { }
 
         public override void pause() { }
-        
+
+       
         public override void updateView(bool goToGood)
         {            
-            if (!goToGood && currentID != 30)
+            if (!goToGood && currentID >= 30)
             {
                 currentID--;
-                RefreshView();
-            }else if(goToGood && (currentID != numOfPics - 1)){
+                good = "bad";                
+            }else if(goToGood && (currentID < numOfPics - 1)){
                 currentID++;
-                RefreshView();
+                good = "good";                
             }
+            RefreshView();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -88,13 +95,22 @@ namespace WiredIn.View
             e.Graphics.Clear(this.BackColor);
             if (this.content != null)
             {
-                e.Graphics.DrawImage(this.content, 0, 0,this.Size.Width,this.Size.Height);
+                int w = this.Size.Width;
+                int h = (int)(this.Size.Width * this.aspectRatio);
+                int start_h = (this.Size.Height - h) / 2;  
+                e.Graphics.DrawImage(this.content, 0, start_h, w, h);
             }
-            String str = /*"Score:" + score +*/ "Pic:" + currentID;
-            using (Font myFont = new Font("Arial", 13))
+
+            String str;
+            if (Constants.Config.LabelImageNum)
             {
-                e.Graphics.DrawString(str, myFont, Brushes.Yellow, new Point(2, 2));
-            }           
+                
+                str = "Pic:" + currentID + "(" + good + ")";
+                using (Font myFont = new Font("Arial", 13))
+                {
+                    e.Graphics.DrawString(str, myFont, Brushes.Yellow, new Point(2, 2));
+                }  
+            }                     
         }
 
         private void InitializeComponent()

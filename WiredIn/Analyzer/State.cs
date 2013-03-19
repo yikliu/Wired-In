@@ -181,10 +181,6 @@ namespace WiredIn.Analyzer
             current_index.resetStartX(y);
         }
 
-        
-
-       
-
         public void Clear()
         {
             OnStateAccumulatedTime = TimeSpan.Zero;

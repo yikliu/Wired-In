@@ -6,6 +6,9 @@ using WiredIn.Analyzer;
 
 namespace WiredIn.UserActivity
 {
+    /// <summary>
+    /// Abstract class representing a user activity
+    /// </summary>
     abstract public class Activity
     {
         DateTime time;
@@ -14,26 +17,32 @@ namespace WiredIn.UserActivity
             this.time = time;
         }
 
+        bool catched = false;
+
+       public bool Catched
+       {
+           get
+           {
+               return catched;
+           }
+
+           set
+           {
+               catched = value;
+           }
+       }
+        
         abstract public String What();
        
-        /*
-         *	Defaul HowLong() returns empty string
-         */
         public virtual String getPreviousACDuration()
         {
             return "";
         }
 
-//         public String When()
-//         {
-//             return this.time.ToShortDateString() +", "+ this.time.ToLongTimeString();
-//         }
-
         public DateTime When()
         {
             return time;
         }
-       
         abstract public void Accept(Worker j);
     }
 }

@@ -8,15 +8,21 @@ namespace WiredIn.Constants
     public enum app_size { small, medium, full };
     public enum imagery { flower, progressbar};
     public enum operant_condition{reward, punish};
+    
+    /// <summary>
+    /// Global constants
+    /// </summary>
     public static class Config
     {
         public const int DORMANT_INTERVAL_SECONDS = 30;
         
-        public const int SLOW_UPDATE_RATE_MILLISECONDS = 1000;
+        public const int SLOW_UPDATE_RATE_MILLISECONDS = 500;
         public const int FAST_UPDATE_RATE_MILLISECONDS = 350;
 
-        public static app_size APP_SIZE = app_size.small;        
-        public static imagery VIS_IMAGE = imagery.flower;
+        public static app_size APP_SIZE = app_size.full;        
+        public static imagery VIS_IMAGE = imagery.progressbar;
+
+        public static bool LabelImageNum = true;
 
         public static bool TOPMOST = false;
 

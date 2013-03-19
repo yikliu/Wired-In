@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace WiredIn
-{
-    
+{    
     public abstract class SlackIndex
     {
         public abstract void updateScore(double x);

@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ManagedWinapi.Windows;
-//using Wired_In;
 using WiredIn.Constants;
 
 namespace WiredIn
 {
     public partial class SettingForm : Form
     {
-        MainForm m_parent;
+        MainForm m_parent; // Ref to the parent form
+
         public SettingForm(MainForm parent)
         {
             InitializeComponent();
@@ -103,7 +103,7 @@ namespace WiredIn
             if (rbSizeSmall.Checked)
             {
                 Config.APP_SIZE = app_size.small;
-                m_parent.switchAppSize();
+                m_parent.SwitchAppSize();
             }           
         }        
 
@@ -112,7 +112,7 @@ namespace WiredIn
             if (rbFullScreen.Checked)
             {
                 Config.APP_SIZE = app_size.full;
-                m_parent.switchAppSize();
+                m_parent.SwitchAppSize();
             }           
         }
 
