@@ -46,10 +46,10 @@ namespace WiredIn
 
             switch (Constants.Config.OPERAND_CONDITION)
             {
-                case operant_condition.reward:
+                case operand_condition.reward:
                     rbReward.Checked = true;
                     break;
-                case operant_condition.punish:
+                case operand_condition.punish:
                     rbPunishment.Checked = true;
                     break;
             }
@@ -120,7 +120,8 @@ namespace WiredIn
         {
             if (rbReward.Checked)
             {
-                Config.OPERAND_CONDITION = operant_condition.reward;
+                Config.OPERAND_CONDITION = operand_condition.reward;
+                m_parent.setTransitSpeed();
             }
         }
 
@@ -128,7 +129,8 @@ namespace WiredIn
         {
             if (rbPunishment.Checked)
             {
-                Config.OPERAND_CONDITION = operant_condition.punish;
+                Config.OPERAND_CONDITION = operand_condition.punish;
+                m_parent.setTransitSpeed();
             }
         }
 
@@ -138,6 +140,7 @@ namespace WiredIn
             {
                 Config.VIS_IMAGE = imagery.progressbar;
                 m_parent.createView();
+                m_parent.AttachView();
             }
         }
 
@@ -147,6 +150,17 @@ namespace WiredIn
             {
                 Config.VIS_IMAGE = imagery.flower;
                 m_parent.createView();
+                m_parent.AttachView();
+            }
+        }
+
+        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (rbEmpty.Checked)
+            {
+                Config.VIS_IMAGE = imagery.empty;
+                m_parent.createView();
+                m_parent.AttachView();
             }
         }
 

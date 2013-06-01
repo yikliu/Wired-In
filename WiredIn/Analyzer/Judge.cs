@@ -11,6 +11,8 @@ namespace WiredIn.Analyzer
     /// </summary>
     public class Judge
     {
+        //private bool onTask = false;
+        
         /// <summary>
         /// determines whether subject is on or off task
         /// If current window title is on white list, return on;
@@ -22,16 +24,19 @@ namespace WiredIn.Analyzer
         /// <returns></returns>
         public bool checkOnTask(String procName, String winTitle)
         {
+            //System.Console.WriteLine("proc:" + procName + " title" + winTitle);
             if (CheckWinTitle(winTitle))
             {
+                //onTask = true;
                 return true;
             }
 
             if(Constants.Config.WHITE_PROC.Contains(procName.ToLower()))
             {
+                //onTask = true;
                 return true;
             }
-
+            //onTask = false;
             return false;
         }
 

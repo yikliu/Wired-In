@@ -9,11 +9,9 @@ namespace WiredIn.UserActivity
 {
     public class StartUp : Activity
     {
-
-        public StartUp(DateTime time)
-            : base(time)
-        {
-            
+        public StartUp(DateTime time, int s)
+            : base(time,s)
+        {            
         }
 
         public override String What()

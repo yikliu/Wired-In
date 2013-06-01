@@ -6,7 +6,6 @@ using ManagedWinapi.Windows;
 using WiredIn.Analyzer;
 using WiredIn.UserActivity;
 using WiredIn.Windows;
-using WiredIn;
 
 namespace WiredIn
 {
@@ -49,6 +48,11 @@ namespace WiredIn
             
             activityQueue.CollectionChanged += worker.OnActiveQueueChange;
          }
+
+        public void AttachView()
+        {
+            worker.setView(myView);
+        }
         
         /// <summary>
         /// Init the view based on config setting
@@ -70,6 +74,12 @@ namespace WiredIn
                         return;
                     this.Controls.Remove(this.myView);
                     this.myView = new WiredIn.View.ProgressBarView();
+                    break;
+                case Constants.imagery.empty:
+                    if (this.myView is WiredIn.View.EmptyView)
+                        return;
+                    this.Controls.Remove(this.myView);
+                    this.myView = new WiredIn.View.EmptyView();
                     break;
             }
             
@@ -175,11 +185,10 @@ namespace WiredIn
         /// <param name="e"></param>
         private void WindowsWatcherTimerTick(object sender, EventArgs e)
         {
-            SystemWindow window = SystemWindow.ForegroundWindow;
-            
+            SystemWindow window = SystemWindow.ForegroundWindow;            
             if (!currentWindowInfo.WinTitle.Equals(window.Title))
             {
-                EnqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now));
+                EnqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now, myView.getScore()));
                 currentWindowInfo.update(window);
             }           
         }
@@ -193,7 +202,7 @@ namespace WiredIn
                 isTimerStarted = true;
                 winWatchTimer.Start();
                 worker.StartWoker();
-                EnqueueActivity(new StartUp(DateTime.Now));
+                EnqueueActivity(new StartUp(DateTime.Now, myView.getScore()));
             }
             else
             {
@@ -220,13 +229,13 @@ namespace WiredIn
         private void globalEventProvider_KeyUp(object sender, KeyEventArgs e)
         {
             //System.Console.WriteLine("Key: " + e.KeyCode);
-            EnqueueActivity(new KeyPress(e.KeyCode, DateTime.Now));
+            EnqueueActivity(new KeyPress(e.KeyCode, DateTime.Now, myView.getScore()));
         }
 
         private void globalEventProvider_MouseUp(object sender, MouseEventArgs e)
         {
             // System.Console.WriteLine("Mouse Clicked: " + e.Location.ToString());
-            EnqueueActivity(new MouseClick(DateTime.Now));
+            EnqueueActivity(new MouseClick(DateTime.Now,myView.getScore()));
         }
 
         /// <summary>
@@ -236,7 +245,7 @@ namespace WiredIn
         /// <param name="e"></param>       
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            EnqueueActivity(new ShutDown(DateTime.Now));
+            EnqueueActivity(new ShutDown(DateTime.Now, myView.getScore()));
             winWatchTimer.Stop();
             worker.StopWorker();
         }
@@ -274,6 +283,11 @@ namespace WiredIn
         private void myView_Load(object sender, EventArgs e)
         {            
             myView.updateView(false);   
+        }
+
+        public void setTransitSpeed()
+        {
+            this.worker.setInterval();
         }
     }
 }

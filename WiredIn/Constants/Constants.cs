@@ -1,36 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace WiredIn.Constants
 {
     public enum app_size { small, medium, full };
-    public enum imagery { flower, progressbar};
-    public enum operant_condition{reward, punish};
+    public enum imagery { flower, progressbar, empty };
+    public enum operand_condition{ reward, punish };
     
     /// <summary>
     /// Global constants
     /// </summary>
     public static class Config
     {
-        public const int DORMANT_INTERVAL_SECONDS = 30;
+        /// <summary>
+        /// use flower or other visual representation
+        /// </summary>
+        public static imagery VIS_IMAGE = imagery.flower;
         
-        public const int SLOW_UPDATE_RATE_MILLISECONDS = 500;
+        public static operand_condition OPERAND_CONDITION = operand_condition.punish;
+        
+        public const int DORMANT_INTERVAL_SECONDS = 20;
+        
+        public const int SLOW_UPDATE_RATE_MILLISECONDS = 450;
+        
         public const int FAST_UPDATE_RATE_MILLISECONDS = 350;
 
-        public static app_size APP_SIZE = app_size.full;        
-        public static imagery VIS_IMAGE = imagery.progressbar;
+        public static app_size APP_SIZE = app_size.full;   
+     
+        public static bool LabelImageNum = false;
 
-        public static bool LabelImageNum = true;
+        public static bool TOPMOST = false;        
+     
+        public static List<String> WHITE_WIN = new List<String>() { "word" };
 
-        public static bool TOPMOST = false;
-
-        public static operant_condition OPERAND_CONDITION = operant_condition.reward;
-
-        public static List<String> WHITE_WIN = new List<String>() { "word"};
-
-        public static List<String> WHITE_PROC = new List<String>() { "WINWORD" };
+        public static List<String> WHITE_PROC = new List<String>() { "winword" };
 
         public static int SHRINK_FACTOR = 5; // small screen is shrunk to factor of screen size;
     }

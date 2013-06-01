@@ -7,7 +7,7 @@ using WiredIn.UserActivity;
 using System.Collections.Specialized;
 using System.Timers;
 
-using WiredIn.Command;
+using WiredIn.TransitCommand;
 using WiredIn.View;
 using WiredIn.Constants;
 
@@ -36,7 +36,7 @@ namespace WiredIn.Analyzer
 
         private Boolean IsOnTask = false;
 
-        public String StateString = "Off";
+        public String StateString = "Bad";
 
         private int goodInterval = 0;
         private int badInterval = 0;
@@ -55,30 +55,36 @@ namespace WiredIn.Analyzer
             transitTimer = new Timer();
             judge = new Judge();
 
-            switch (Constants.Config.OPERAND_CONDITION)
-            {
-                case operant_condition.punish:
-                    goodInterval = Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS;
-                    badInterval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
-                    break;
-                case operant_condition.reward:
-                    badInterval = Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS;
-                    goodInterval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
-                    break;
-            }
-            dormantInterval = Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS;
+            setInterval();
 
             transitTimer.Interval = badInterval;
             transitTimer.Stop();
             transitTimer.Elapsed += new ElapsedEventHandler(TransitionTimerTick);
 
             transitCommand = new NormalTransitCommand(this.view, false);
+            
             lastHitTime = DateTime.Now;
 
             logger = new Logger();
             loggerTimer = new Timer();
             loggerTimer.Interval = 1000; // Try to log every second
             loggerTimer.Elapsed += new ElapsedEventHandler(this.LoggerTimerTick);
+        }
+
+        public void setInterval()
+        {
+            switch (Constants.Config.OPERAND_CONDITION)
+            {
+                case operand_condition.punish:
+                    goodInterval = Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS;
+                    badInterval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
+                    break;
+                case operand_condition.reward:
+                    badInterval = Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS;
+                    goodInterval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
+                    break;
+            }
+            dormantInterval = Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS;
         }
 
         /// <summary>
@@ -161,9 +167,10 @@ namespace WiredIn.Analyzer
         private void TransitionTimerTick(Object sender, ElapsedEventArgs e)
         {           
             TimeSpan diff = DateTime.Now - lastHitTime;
+            
             if (IsOnTask && diff.TotalSeconds >= Constants.Config.DORMANT_INTERVAL_SECONDS)
             {
-                if (this.transitTimer.Interval != dormantInterval)
+                if (this.StateString != "Dormant")
                 {
                     this.transitCommand.setDirection(false);
                     this.transitTimer.Interval = dormantInterval;
@@ -172,7 +179,7 @@ namespace WiredIn.Analyzer
             }
             else if(IsOnTask)
             {
-                if (this.transitTimer.Interval != goodInterval)
+                if (StateString != "Good")
                 {
                     this.transitCommand.setDirection(true);
                     this.transitTimer.Interval = goodInterval;
@@ -181,13 +188,15 @@ namespace WiredIn.Analyzer
             }
             else
             {
-                if (this.transitTimer.Interval != badInterval)
+                if (StateString != "Bad")
                 {
                     this.transitCommand.setDirection(false);
                     this.transitTimer.Interval = badInterval;
                     StateString = "Bad";
                 }
             }
+            
+            //move the view
             this.transitCommand.transit();            
         }
 
@@ -216,23 +225,27 @@ namespace WiredIn.Analyzer
         public void CatchKeyPressActivity(KeyPress key_press_activity)
         {
             key_press_activity.Catched = true;
+            key_press_activity.StateString = StateString;
             lastHitTime = DateTime.Now;
         }
 
         public void CatchMouseClickActivity(MouseClick mouse_click_activity)
         {
             mouse_click_activity.Catched = true;
+            mouse_click_activity.StateString = StateString;
             lastHitTime = DateTime.Now;
         }
 
         public void CatchStartUpActivity(StartUp su)
         {
             su.Catched = true;
+            su.StateString = StateString;
         }
 
         public void CatchShutDownActivity(ShutDown sd)
         {
             sd.Catched = true;
+            sd.StateString = StateString;
         }
 
         private bool CheckOnOrOff(String proc_name,String w_title)
@@ -244,24 +257,32 @@ namespace WiredIn.Analyzer
         {
             
             bool b = CheckOnOrOff(ac.NewProcName,ac.NewWinTitle);
-            //System.Console.WriteLine("Caught!" + ac.What() + "on: "+b);           
             if (IsOnTask != b)
             {
+                view.jump();
                 IsOnTask = b;
+                ac.IsON = IsOnTask;
                 if (IsOnTask)
                 {
                     this.transitCommand.setDirection(true);
-                    StateString = "On";
+                    //StateString = "On";
                 }
                 else
                 {
                     this.transitCommand.setDirection(false);
-                    StateString = "Off";
+                    //StateString = "Off";
                 }
-                this.transitTimer.Interval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
+                //this.transitTimer.Interval = Constants.Config.FAST_UPDATE_RATE_MILLISECONDS;
             }
             ac.Catched = true;
+            ac.StateString = StateString;
         }
 
+        public void setView(AbstractView v)
+        {
+            this.view = v;
+            transitCommand.setView(v);
+        }
+        
     }
 }

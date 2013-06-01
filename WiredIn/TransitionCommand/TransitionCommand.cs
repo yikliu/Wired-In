@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using WiredIn.View;
 
-namespace WiredIn.Command
+namespace WiredIn.TransitCommand
 {
     interface TransitionCommand
     {
         void transit();        
         void setDirection(bool d);
+        void setView(AbstractView v);
     }
 }

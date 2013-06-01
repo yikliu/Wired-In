@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using System.Text;
 using WiredIn.Analyzer;
 
 namespace WiredIn.UserActivity
@@ -10,7 +7,7 @@ namespace WiredIn.UserActivity
     public class KeyPress : Activity
     {
         private Keys key_;
-        public KeyPress(Keys key, DateTime time) : base(time)
+        public KeyPress(Keys key, DateTime time, int s) : base(time,s)
         {
             key_ = key;
         }
@@ -23,7 +20,6 @@ namespace WiredIn.UserActivity
         public override void Accept(Worker j)
         {
             j.CatchKeyPressActivity(this);
-        }
-                
+        }               
     }
 }

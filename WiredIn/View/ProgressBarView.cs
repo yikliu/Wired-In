@@ -16,7 +16,7 @@ namespace WiredIn.View
             InitializeComponent();
             this.bar.Value = full;
             countNumberOfFiles();
-            currentID = numOfPics;       
+            currentID = 2 * (numOfPics / 3);       
         }
 
         protected override void OnResize(EventArgs e)
@@ -48,9 +48,14 @@ namespace WiredIn.View
            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
         }
 
+        public override int getScore()
+        {
+            return currentID;
+        }
+
         public override void updateView(bool g)
         {
-            if (!g && currentID != 0)
+            if (!g && currentID >= 30)
             {
                 currentID--;                
             }
@@ -64,6 +69,6 @@ namespace WiredIn.View
                 this.bar.Value = (int)(r * full);               
             }            
             this.bar.Invalidate();            
-        }       
+        }
     }
 }

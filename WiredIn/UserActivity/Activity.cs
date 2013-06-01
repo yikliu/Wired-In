@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using WiredIn.Analyzer;
 
 namespace WiredIn.UserActivity
@@ -12,9 +9,32 @@ namespace WiredIn.UserActivity
     abstract public class Activity
     {
         DateTime time;
-        public Activity(DateTime time)
+        int score;
+
+        String state;
+
+        public String StateString
+        {
+            get
+            {
+                return state;
+            }
+
+            set
+            {
+                state = value;
+            }
+        }
+
+        public Activity(DateTime time, int s)
         {
             this.time = time;
+            this.score = s;
+        }
+
+        public virtual int getScore()
+        {
+            return score;
         }
 
         bool catched = false;
@@ -34,7 +54,7 @@ namespace WiredIn.UserActivity
         
         abstract public String What();
        
-        public virtual String getPreviousACDuration()
+        public virtual String getStats()
         {
             return "";
         }

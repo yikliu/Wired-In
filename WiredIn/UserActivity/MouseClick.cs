@@ -8,7 +8,7 @@ namespace WiredIn.UserActivity
 {
     public class MouseClick : Activity
     {
-        public MouseClick(DateTime time):base(time)
+        public MouseClick(DateTime time, int s):base(time,s)
         {            
         }
 

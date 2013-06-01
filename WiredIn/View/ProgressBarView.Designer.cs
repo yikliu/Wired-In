@@ -5,7 +5,7 @@
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        //private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -39,8 +39,8 @@
             this.bar.Maximum = 1000;
             this.bar.Minimum = 0;
             this.bar.Name = "bar";
-            this.bar.ProgressBarColor = System.Drawing.Color.Maroon;
-            this.bar.Size = new System.Drawing.Size(950, 150);
+            this.bar.ProgressBarColor = System.Drawing.Color.Green;
+            this.bar.Size = new System.Drawing.Size(950, 105);
             this.bar.TabIndex = 0;
             this.bar.Value = 1000;
             // 

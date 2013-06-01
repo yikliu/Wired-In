@@ -177,7 +177,6 @@ namespace WiredIn.View
             set
             {
                 BarColor = value;
-
                 // Invalidate the control to get a repaint.
                 this.Invalidate();
             }

@@ -7,5 +7,6 @@ namespace WiredIn.Analyzer
 {
     class DormantStatecs
     {
+
     }
 }

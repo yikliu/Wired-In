@@ -7,8 +7,8 @@ namespace WiredIn.UserActivity
 {
     public class ShutDown : Activity
     {
-        public ShutDown(DateTime time)
-            : base(time)
+        public ShutDown(DateTime time, int s)
+            : base(time,s)
         {
         }
 
@@ -17,7 +17,7 @@ namespace WiredIn.UserActivity
             return "ShutDown";
         }
 
-        public override String getPreviousACDuration()
+        public override String getStats()
         {
             TimeSpan span = this.When() - WindowChangeActivity.LAST_WINDOW_CHANGE;
             return ", , , " + span.TotalSeconds.ToString();
