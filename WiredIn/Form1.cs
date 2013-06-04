@@ -15,7 +15,7 @@ namespace WiredIn
     public partial class MainForm : Form
     {
         //The queue storing all keyboard/mouse activity
-        private ObservableCollection<Activity> activityQueue;
+        private ObservableCollection<Activity> activityQueue; 
         
         //A data structure for storing windows information (See MangedWinapi)
         private WindowInfo currentWindowInfo;        

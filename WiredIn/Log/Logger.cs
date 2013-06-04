@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using WiredIn.UserActivity;
-using MySql.Data.MySqlClient;
 
-namespace WiredIn
+
+namespace WiredIn.Log
 {   
     /// <summary>
     /// Logger writes user activity + time to log file
@@ -21,17 +21,14 @@ namespace WiredIn
         private String full_path;
 
         private StreamWriter writer;
-        
-        private MySqlConnection conn = null;
-        private MySqlCommand cmd = null;
-        private MySqlParameter title;
-        private MySqlParameter score;
-        private MySqlParameter time;
+
+        private SqlWriter sqlWriter;
 
         public Logger()
         {
             currentDirectoryString = System.Windows.Forms.Application.StartupPath;
             path = currentDirectoryString + "\\..\\log\\";
+            sqlWriter = new SqlWriter();
 
             DirectoryInfo di = new DirectoryInfo(path);
 
@@ -48,33 +45,7 @@ namespace WiredIn
 
             this.full_path = Path.Combine(path, file_name);
 
-            try
-            {
-                string cs = @"server=54.214.0.224;userid=root;password=678jaesy;database=wiredin";
-                conn = new MySqlConnection();
-                conn.ConnectionString = cs;
-                conn.Open();
-
-                cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                string SQL = "INSERT INTO windows(title,score,time) VALUES(@title,@score,@time)";
-                cmd.CommandText = SQL;
-                
-                title = new MySqlParameter("@title", MySqlDbType.VarChar);
-                cmd.Parameters.Add(title);
-                
-                score = new MySqlParameter("@score", MySqlDbType.Int16);
-                cmd.Parameters.Add(score);
-
-                time = new MySqlParameter("@time", MySqlDbType.VarChar);
-                cmd.Parameters.Add(time);
-                
-                cmd.Prepare();   
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }            
+            sqlWriter.Prepare(); //prepare the sql statements                     
         }
 
         public void OpenFile() {            
@@ -110,14 +81,7 @@ namespace WiredIn
                 writer.Close();
             }
 
-            if (conn != null)
-            {
-                title.Value = "closing";
-                score.Value = 0;
-                time.Value = DateTime.Now.ToString();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-            }           
+                     
         }
 
         /// <summary>
@@ -151,7 +115,6 @@ namespace WiredIn
                 OpenFile();
             
             text = this.FormatLog(ac);
-
             try
             {
                 this.writer.WriteLine(text);                  
@@ -159,21 +122,7 @@ namespace WiredIn
             catch (System.Exception ex)
             {
                 System.Console.WriteLine(ex.Message);
-            }
-            if (ac is WindowChangeActivity)
-            {
-                try
-                {
-                    title.Value = ac.What();
-                    score.Value = ac.getScore();
-                    time.Value = ac.When();
-                    cmd.ExecuteNonQuery();
-                }
-                catch (MySqlException ex)
-                {
-                    Console.WriteLine("Error: {0}", ex.ToString());
-                }
-            }            
+            }                      
         }
     }
 }

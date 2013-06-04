@@ -2,7 +2,9 @@ WiredIn is an ambient visualization for measuring and visualizing user attentive
 WiredIn monitors in real-time user's performed activities on primary tasks, (such as a Word document). Sequence of activities will then be mapped to attentiveness state of high or low.
 Visualization then feedback attentivenss state to users by rendering different state of an ambient design art, such as a blossom flower or a withering flower.
 
-At this stage, WiredIn is primarily for human-in-the-loop experiment use. 
+At this stage, WiredIn is primarily for human-in-the-loop experiment use.
+
+ 
 
 WiredIn replies on GMA.UserActivityMonitor and ManagedWinapi for low level system hook implementation, please link dll files for compilation.
 Binary of GMA.UserActivityMonitor can be downloaded at: 

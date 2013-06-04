@@ -9,6 +9,7 @@ using System.Timers;
 
 using WiredIn.TransitCommand;
 using WiredIn.View;
+using WiredIn.Log;
 using WiredIn.Constants;
 
 namespace WiredIn.Analyzer

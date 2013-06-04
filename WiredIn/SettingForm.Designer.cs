@@ -33,6 +33,7 @@
             this.rbFullScreen = new System.Windows.Forms.RadioButton();
             this.rbSizeSmall = new System.Windows.Forms.RadioButton();
             this.gbImagery = new System.Windows.Forms.GroupBox();
+            this.rbEmpty = new System.Windows.Forms.RadioButton();
             this.rdbProgbar = new System.Windows.Forms.RadioButton();
             this.rdbFlower = new System.Windows.Forms.RadioButton();
             this.cbTopMost = new System.Windows.Forms.CheckBox();
@@ -47,7 +48,6 @@
             this.gbCondition = new System.Windows.Forms.GroupBox();
             this.rbPunishment = new System.Windows.Forms.RadioButton();
             this.rbReward = new System.Windows.Forms.RadioButton();
-            this.rbEmpty = new System.Windows.Forms.RadioButton();
             this.gbSize.SuspendLayout();
             this.gbImagery.SuspendLayout();
             this.gbWhiteList.SuspendLayout();
@@ -58,11 +58,11 @@
             // 
             this.gbSize.Controls.Add(this.rbFullScreen);
             this.gbSize.Controls.Add(this.rbSizeSmall);
-            this.gbSize.Location = new System.Drawing.Point(12, 12);
-            this.gbSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbSize.Location = new System.Drawing.Point(9, 10);
+            this.gbSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbSize.Name = "gbSize";
-            this.gbSize.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbSize.Size = new System.Drawing.Size(493, 78);
+            this.gbSize.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbSize.Size = new System.Drawing.Size(370, 63);
             this.gbSize.TabIndex = 1;
             this.gbSize.TabStop = false;
             this.gbSize.Text = "Size";
@@ -70,10 +70,10 @@
             // rbFullScreen
             // 
             this.rbFullScreen.AutoSize = true;
-            this.rbFullScreen.Location = new System.Drawing.Point(256, 33);
-            this.rbFullScreen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rbFullScreen.Location = new System.Drawing.Point(192, 27);
+            this.rbFullScreen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbFullScreen.Name = "rbFullScreen";
-            this.rbFullScreen.Size = new System.Drawing.Size(100, 21);
+            this.rbFullScreen.Size = new System.Drawing.Size(87, 19);
             this.rbFullScreen.TabIndex = 2;
             this.rbFullScreen.Text = "Full Screen";
             this.rbFullScreen.UseVisualStyleBackColor = true;
@@ -82,10 +82,10 @@
             // rbSizeSmall
             // 
             this.rbSizeSmall.AutoSize = true;
-            this.rbSizeSmall.Location = new System.Drawing.Point(107, 33);
-            this.rbSizeSmall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rbSizeSmall.Location = new System.Drawing.Point(80, 27);
+            this.rbSizeSmall.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbSizeSmall.Name = "rbSizeSmall";
-            this.rbSizeSmall.Size = new System.Drawing.Size(63, 21);
+            this.rbSizeSmall.Size = new System.Drawing.Size(57, 19);
             this.rbSizeSmall.TabIndex = 0;
             this.rbSizeSmall.Text = "Small";
             this.rbSizeSmall.UseVisualStyleBackColor = true;
@@ -96,22 +96,35 @@
             this.gbImagery.Controls.Add(this.rbEmpty);
             this.gbImagery.Controls.Add(this.rdbProgbar);
             this.gbImagery.Controls.Add(this.rdbFlower);
-            this.gbImagery.Location = new System.Drawing.Point(12, 95);
-            this.gbImagery.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbImagery.Location = new System.Drawing.Point(9, 77);
+            this.gbImagery.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbImagery.Name = "gbImagery";
-            this.gbImagery.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbImagery.Size = new System.Drawing.Size(493, 78);
+            this.gbImagery.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbImagery.Size = new System.Drawing.Size(370, 63);
             this.gbImagery.TabIndex = 2;
             this.gbImagery.TabStop = false;
             this.gbImagery.Text = "Imagery";
             // 
+            // rbEmpty
+            // 
+            this.rbEmpty.AutoSize = true;
+            this.rbEmpty.Location = new System.Drawing.Point(242, 26);
+            this.rbEmpty.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbEmpty.Name = "rbEmpty";
+            this.rbEmpty.Size = new System.Drawing.Size(59, 19);
+            this.rbEmpty.TabIndex = 2;
+            this.rbEmpty.TabStop = true;
+            this.rbEmpty.Text = "Empty";
+            this.rbEmpty.UseVisualStyleBackColor = true;
+            this.rbEmpty.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
+            // 
             // rdbProgbar
             // 
             this.rdbProgbar.AutoSize = true;
-            this.rdbProgbar.Location = new System.Drawing.Point(172, 33);
-            this.rdbProgbar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdbProgbar.Location = new System.Drawing.Point(129, 27);
+            this.rdbProgbar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbProgbar.Name = "rdbProgbar";
-            this.rdbProgbar.Size = new System.Drawing.Size(112, 21);
+            this.rdbProgbar.Size = new System.Drawing.Size(96, 19);
             this.rdbProgbar.TabIndex = 1;
             this.rdbProgbar.TabStop = true;
             this.rdbProgbar.Text = "Progress Bar";
@@ -121,10 +134,10 @@
             // rdbFlower
             // 
             this.rdbFlower.AutoSize = true;
-            this.rdbFlower.Location = new System.Drawing.Point(44, 33);
-            this.rdbFlower.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdbFlower.Location = new System.Drawing.Point(33, 27);
+            this.rdbFlower.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbFlower.Name = "rdbFlower";
-            this.rdbFlower.Size = new System.Drawing.Size(70, 21);
+            this.rdbFlower.Size = new System.Drawing.Size(62, 19);
             this.rdbFlower.TabIndex = 0;
             this.rdbFlower.Text = "Flower";
             this.rdbFlower.UseVisualStyleBackColor = true;
@@ -133,10 +146,10 @@
             // cbTopMost
             // 
             this.cbTopMost.AutoSize = true;
-            this.cbTopMost.Location = new System.Drawing.Point(13, 178);
-            this.cbTopMost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbTopMost.Location = new System.Drawing.Point(10, 145);
+            this.cbTopMost.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbTopMost.Name = "cbTopMost";
-            this.cbTopMost.Size = new System.Drawing.Size(89, 21);
+            this.cbTopMost.Size = new System.Drawing.Size(77, 19);
             this.cbTopMost.TabIndex = 3;
             this.cbTopMost.Text = "Top Most";
             this.cbTopMost.UseVisualStyleBackColor = true;
@@ -145,10 +158,10 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.18868F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(107, 253);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCancel.Location = new System.Drawing.Point(80, 206);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(261, 49);
+            this.btnCancel.Size = new System.Drawing.Size(196, 40);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Close";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -162,11 +175,11 @@
             this.gbWhiteList.Controls.Add(this.btnAdd);
             this.gbWhiteList.Controls.Add(this.lbl_title);
             this.gbWhiteList.Controls.Add(this.crosshair);
-            this.gbWhiteList.Location = new System.Drawing.Point(15, 287);
-            this.gbWhiteList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbWhiteList.Location = new System.Drawing.Point(11, 233);
+            this.gbWhiteList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbWhiteList.Name = "gbWhiteList";
-            this.gbWhiteList.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbWhiteList.Size = new System.Drawing.Size(492, 330);
+            this.gbWhiteList.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbWhiteList.Size = new System.Drawing.Size(369, 268);
             this.gbWhiteList.TabIndex = 5;
             this.gbWhiteList.TabStop = false;
             this.gbWhiteList.Text = "White List";
@@ -174,20 +187,19 @@
             // lbxWhiteList
             // 
             this.lbxWhiteList.FormattingEnabled = true;
-            this.lbxWhiteList.ItemHeight = 16;
-            this.lbxWhiteList.Location = new System.Drawing.Point(1, 81);
-            this.lbxWhiteList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lbxWhiteList.Location = new System.Drawing.Point(1, 79);
+            this.lbxWhiteList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lbxWhiteList.Name = "lbxWhiteList";
-            this.lbxWhiteList.Size = new System.Drawing.Size(484, 132);
+            this.lbxWhiteList.Size = new System.Drawing.Size(364, 108);
             this.lbxWhiteList.TabIndex = 5;
             // 
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.113208F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(107, 52);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDelete.Location = new System.Drawing.Point(110, 42);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(85, 33);
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -196,10 +208,10 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.113208F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(12, 52);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Location = new System.Drawing.Point(9, 42);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(87, 33);
             this.btnAdd.TabIndex = 3;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -208,18 +220,19 @@
             // lbl_title
             // 
             this.lbl_title.AutoSize = true;
-            this.lbl_title.Location = new System.Drawing.Point(8, 18);
+            this.lbl_title.Location = new System.Drawing.Point(6, 15);
+            this.lbl_title.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_title.Name = "lbl_title";
-            this.lbl_title.Size = new System.Drawing.Size(103, 17);
+            this.lbl_title.Size = new System.Drawing.Size(90, 15);
             this.lbl_title.TabIndex = 2;
             this.lbl_title.Text = "<Un-specified>";
             // 
             // crosshair
             // 
-            this.crosshair.Location = new System.Drawing.Point(417, 37);
-            this.crosshair.Margin = new System.Windows.Forms.Padding(5);
+            this.crosshair.Location = new System.Drawing.Point(321, 19);
+            this.crosshair.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.crosshair.Name = "crosshair";
-            this.crosshair.Size = new System.Drawing.Size(52, 38);
+            this.crosshair.Size = new System.Drawing.Size(41, 41);
             this.crosshair.TabIndex = 1;
             this.toolTip1.SetToolTip(this.crosshair, "Drag crosshair onto the window to add ");
             this.crosshair.CrosshairDragged += new System.EventHandler(this.crosshair1_CrosshairDragged);
@@ -229,11 +242,9 @@
             // 
             this.gbCondition.Controls.Add(this.rbPunishment);
             this.gbCondition.Controls.Add(this.rbReward);
-            this.gbCondition.Location = new System.Drawing.Point(15, 209);
-            this.gbCondition.Margin = new System.Windows.Forms.Padding(4);
+            this.gbCondition.Location = new System.Drawing.Point(11, 170);
             this.gbCondition.Name = "gbCondition";
-            this.gbCondition.Padding = new System.Windows.Forms.Padding(4);
-            this.gbCondition.Size = new System.Drawing.Size(483, 71);
+            this.gbCondition.Size = new System.Drawing.Size(362, 58);
             this.gbCondition.TabIndex = 6;
             this.gbCondition.TabStop = false;
             this.gbCondition.Text = "Condition";
@@ -241,10 +252,9 @@
             // rbPunishment
             // 
             this.rbPunishment.AutoSize = true;
-            this.rbPunishment.Location = new System.Drawing.Point(253, 23);
-            this.rbPunishment.Margin = new System.Windows.Forms.Padding(4);
+            this.rbPunishment.Location = new System.Drawing.Point(190, 19);
             this.rbPunishment.Name = "rbPunishment";
-            this.rbPunishment.Size = new System.Drawing.Size(103, 21);
+            this.rbPunishment.Size = new System.Drawing.Size(91, 19);
             this.rbPunishment.TabIndex = 1;
             this.rbPunishment.TabStop = true;
             this.rbPunishment.Text = "Punishment";
@@ -254,34 +264,21 @@
             // rbReward
             // 
             this.rbReward.AutoSize = true;
-            this.rbReward.Location = new System.Drawing.Point(104, 25);
-            this.rbReward.Margin = new System.Windows.Forms.Padding(4);
+            this.rbReward.Location = new System.Drawing.Point(78, 20);
             this.rbReward.Name = "rbReward";
-            this.rbReward.Size = new System.Drawing.Size(77, 21);
+            this.rbReward.Size = new System.Drawing.Size(68, 19);
             this.rbReward.TabIndex = 0;
             this.rbReward.TabStop = true;
             this.rbReward.Text = "Reward";
             this.rbReward.UseVisualStyleBackColor = true;
             this.rbReward.CheckedChanged += new System.EventHandler(this.rbReward_CheckedChanged);
             // 
-            // rbEmpty
-            // 
-            this.rbEmpty.AutoSize = true;
-            this.rbEmpty.Location = new System.Drawing.Point(323, 32);
-            this.rbEmpty.Name = "rbEmpty";
-            this.rbEmpty.Size = new System.Drawing.Size(68, 21);
-            this.rbEmpty.TabIndex = 2;
-            this.rbEmpty.TabStop = true;
-            this.rbEmpty.Text = "Empty";
-            this.rbEmpty.UseVisualStyleBackColor = true;
-            this.rbEmpty.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
-            // 
             // SettingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(517, 681);
+            this.ClientSize = new System.Drawing.Size(388, 553);
             this.ControlBox = false;
             this.Controls.Add(this.gbCondition);
             this.Controls.Add(this.gbWhiteList);
@@ -289,7 +286,7 @@
             this.Controls.Add(this.gbImagery);
             this.Controls.Add(this.gbSize);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingForm";
