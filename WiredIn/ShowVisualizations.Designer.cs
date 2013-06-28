@@ -4,7 +4,7 @@ using Gma.UserActivityMonitor;
 using WiredIn.View;
 namespace WiredIn
 {
-    partial class MainForm
+    partial class ShowVisualizations
     {
         /// <summary>
         /// Required designer variable.
@@ -84,48 +84,70 @@ namespace WiredIn
         {
             this.components = new System.ComponentModel.Container();
             this.winWatchTimer = new System.Windows.Forms.Timer(this.components);
-          
-            this.globalEventProvider1 = new Gma.UserActivityMonitor.GlobalEventProvider();          
-
-            this.menu = new ContextMenuStrip();         
-          
+            this.globalEventProvider = new Gma.UserActivityMonitor.GlobalEventProvider();
+            this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuStart = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSetting = new System.Windows.Forms.ToolStripMenuItem();
+            this.importImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // win_watcher_timer
+            // winWatchTimer
             // 
             this.winWatchTimer.Interval = 1000;
             this.winWatchTimer.Tick += new System.EventHandler(this.WindowsWatcherTimerTick);
-            
+           // 
+            // menu
             // 
-            // globalEventProvider1
+            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuStart,
+            this.mnuExit,
+            this.mnuSetting,
+            this.importImagesToolStripMenuItem});
+            this.menu.Name = "menu";
+            this.menu.Size = new System.Drawing.Size(174, 114);
             // 
-            this.globalEventProvider1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.globalEventProvider_MouseUp);
-            this.globalEventProvider1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
-            
-            ToolStripMenuItem mnuStart = new ToolStripMenuItem("Start");
-            ToolStripMenuItem mnuExit = new ToolStripMenuItem("Exit");
-            ToolStripMenuItem mnuSetting = new ToolStripMenuItem("Settings");
-            //Assign event handlers
-            mnuStart.Click += new System.EventHandler(this.btnStart_Click);
-            mnuExit.Click += new System.EventHandler(this.btn_exit_Click);
-            mnuSetting.Click += new System.EventHandler(this.btnSetting_Click);
-            //Add to main context menu
-            this.menu.Items.AddRange(new ToolStripItem[] { mnuStart, mnuExit, mnuSetting });
-           
+            // mnuStart
             // 
-            // MainForm
+            this.mnuStart.Name = "mnuStart";
+            this.mnuStart.Size = new System.Drawing.Size(173, 22);
+            this.mnuStart.Text = "Start";
+            this.mnuStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // mnuExit
+            // 
+            this.mnuExit.Name = "mnuExit";
+            this.mnuExit.Size = new System.Drawing.Size(173, 22);
+            this.mnuExit.Text = "Exit";
+            this.mnuExit.Click += new System.EventHandler(this.btn_exit_Click);
+            // 
+            // mnuSetting
+            // 
+            this.mnuSetting.Name = "mnuSetting";
+            this.mnuSetting.Size = new System.Drawing.Size(173, 22);
+            this.mnuSetting.Text = "Settings";
+            this.mnuSetting.Click += new System.EventHandler(this.btnSetting_Click);
+            // 
+            // importImagesToolStripMenuItem
+            // 
+            this.importImagesToolStripMenuItem.Name = "importImagesToolStripMenuItem";
+            this.importImagesToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.importImagesToolStripMenuItem.Text = "Import Images";
+            this.importImagesToolStripMenuItem.Click += new System.EventHandler(this.importImagesToolStripMenuItem_Click);
+            // 
+            // ShowVisualizations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lime;
             this.ClientSize = new System.Drawing.Size(800, 600);
-           
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "MainForm";
+            this.Name = "ShowVisualizations";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -136,8 +158,9 @@ namespace WiredIn
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
-           
+            this.menu.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -145,8 +168,12 @@ namespace WiredIn
         private System.Windows.Forms.Timer winWatchTimer;
 
         private ContextMenuStrip menu;
-        private GlobalEventProvider globalEventProvider1;        
-        private AbstractView myView;       
+        private GlobalEventProvider globalEventProvider;        
+        private AbstractView myView;
+        private ToolStripMenuItem mnuStart;
+        private ToolStripMenuItem mnuExit;
+        private ToolStripMenuItem mnuSetting;
+        private ToolStripMenuItem importImagesToolStripMenuItem;       
     }
 }
 

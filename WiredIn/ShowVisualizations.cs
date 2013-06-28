@@ -12,7 +12,7 @@ namespace WiredIn
     /// <summary>
     /// Main Form
     /// </summary>
-    public partial class MainForm : Form
+    public partial class ShowVisualizations : Form
     {
         //The queue storing all keyboard/mouse activity
         private ObservableCollection<Activity> activityQueue; 
@@ -32,22 +32,43 @@ namespace WiredIn
         //whether the timer has started
         public bool isTimerStarted = false;                
 
-        public MainForm()
+        public ShowVisualizations()
         {           
             InitializeComponent();
-            
-            createView();
-            
-            activityQueue = new ObservableCollection<Activity>();
-            
-            currentWindowInfo = new WindowInfo();
-            
-            winWatchTimer.Enabled = false;
-            
-            worker = new Worker(activityQueue,myView);
-            
-            activityQueue.CollectionChanged += worker.OnActiveQueueChange;
+            this.Hide();
+            Guide theGuideForm = new Guide();
+            if (theGuideForm.ShowDialog() == DialogResult.OK)
+            {                
+                TurnOnVisualization();
+            }
          }
+
+        public void AttachListeners()
+        {
+            this.globalEventProvider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.globalEventProvider_MouseUp);
+            this.globalEventProvider.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
+           
+        }
+
+        public void DetachListeners()
+        {
+            this.globalEventProvider.MouseUp -= new System.Windows.Forms.MouseEventHandler(this.globalEventProvider_MouseUp);
+            this.globalEventProvider.KeyUp -= new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
+        }
+
+        public void TurnOnVisualization()
+        {
+            createView();
+
+            AttachListeners();
+          
+            activityQueue = new ObservableCollection<Activity>();
+            currentWindowInfo = new WindowInfo();
+            winWatchTimer.Enabled = false;
+            worker = new Worker(activityQueue, myView);
+            activityQueue.CollectionChanged += worker.OnActiveQueueChange;
+            this.Show();
+        }
 
         public void AttachView()
         {
@@ -218,8 +239,6 @@ namespace WiredIn
             // Create and display an instance of the dialog box
             Form setting = new SettingForm(this);
 
-            // Show the dialog and determine the state of the 
-            // DialogResult property for the form.
             if (setting.ShowDialog() == DialogResult.OK)
             {
                 // Do something here to handle data from dialog box.
@@ -288,6 +307,17 @@ namespace WiredIn
         public void setTransitSpeed()
         {
             this.worker.setInterval();
+        }
+
+        private void importImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Create and display an instance of the dialog box
+            Form image_import = new ImageImport();
+
+            if (image_import.ShowDialog() == DialogResult.OK)
+            {
+                // Do something here to handle data from dialog box.
+            }
         }
     }
 }

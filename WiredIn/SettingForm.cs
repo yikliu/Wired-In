@@ -13,9 +13,9 @@ namespace WiredIn
 {
     public partial class SettingForm : Form
     {
-        MainForm m_parent; // Ref to the parent form
+        ShowVisualizations m_parent; // Ref to the parent form
 
-        public SettingForm(MainForm parent)
+        public SettingForm(ShowVisualizations parent)
         {
             InitializeComponent();
             m_parent = parent;

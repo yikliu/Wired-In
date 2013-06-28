@@ -36,5 +36,7 @@ namespace WiredIn.Constants
         public static List<String> WHITE_PROC = new List<String>() { "winword" };
 
         public static int SHRINK_FACTOR = 5; // small screen is shrunk to factor of screen size;
+
+        public static bool enable_sqlLogging = false;
     }
 }

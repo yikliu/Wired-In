@@ -18,7 +18,7 @@ namespace WiredIn.View
 
         public virtual Size getComponentSize()
         {
-            throw new InvalidOperationException("This method must be overriden");
+            throw new InvalidOperationException("This method must be overridden");
         }
 
         public AbstractView()
@@ -29,7 +29,7 @@ namespace WiredIn.View
 
         public virtual void updateView(bool goToGood)
         {
-            throw new InvalidOperationException("This method must be overriden");
+            throw new InvalidOperationException("This method must be overridden");
         }
 
         public virtual void setSize(Size s) 
@@ -106,9 +106,6 @@ namespace WiredIn.View
         public virtual int getScore()
         {
             return -1;
-        } 
-       
-        
-
+        }       
     }
 }

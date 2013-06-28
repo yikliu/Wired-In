@@ -11,8 +11,7 @@ namespace WiredIn.View
         
         private string good = "bad";
 
-        private double aspectRatio = 0.0;
-        
+        private double aspectRatio = 0.0;        
         
         public ImageView()
         {            

@@ -6,7 +6,6 @@ using System.Text;
 using System.Collections.ObjectModel;
 using WiredIn.UserActivity;
 
-
 namespace WiredIn.Log
 {   
     /// <summary>
@@ -21,14 +20,19 @@ namespace WiredIn.Log
         private String full_path;
 
         private StreamWriter writer;
-
         private SqlWriter sqlWriter;
 
         public Logger()
         {
+            bool sql = Constants.Config.enable_sqlLogging;
+            
             currentDirectoryString = System.Windows.Forms.Application.StartupPath;
             path = currentDirectoryString + "\\..\\log\\";
-            sqlWriter = new SqlWriter();
+
+            if (sql)
+            {
+                sqlWriter = new SqlWriter();
+            }           
 
             DirectoryInfo di = new DirectoryInfo(path);
 
@@ -45,7 +49,10 @@ namespace WiredIn.Log
 
             this.full_path = Path.Combine(path, file_name);
 
-            sqlWriter.Prepare(); //prepare the sql statements                     
+            if (sql)
+            {
+                sqlWriter.Prepare(); //prepare the sql statements                  
+            }              
         }
 
         public void OpenFile() {            
@@ -79,9 +86,7 @@ namespace WiredIn.Log
             {
                 writer.Flush();
                 writer.Close();
-            }
-
-                     
+            }        
         }
 
         /// <summary>
