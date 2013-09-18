@@ -15,7 +15,7 @@ namespace WiredIn
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ShowVisualizations());
+            Application.Run(new WiredIn.ShowVisualizations());
         }
     }
 }

@@ -1,35 +1,66 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : WiredIn
+// Author           : yikliu
+// Created          : 06-28-2013
+//
+// Last Modified By : yikliu
+// Last Modified On : 09-05-2013
+// ***********************************************************************
+// <copyright file="VisualizationOrganizer.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+using WiredIn.Constants;
 
-namespace WiredIn
+namespace WiredIn.UI
 {
-    public partial class VisualizationOrganizer : Form
-    {        
-      
-        private int selected = -1;
-        private int[] image_set = {0,0,0};
-
-        private String wired_in_folder;
-        private List<String> visNames;
+    /// <summary>
+    /// Class VisualizationOrganizer
+    /// </summary>
+    public partial class VisualizationOrganizer : MetroFramework.Forms.MetroForm
+    {
 
         /// <summary>
-        /// 
+        /// The selected
+        /// </summary>
+        private int selected = -1;
+        /// <summary>
+        /// The image_set
+        /// </summary>
+        private int[] image_set = {0,0,0};
+
+        /// <summary>
+        /// The wired_in_folder
+        /// </summary>
+        private String wired_in_folder;
+        /// <summary>
+        /// The vis names
+        /// </summary>
+        private List<String> visNames;
+
+        private SingletonConstant constants = SingletonConstant.GetSingletonConstant(); 
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VisualizationOrganizer"/> class.
         /// </summary>
         /// <returns></returns>
         public VisualizationOrganizer()
         {
-            InitializeComponent();           
-            
+            InitializeComponent();            
         }
 
+        /// <summary>
+        /// Handles the Click event of the picBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void picBox_Click(object sender, EventArgs e)
         {
             PictureBox box = (PictureBox)sender;
@@ -43,23 +74,20 @@ namespace WiredIn
             }
             
         }
-        
+
         /// <summary>
-        /// 
+        /// Serializes the specified filename.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="ser"></param>
-        /// <returns></returns>
+        /// <param name="filename">The filename.</param>
         public static void Serialize(String filename)
         {
            
         }
 
         /// <summary>
-        /// 
+        /// Deserializes the specified filename.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
+        /// <param name="filename">The filename.</param>
         public static void Deserialize(String filename)
         {
             if (File.Exists(filename))
@@ -78,11 +106,21 @@ namespace WiredIn
             }
         }
 
+        /// <summary>
+        /// Handles the FormClosing event of the ImageImport control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private void ImageImport_FormClosing(object sender, FormClosingEventArgs e)
         {
             
         }
 
+        /// <summary>
+        /// Handles the Click event of the button1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void button1_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < 3; i++)
@@ -94,7 +132,7 @@ namespace WiredIn
                 }
             }
             string name = tbox_name.Text;
-            string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "WiredIn");
+            string folder = Path.Combine(constants.WiredInFolder, "visualizations");
             DirectoryInfo dir = Directory.CreateDirectory(Path.Combine(folder, name));
             foreach (Control c in imagePanel.Controls)
             {
@@ -104,7 +142,6 @@ namespace WiredIn
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
-        }
-       
+        }       
     }
 }

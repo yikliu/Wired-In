@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Collections.ObjectModel;
+using WiredIn.Constants;
 using WiredIn.UserActivity;
 
 namespace WiredIn.Log
@@ -17,14 +15,14 @@ namespace WiredIn.Log
         private String path;
 
         private String text;
-        private String full_path;
+        private String fullPath;
 
         private StreamWriter writer;
         private SqlWriter sqlWriter;
 
         public Logger()
         {
-            bool sql = Constants.Config.ENABLE_SQL_LOGGING;
+            bool sql = SingletonConstant.GetSingletonConstant().EnableDBLogging;
             
             currentDirectoryString = System.Windows.Forms.Application.StartupPath;
             path = currentDirectoryString + "\\..\\log\\";
@@ -47,7 +45,7 @@ namespace WiredIn.Log
                 + now.Hour.ToString() + "-" 
                 + now.Minute.ToString() + ".csv";
 
-            this.full_path = Path.Combine(path, file_name);
+            this.fullPath = Path.Combine(path, file_name);
 
             if (sql)
             {
@@ -55,13 +53,16 @@ namespace WiredIn.Log
             }              
         }
 
-        public void OpenFile() {            
+        public void OpenFile()
+        {
+            SingletonConstant constants = SingletonConstant.GetSingletonConstant();
+
             StringBuilder sb = new StringBuilder();
-            if (Constants.Config.VIS_IMAGE == Constants.Visualization.ManyStepImages)
+            if (constants.ActiveView == Visualization.ManyStepImages)
             {
                 sb.Append("Flower");
             }
-            else if (Constants.Config.VIS_IMAGE == Constants.Visualization.Progressbar)
+            else if (constants.ActiveView == Visualization.Progressbar)
             {
                 sb.Append("Progressbar");
             }else
@@ -69,15 +70,15 @@ namespace WiredIn.Log
                 sb.Append("Empty");                
             }
 
-            if (Constants.Config.CONDITION == Constants.OperandCondition.punish)
+            if (constants.Condition == OperandCondition.punish)
             {
                 sb.Append("+Punish");
             }
-            else if (Constants.Config.CONDITION == Constants.OperandCondition.reward)
+            else if (constants.Condition == OperandCondition.reward)
             {
                 sb.Append("+Reward");
             }
-            writer = new StreamWriter(full_path, true);
+            writer = new StreamWriter(fullPath, true);
             writer.WriteLine(sb.ToString());
         }
 

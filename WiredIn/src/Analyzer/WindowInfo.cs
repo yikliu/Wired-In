@@ -17,23 +17,23 @@ using System.Linq;
 using System.Text;
 using ManagedWinapi.Windows;
 
-namespace WiredIn.Windows
+namespace WiredIn.Analyzer
 {
     /// <summary>
     /// Class WindowInfo
     /// </summary>
-    class WindowInfo
+    public class WindowInfo
     {
-        private String procName;
-        private int procID;
-        private String winTitle;
-        private IntPtr winHandle;
+        private String _procName;
+        private int _procID;
+        private String _winTitle;
+        private IntPtr _winHandle;
 
         public String ProcName
         {
             get 
             {
-                return this.procName;
+                return this._procName;
             }
         }
 
@@ -41,7 +41,7 @@ namespace WiredIn.Windows
         {
             get
             {
-                return this.winTitle;
+                return this._winTitle;
             }
 
         }
@@ -55,26 +55,27 @@ namespace WiredIn.Windows
             this.update(win);
         }
 
-        public bool Equals(WindowInfo info){
-            return this.winHandle == info.winHandle;
+        public bool Equals(WindowInfo info)
+        {
+            return this._winHandle == info._winHandle;
         }
 
         public bool belongToSameProcess(WindowInfo info)
         {
-            return this.procID == info.procID;
+            return this._procID == info._procID;
         }
 
         public bool belongToSameProcess(SystemWindow win)
         {
-            return this.procID == win.Process.Id;
+            return this._procID == win.Process.Id;
         }
 
         public void update(SystemWindow win)
         {
-            this.procID = win.Process.Id;
-            this.procName = win.Process.ProcessName;
-            this.winTitle = win.Title;
-            this.winHandle = win.HWnd;
+            this._procID = win.Process.Id;
+            this._procName = win.Process.ProcessName;
+            this._winTitle = win.Title;
+            this._winHandle = win.HWnd;
         }
     }
 }

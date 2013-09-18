@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Timers;
 using WiredIn.View;
+using WiredIn.Constants;
 
 namespace WiredIn.TransitionCommand
 {
@@ -15,8 +16,9 @@ namespace WiredIn.TransitionCommand
         private int dormantInterval = 0;
 
         private int currentStep = 0;
-
         private double speedAdjustFactor = 1;
+
+        private SingletonConstant _constant = SingletonConstant.GetSingletonConstant();
 
         public double SpeedAdjustFactor
         {
@@ -58,8 +60,7 @@ namespace WiredIn.TransitionCommand
         public ManyStepTransitCommand(AbstractView v)
         {
             this.view = v;
-
-            
+                        
             transitTimer = new Timer();         
             transitTimer.Stop();
             transitTimer.Elapsed += new ElapsedEventHandler(TransitionTimerTick);
@@ -78,20 +79,23 @@ namespace WiredIn.TransitionCommand
             this.view = view;
         }
 
+        /// <summary>
+        /// Initializes the interval based on operational condition.
+        /// </summary>
         public void InitializeIntervalBasedOnOperationalCondition()
         {
-            switch (Constants.Config.CONDITION)
+            switch (_constant.Condition)
             {
                 case Constants.OperandCondition.punish:
-                    goodInterval = (int)(Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS * this.speedAdjustFactor);
-                    badInterval = (int)(Constants.Config.FAST_UPDATE_RATE_MILLISECONDS* this.speedAdjustFactor);
+                    goodInterval = (int)(_constant.SlowUpdateRateInMilliSeconds * this.speedAdjustFactor);
+                    badInterval = (int)(_constant.FastUpdateRateInMilliSeconds * this.speedAdjustFactor);
                     break;
                 case Constants.OperandCondition.reward:
-                    badInterval = (int)(Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS * this.speedAdjustFactor);
-                    goodInterval = (int)(Constants.Config.FAST_UPDATE_RATE_MILLISECONDS * this.speedAdjustFactor);
+                    badInterval = (int)(_constant.SlowUpdateRateInMilliSeconds * this.speedAdjustFactor);
+                    goodInterval = (int)(_constant.FastUpdateRateInMilliSeconds * this.speedAdjustFactor);
                     break;
             }
-            dormantInterval = (int)(Constants.Config.SLOW_UPDATE_RATE_MILLISECONDS * this.speedAdjustFactor);
+            dormantInterval = (int)(_constant.SlowUpdateRateInMilliSeconds * this.speedAdjustFactor);
         }
 
         /// <summary>
@@ -105,12 +109,12 @@ namespace WiredIn.TransitionCommand
 
         public virtual void Jump()
         {
-            if (Constants.Config.CONDITION == Constants.OperandCondition.reward 
+            if (_constant.Condition == Constants.OperandCondition.reward 
                 && IsInBadRange())
             {
                 JumpFromBadRange();
             }
-            else if (Constants.Config.CONDITION == Constants.OperandCondition.punish 
+            else if (_constant.Condition == Constants.OperandCondition.punish 
                 && IsInGoodRange())
             {
                 JumpFromGoodRange();

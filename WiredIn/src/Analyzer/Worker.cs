@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Collections.Specialized;
 using System.Timers;
-
-using WiredIn.UserActivity;
-
-using WiredIn.View;
-using WiredIn.Log;
 using WiredIn.Constants;
+using WiredIn.Log;
 using WiredIn.TransitionCommand;
+using WiredIn.UserActivity;
 
 namespace WiredIn.Analyzer
 {
@@ -30,11 +24,20 @@ namespace WiredIn.Analyzer
         private Timer loggerTimer;
 
         private AbstractTransitionCommand transitCommand;
+
+        private SingletonConstant _constant = SingletonConstant.GetSingletonConstant();
         
-        public WiredIn.TransitionCommand.AbstractTransitionCommand TransitCommand
+        public AbstractTransitionCommand TransitCommand
         {
-            get { return transitCommand; }
-            set { transitCommand = value; }
+            get 
+            { 
+                return transitCommand; 
+            }
+            
+            set 
+            { 
+                transitCommand = value; 
+            }
         }
 
         private DateTime lastHitTime;
@@ -50,13 +53,10 @@ namespace WiredIn.Analyzer
         /// <param name="v">View instance</param>
         public Worker(ObservableCollection<Activity> q, AbstractTransitionCommand t)
         {
-            theActivityQueue = q;
-            this.transitCommand = t;
-            
+            theActivityQueue = q;            
+            this.transitCommand = t;            
             judge = new Judge();
-
             lastHitTime = DateTime.Now;
-
             logger = new Logger();
             loggerTimer = new Timer();
             loggerTimer.Interval = 1000; // Try to log every second
@@ -187,14 +187,14 @@ namespace WiredIn.Analyzer
             sd.StateString = this.state.ToString();
         }
 
-        private bool CheckOnOrOff(String proc_name,String w_title)
+        private bool CheckOnOrOff(WindowInfo w)
         {
-            return judge.checkOnTask(proc_name, w_title);
+            return judge.CheckOnTask(w);
         }
 
         public void CatchWindowChangeActivity(WindowChangeActivity ac)
         {            
-            bool b = CheckOnOrOff(ac.NewProcName,ac.NewWinTitle);
+            bool b = CheckOnOrOff(ac.NewWindow);
             if (IsOnTask != b)
             {
                 IsOnTask = b;
@@ -214,7 +214,7 @@ namespace WiredIn.Analyzer
         {
             TimeSpan diff = DateTime.Now - lastHitTime;
 
-            if (IsOnTask && diff.TotalSeconds >= Constants.Config.DORMANT_INTERVAL_SECONDS)
+            if (IsOnTask && diff.TotalSeconds >= _constant.DormantIntervalInSeconds)
             {
                 UpdateTransitState(Constants.State.Dormant);
             }

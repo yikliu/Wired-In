@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using WiredIn.Analyzer;
 
+
 namespace WiredIn.UserActivity
 {
     public class WindowChangeActivity : Activity
@@ -25,6 +26,14 @@ namespace WiredIn.UserActivity
         TimeSpan onOneWindow;
         TimeSpan onTask;
         TimeSpan onOffTask;
+
+        WindowInfo newWindow;
+
+        public WindowInfo NewWindow
+        {
+            get { return newWindow; }
+            set { newWindow = value; }
+        }
 
         public bool IsON
         {
@@ -67,10 +76,19 @@ namespace WiredIn.UserActivity
             set { this._newProcName = value; }
         }
 
+        /*
         public WindowChangeActivity(String p_name, String w_title, DateTime time, int score):base(time, score)
         {
             _newProcName = p_name;
             _newWinTitle = w_title;
+        }
+        */
+        public WindowChangeActivity(WindowInfo newWindow, DateTime time,  int score)
+            : base(time, score)
+        {
+            this.newWindow = newWindow;
+            this._newProcName = newWindow.ProcName;
+            this._newWinTitle = newWindow.WinTitle;
         }
 
         /*

@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using ManagedWinapi.Windows;
+using WiredIn.Constants;
 
-namespace WiredIn
+namespace WiredIn.UI
 {
     public partial class Guide : Form
     {
         private string customViewFolder;
+        
         private List<string> customVisNames;
 
         private string selected_vis;
 
+        private SystemWindow currentWindow;
+
         private int indexOfSelectedRadioButton;
+
+        private SingletonConstant _constant = SingletonConstant.GetSingletonConstant();
 
         /// <summary>
         /// 
@@ -35,8 +37,8 @@ namespace WiredIn
             //get my document folder
             this.selected_vis = "rose";
             this.indexOfSelectedRadioButton = 0;
-            //wired_in_folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "WiredIn");
-            customViewFolder = Path.Combine(Constants.Config.WIREDIN_FOLDER, "visualizations\\custom");
+
+            customViewFolder = Path.Combine(_constant.WiredInFolder, "visualizations\\custom");
             bool folder_exists = Directory.Exists(customViewFolder);
             if (!folder_exists)
             {
@@ -49,8 +51,7 @@ namespace WiredIn
                 {
                     customVisNames.Add(s.Remove(0, customViewFolder.Length + 1));
                     //Console.WriteLine(s.Remove(0, wired_in_folder.Length + 1));
-                }
-                
+                }                
             }
 
             tableLayoutPanel.ColumnCount = customVisNames.Count + 2;
@@ -129,8 +130,21 @@ namespace WiredIn
             return selected_vis;
         }
 
+        public List<string> GetWorkSphereWindowTitles()
+        {
+            return lbxWhiteList.Items.OfType<string>().ToList();
+        }
+
+        public List<string> GetKeywords()
+        {
+            return listBox_keywords.Items.OfType<string>().ToList();
+        }
+
         private void button1_Click(object sender, EventArgs e)
-        {           
+        {
+            _constant.WhiteListWinTitles.AddRange(GetWorkSphereWindowTitles());
+            _constant.WhiteListKeyWords.AddRange(GetKeywords());
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -142,17 +156,17 @@ namespace WiredIn
 
         private void crosshair_CrosshairDragging(object sender, EventArgs e)
         {
-            updateWindowTitleLabel();
+            //updateWindowTitleLabel();
         }
 
         private void updateWindowTitleLabel()
-        {            
-            SystemWindow sw = SystemWindow.FromPointEx(MousePosition.X, MousePosition.Y, false, false);
-            lbl_title.Text = sw.Title;      
+        {
+            currentWindow = SystemWindow.FromPointEx(MousePosition.X, MousePosition.Y, false, false);
+            lbl_title.Text = currentWindow.Title;           
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
-        {
+        {            
             this.lbxWhiteList.Items.Add(lbl_title.Text);
         }
 
@@ -174,10 +188,28 @@ namespace WiredIn
             else
             {
                 //gBox_Vis.Controls.RemoveAt(indexOfSelectedRadioButton);
-                String location = Path.Combine(Constants.Config.WIREDIN_FOLDER, "visualizations\\custom\\" + this.selected_vis);
+                String location = Path.Combine(_constant.WiredInFolder, "visualizations\\custom\\" + this.selected_vis);
                 var dir = new DirectoryInfo(location);
                 dir.Delete(true);
                 RefreshCustomVisualizations();
+            }
+        }
+
+        private void btnKW_Add_Click(object sender, EventArgs e)
+        {
+            if (tbox_keyword.Text.Length > 0)
+            {
+                listBox_keywords.Items.Add(tbox_keyword.Text);
+                tbox_keyword.Text = "";
+            }
+        }
+
+        private void btnKW_Del_Click(object sender, EventArgs e)
+        {
+            ListBox.SelectedIndexCollection selected = this.listBox_keywords.SelectedIndices;
+            foreach (int i in selected)
+            {
+                this.listBox_keywords.Items.RemoveAt(i);
             }
         }       
     }

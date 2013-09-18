@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ManagedWinapi.Windows;
+using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Forms;
-using ManagedWinapi.Windows;
 using WiredIn.Analyzer;
+using WiredIn.Constants;
+using WiredIn.UI;
 using WiredIn.UserActivity;
-using WiredIn.Windows;
 
 namespace WiredIn
 {
@@ -15,60 +16,46 @@ namespace WiredIn
     public partial class ShowVisualizations : Form
     {
         //The queue storing all keyboard/mouse activity
-        private ObservableCollection<Activity> activityQueue; 
-        
+        private ObservableCollection<Activity> activityQueue;
+
         //A data structure for storing windows information (See MangedWinapi)
-        private WindowInfo currentWindowInfo;        
-        
+        private WindowInfo currentWindowInfo;
+
         //An instance of background worker
         private Worker worker;
 
         //Allowing dragging a windows
         public Point lastClick;
-        
+
         //whether dragging is allowed
-        public bool drag = false;       
+        public bool drag = false;
 
         //whether the timer has started
         public bool isTimerStarted = false;
 
-        private bool guideSuccess = false;
+        private bool orientationSuccess = false;
 
-        private string selected_vis = "rose";
+        private SingletonConstant constant = SingletonConstant.GetSingletonConstant();
 
         public ShowVisualizations()
-        {           
+        {
             InitializeComponent();
             this.Hide();
-            Guide theGuideForm = new Guide();
-            if (theGuideForm.ShowDialog() == DialogResult.OK)
+            WiredIn.UI.Orientation orientation = new WiredIn.UI.Orientation();
+            if (orientation.ShowDialog() == DialogResult.OK)
             {
-                guideSuccess = true;
-                this.selected_vis = theGuideForm.GetSelectedVis();
-                switch (this.selected_vis.ToLower())
-                {
-                    case "rose":
-                    case "moon":
-                        Constants.Config.VIS_IMAGE = Constants.Visualization.ManyStepImages;
-                        break;
-                    case "progressbar":
-                        Constants.Config.VIS_IMAGE = Constants.Visualization.Progressbar;
-                        break;
-                    default:
-                        Constants.Config.VIS_IMAGE = Constants.Visualization.Custom;
-                        break;
-                }
+                orientationSuccess = true;                
             }
             else
             {
-                guideSuccess = false;
-            }            
-         }
+                orientationSuccess = false;
+            }
+        }
 
         public void AttachListeners()
         {
             this.globalEventProvider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.globalEventProvider_MouseUp);
-            this.globalEventProvider.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);           
+            this.globalEventProvider.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
         }
 
         public void DetachListeners()
@@ -78,9 +65,9 @@ namespace WiredIn
         }
 
         public void TurnOnVisualization()
-        {            
+        {
             CreateView();
-            AttachListeners();          
+            AttachListeners();
             activityQueue = new ObservableCollection<Activity>();
             currentWindowInfo = new WindowInfo();
             winWatchTimer.Enabled = false;
@@ -93,13 +80,14 @@ namespace WiredIn
         {
             worker.TransitCommand = myView.GetTransitCommand();
         }
-        
+
         /// <summary>
         /// Init the view based on config setting
         /// </summary>
         public void CreateView()
         {
-            switch (Constants.Config.VIS_IMAGE)
+            string visName = constant.ActiveVisualizationName;
+            switch (constant.ActiveView)
             {
                 case Constants.Visualization.ManyStepImages:
                     if (this.myView is WiredIn.View.ManyStepsView)
@@ -107,7 +95,7 @@ namespace WiredIn
                         return;
                     }
                     this.Controls.Remove(this.myView);
-                    this.myView = new WiredIn.View.ManyStepsView(this.selected_vis);
+                    this.myView = new WiredIn.View.ManyStepsView(visName);
                     break;
                 case Constants.Visualization.Progressbar:
                     if (this.myView is WiredIn.View.ProgressBarView)
@@ -125,10 +113,10 @@ namespace WiredIn
                     if (this.myView is WiredIn.View.CustomView)
                         return;
                     this.Controls.Remove(this.myView);
-                    this.myView = new WiredIn.View.CustomView(this.selected_vis);
+                    this.myView = new WiredIn.View.CustomView(visName);
                     break;
             }
-            
+
             this.SuspendLayout();
             this.myView.ForeColor = System.Drawing.Color.Transparent;
             this.myView.Location = new System.Drawing.Point(0, 0);
@@ -137,7 +125,7 @@ namespace WiredIn
             this.myView.Load += new System.EventHandler(this.myView_Load);
             this.myView.Dock = DockStyle.Fill;
             this.myView.ContextMenuStrip = menu;
-           
+
             this.Controls.Add(this.myView);
             SwitchAppSize();
             this.ResumeLayout();
@@ -150,33 +138,33 @@ namespace WiredIn
         private void ShowOnMonitor(int monitor)
         {
             Screen[] sc;
-            sc = Screen.AllScreens;        
-            Screen s = monitor >= sc.Length ? sc[0] : sc[monitor];            
+            sc = Screen.AllScreens;
+            Screen s = monitor >= sc.Length ? sc[0] : sc[monitor];
             this.Left = s.Bounds.Left;
             this.Top = s.Bounds.Top;
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(this.Left, this.Top);
             this.Size = s.Bounds.Size;
             this.WindowState = FormWindowState.Maximized;
-            this.myView.SetSize(this.Size);             
+            this.myView.SetSize(this.Size);
         }
-        
+
         /// <summary>
         /// Show on right-bottom of the primary screen
         /// </summary>
         private void showOnRightBottom()
         {
             Screen s = Screen.PrimaryScreen;
-            int het = s.WorkingArea.Height / Constants.Config.SHRINK_FACTOR;
-            int wth = s.WorkingArea.Width / Constants.Config.SHRINK_FACTOR;
+            int het = s.WorkingArea.Height / constant.ShrinkFactor;
+            int wth = s.WorkingArea.Width / constant.ShrinkFactor;
 
-            this.Size = new Size(wth, het);            
+            this.Size = new Size(wth, het);
             this.Left = s.WorkingArea.Right - wth;
-            this.Top = s.WorkingArea.Bottom - het;          
+            this.Top = s.WorkingArea.Bottom - het;
             this.StartPosition = FormStartPosition.Manual;
 
             this.TopMost = true;
-            
+
             this.Location = new Point(this.Left, this.Top);
             this.WindowState = FormWindowState.Normal;
             this.myView.SetSize(this.Size);
@@ -184,7 +172,7 @@ namespace WiredIn
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (guideSuccess)
+            if (orientationSuccess)
             {
                 this.FormBorderStyle = FormBorderStyle.None;
                 TurnOnVisualization();
@@ -195,14 +183,14 @@ namespace WiredIn
             {
                 this.Close();
             }
-            
+
         }
 
         public void SwitchAppSize()
         {
-            if (Constants.Config.APP_SIZE == Constants.AppSize.Small)
+            if (constant.WindowSize == Constants.ApplicationSize.Small)
             {
-                showOnRightBottom();                
+                showOnRightBottom();
             }
             else
             {
@@ -228,9 +216,6 @@ namespace WiredIn
             {
                 System.Console.WriteLine(ex.Message);
             }
-            finally
-            {
-            }
         }
 
         /// <summary>
@@ -240,10 +225,11 @@ namespace WiredIn
         /// <param name="e"></param>
         private void WindowsWatcherTimerTick(object sender, EventArgs e)
         {
-            SystemWindow window = SystemWindow.ForegroundWindow;            
+            SystemWindow window = SystemWindow.ForegroundWindow;
             if (!currentWindowInfo.WinTitle.Equals(window.Title))
             {
-                EnqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now, myView.GetScore()));
+                //EnqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now, myView.GetScore()));
+                EnqueueActivity(new WindowChangeActivity(new WindowInfo(window), DateTime.Now, myView.GetScore()));
                 currentWindowInfo.update(window);
             }
             worker.DriveView();
@@ -252,7 +238,7 @@ namespace WiredIn
         private void btnStart_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem start = (ToolStripMenuItem)this.menu.Items[0];
-            if(start.Text.Equals("Start"))            
+            if (start.Text.Equals("Start"))
             {
                 start.Text = "Pause";
                 isTimerStarted = true;
@@ -281,13 +267,13 @@ namespace WiredIn
         }
 
         private void globalEventProvider_KeyUp(object sender, KeyEventArgs e)
-        {           
+        {
             EnqueueActivity(new KeyPress(e.KeyCode, DateTime.Now, myView.GetScore()));
         }
 
         private void globalEventProvider_MouseUp(object sender, MouseEventArgs e)
-        {            
-            EnqueueActivity(new MouseClick(DateTime.Now,myView.GetScore()));
+        {
+            EnqueueActivity(new MouseClick(DateTime.Now, myView.GetScore()));
         }
 
         /// <summary>
@@ -302,14 +288,14 @@ namespace WiredIn
                 EnqueueActivity(new ShutDown(DateTime.Now, myView.GetScore()));
                 winWatchTimer.Stop();
                 worker.StopWorker();
-            }            
+            }
         }
-       
+
         private void btn_exit_Click(object sender, EventArgs e)
-        {            
+        {
             Application.Exit();
         }
-        
+
         private void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
             if (drag && e.Button == MouseButtons.Left)
@@ -336,19 +322,19 @@ namespace WiredIn
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void myView_Load(object sender, EventArgs e)
-        {            
-            myView.UpdateView(false);   
+        {
+            myView.UpdateView(false);
         }
 
         private void smallToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Constants.Config.APP_SIZE = Constants.AppSize.Small;
+            constant.WindowSize = Constants.ApplicationSize.Small;
             SwitchAppSize();
         }
 
         private void fullScreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Constants.Config.APP_SIZE = Constants.AppSize.Full;
+            constant.WindowSize = Constants.ApplicationSize.Full;
             SwitchAppSize();
         }
     }

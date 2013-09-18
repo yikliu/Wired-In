@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using WiredIn.TransitionCommand ;
 using System.Windows.Forms;
+using WiredIn.Constants;
+using WiredIn.TransitionCommand;
 
 namespace WiredIn.View
 {
@@ -17,6 +13,8 @@ namespace WiredIn.View
     {
         protected Size componentSize;
         protected Bitmap content;
+
+        private SingletonConstant _constant = SingletonConstant.GetSingletonConstant();
         
         protected AbstractTransitionCommand transit;
 
@@ -47,7 +45,7 @@ namespace WiredIn.View
 
         public virtual int GetCountOfSteps()
         {
-            return Constants.Config.STANDARD_STEPS;
+            return _constant.StandardSteps;
         }
 
         public virtual void UpdateView(bool goToGood)

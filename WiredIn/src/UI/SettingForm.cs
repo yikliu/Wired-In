@@ -11,10 +11,19 @@ using WiredIn.Constants;
 
 namespace WiredIn
 {
+    /// <summary>
+    /// Class SettingForm
+    /// </summary>
     public partial class SettingForm : Form
     {
         ShowVisualizations m_parent; // Ref to the parent form
 
+        private SingletonConstant constant = SingletonConstant.GetSingletonConstant();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SettingForm"/> class.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
         public SettingForm(ShowVisualizations parent)
         {
             InitializeComponent();
@@ -25,16 +34,16 @@ namespace WiredIn
         //set UI values according to global settings
         private void setUIValues()
         {
-            switch (Constants.Config.APP_SIZE)
+            switch (constant.WindowSize)
             {
-                case AppSize.Full:
+                case ApplicationSize.Full:
                     rbFullScreen.Checked = true;
                     break;
-                case AppSize.Small:
+                case ApplicationSize.Small:
                     rbSizeSmall.Checked = true;
                     break;
             }
-            switch (Constants.Config.VIS_IMAGE)
+            switch (constant.ActiveView)
             {
                 case Visualization.ManyStepImages:
                     rdbFlower.Checked = true;
@@ -44,7 +53,7 @@ namespace WiredIn
                     break;
             }
 
-            switch (Constants.Config.CONDITION)
+            switch (constant.Condition)
             {
                 case OperandCondition.reward:
                     rbReward.Checked = true;
@@ -53,7 +62,7 @@ namespace WiredIn
                     rbPunishment.Checked = true;
                     break;
             }
-            cbTopMost.Checked = Config.TOPMOST;
+            cbTopMost.Checked = constant.TopMost;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -102,7 +111,7 @@ namespace WiredIn
         {
             if (rbSizeSmall.Checked)
             {
-                Config.APP_SIZE = AppSize.Small;
+                constant.WindowSize = ApplicationSize.Small;
                 m_parent.SwitchAppSize();
             }           
         }        
@@ -111,7 +120,7 @@ namespace WiredIn
         {
             if (rbFullScreen.Checked)
             {
-                Config.APP_SIZE = AppSize.Full;
+                constant.WindowSize = ApplicationSize.Full;
                 m_parent.SwitchAppSize();
             }           
         }
@@ -120,7 +129,7 @@ namespace WiredIn
         {
             if (rbReward.Checked)
             {
-                Config.CONDITION = OperandCondition.reward;
+                constant.Condition = OperandCondition.reward;
                 //m_parent.setTransitSpeed();
             }
         }
@@ -129,7 +138,7 @@ namespace WiredIn
         {
             if (rbPunishment.Checked)
             {
-                Config.CONDITION = OperandCondition.punish;
+                constant.Condition = OperandCondition.punish;
                 //m_parent.setTransitSpeed();
             }
         }
@@ -138,7 +147,7 @@ namespace WiredIn
         {
             if (rdbProgbar.Checked)
             {
-                Config.VIS_IMAGE = Visualization.Progressbar;
+                constant.ActiveView = Visualization.Progressbar;
                 m_parent.CreateView();
                 m_parent.AttachView();
             }
@@ -148,7 +157,7 @@ namespace WiredIn
         {
             if (rdbFlower.Checked)
             {
-                Config.VIS_IMAGE = Visualization.ManyStepImages;
+                constant.ActiveView = Visualization.ManyStepImages;
                 m_parent.CreateView();
                 m_parent.AttachView();
             }
@@ -158,7 +167,7 @@ namespace WiredIn
         {
             if (rbEmpty.Checked)
             {
-                Config.VIS_IMAGE = Visualization.Empty;
+                constant.ActiveView = Visualization.Empty;
                 m_parent.CreateView();
                 m_parent.AttachView();
             }

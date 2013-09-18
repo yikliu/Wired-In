@@ -16,8 +16,8 @@ namespace WiredIn
 
     public class EscalationSlackIndex : SlackIndex
     {
-        private double score_;
-        private double start_x;
+        private double score;
+        private double startX;
         
         public double rate;
 
@@ -28,27 +28,27 @@ namespace WiredIn
 
         public override void updateScore(double x)
         {
-            score_ = 1 - Math.Exp(-rate * (start_x + x));
+            score = 1 - Math.Exp(-rate * (startX + x));
           
-            if (Math.Abs(1 - score_) <= 0.0000001)
-                score_ = 0.9999999;
+            if (Math.Abs(1 - score) <= 0.0000001)
+                score = 0.9999999;
 
-            //System.Console.WriteLine("Esca Score: " + score_);
+            //System.Console.WriteLine("Esca Score: " + score);
         }
 
         public override void resetStartX(double y)
         {
-            start_x = -Math.Log(1 - y) / rate;
+            startX = -Math.Log(1 - y) / rate;
         }
 
         public override double getCurrentScore()
         {
-            return this.score_;
+            return this.score;
         }
 
         public override void setCurrentScore(double y)
         {
-            this.score_ = y;
+            this.score = y;
         }
 
         public override void setRate(double r)
@@ -76,7 +76,7 @@ namespace WiredIn
             if (Math.Abs(score_ - 0) <= 0.0000001)
                 score_ = 0.0000001;
 
-            //System.Console.WriteLine("Decline Score: " + score_);
+            //System.Console.WriteLine("Decline Score: " + score);
         }
 
         public override void resetStartX(double y)

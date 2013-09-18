@@ -1,11 +1,11 @@
-﻿namespace WiredIn.View
+﻿namespace WiredIn.UI.RadioButtonTile
 {
-    partial class EmptyView
+    partial class MyTile
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
-        //private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -22,13 +22,14 @@
 
         #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion

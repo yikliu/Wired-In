@@ -1,0 +1,21 @@
+<GhostDoc>
+  <SpellChecker>
+    <IncludeExtensions>
+    </IncludeExtensions>
+    <IgnoreExtensions>
+    </IgnoreExtensions>
+    <IgnoreFiles>
+    </IgnoreFiles>
+  </SpellChecker>
+  <HelpFile>
+    <OutputPath>C%3a%5cUsers%5cyikliu%5cDropbox%5cCode%5cC%23%5cWiredIn%5cWiredInv0.5%5cHelp</OutputPath>
+    <SelectedProjects>WiredIn</SelectedProjects>
+    <HtmlHelp1>True</HtmlHelp1>
+    <MSHelp2>False</MSHelp2>
+    <MSHelpViewer>False</MSHelpViewer>
+    <Website>False</Website>
+    <DocumentInternals>True</DocumentInternals>
+    <DocumentProtected>True</DocumentProtected>
+    <DocumentPrivates>True</DocumentPrivates>
+  </HelpFile>
+</GhostDoc>

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 
 using WiredIn.TransitionCommand ;
+using WiredIn.Constants;
 
 namespace WiredIn.View
 {
@@ -22,14 +23,16 @@ namespace WiredIn.View
         private string viewName;
         private string fileLocation;
 
+        private SingletonConstant constant = SingletonConstant.GetSingletonConstant();
+
         public ManyStepsView(String viewName)
         {
             this.viewName = viewName;
-            this.fileLocation = Path.Combine(Constants.Config.WIREDIN_FOLDER, "visualizations\\" + viewName);
+            this.fileLocation = Path.Combine(constant.WiredInFolder, "visualizations\\" + viewName);
             transit = new ManyStepTransitCommand(this);
             numOfPics = GetCountOfSteps();
 
-            ((ManyStepTransitCommand)transit).SpeedAdjustFactor = (double)Constants.Config.STANDARD_STEPS / numOfPics;
+            ((ManyStepTransitCommand)transit).SpeedAdjustFactor = (double) constant.StandardSteps / numOfPics;
 
             currentID = 2 * (numOfPics / 3);  
         }
@@ -134,10 +137,10 @@ namespace WiredIn.View
             }
 
             String str;
-            if (Constants.Config.LabelImageNum)
+            if (constant.LabelImageNum)
             {                
                 str = "Pic:" + currentID + "(" + statusString;
-                if (Constants.Config.CONDITION == Constants.OperandCondition.punish)
+                if (constant.Condition == Constants.OperandCondition.punish)
                     str += ", punish)";
                 else
                     str += ", reward)";

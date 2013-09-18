@@ -9,6 +9,7 @@ using System.IO;
 using System.Windows.Forms;
 
 using WiredIn.TransitionCommand;
+using WiredIn.Constants;
 
 namespace WiredIn.View
 {
@@ -18,6 +19,8 @@ namespace WiredIn.View
         private string imageFolder;
         private Dictionary<int, Image> images;
         private int currentId = 1;
+
+        private SingletonConstant _constant = SingletonConstant.GetSingletonConstant();
 
         /// <summary>
         /// 
@@ -36,8 +39,8 @@ namespace WiredIn.View
         public CustomView(string name) : this()
         {
             this.name = name;
-           
-            imageFolder = Path.Combine(Constants.Config.WIREDIN_FOLDER, "visualizations\\custom\\" + name);
+
+            imageFolder = Path.Combine(_constant.WiredInFolder, "visualizations\\" + name);
             
             if (Directory.Exists(imageFolder))
             {

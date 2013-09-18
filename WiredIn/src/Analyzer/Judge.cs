@@ -1,51 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using WiredIn.Constants;
 
 namespace WiredIn.Analyzer
 {
     /// <summary>
-    /// Judge determines whether subject is on or off task
+    /// Judge determines whether Subject is on or off task
     /// </summary>
     public class Judge
     {
-        //private bool onTask = false;
+        private SingletonConstant constant = SingletonConstant.GetSingletonConstant();
         
-        /// <summary>
-        /// determines whether subject is on or off task
-        /// If current window title is on white list, return on;
-        /// if not, process name is on white list, return on;
-        /// if not, return false
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="winTitle"></param>
-        /// <returns></returns>
-        public bool checkOnTask(String procName, String winTitle)
+        public bool CheckOnTask(WindowInfo newWinInfo)
         {
-            //System.Console.WriteLine("proc:" + procName + " title" + winTitle);
-            if (CheckWinTitle(winTitle))
-            {
-                //onTask = true;
+            if (CheckKeyWords(newWinInfo.WinTitle))
+            {               
                 return true;
-            }
-
-            if(Constants.Config.WHITE_PROC.Contains(procName.ToLower()))
-            {
-                //onTask = true;
-                return true;
-            }
-            //onTask = false;
+            }                      
             return false;
         }
 
-        private bool CheckWinTitle(String title)
+        private bool CheckWindows(WindowInfo curWin) 
+        {
+            return false;
+        }
+
+        private bool CheckKeyWords(String title)
         {
             title = title.ToLowerInvariant();
             String[] words = title.Split(' ');
             
-            IEnumerable<String> both = Constants.Config.WHITE_WIN.Intersect(words);
+            IEnumerable<String> both = constant.WhiteListKeyWords.Intersect(words);           
 
             int count = 0;
             foreach(String s in both){

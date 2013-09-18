@@ -20,7 +20,6 @@ namespace WiredIn.TransitionCommand
         public FewStepTransitCommand(AbstractView view)
         {
            this.view = view;
-
            transitTimer = new Timer();         
            transitTimer.Elapsed += new ElapsedEventHandler(TransitionTimerTick);
         }
@@ -55,10 +54,9 @@ namespace WiredIn.TransitionCommand
                     //good becomes bad, do something...
                     this.curState = Constants.State.Bad;
                     transitTimer.Stop();
-                    transitTimer.Interval = 1000 * 10 ; //5 mins, 
+                    transitTimer.Interval = 1000 * 10 ;
                     transitTimer.Start();
                     dir = DIRECTION.FromGoodToBad;
-
                 }
             }
             else
