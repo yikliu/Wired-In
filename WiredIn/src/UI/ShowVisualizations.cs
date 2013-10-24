@@ -1,141 +1,309 @@
-﻿using ManagedWinapi.Windows;
-using System;
-using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Windows.Forms;
-using WiredIn.Analyzer;
-using WiredIn.Constants;
-using WiredIn.UI;
-using WiredIn.UserActivity;
+﻿/**
+ * WiredIn - Visual Reminder of Suspended Tasks
+ *
+ * The MIT License (MIT)
+ * Copyright (c) 2012 Yikun Liu, https://github.com/yikliu
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+#region Header
 
+// ***********************************************************************
+// Assembly         : WiredIn
+// Author           : Yikun Liu
+// Created          : 06-28-2013
+//
+// Last Modified By : Yikun Liu
+// Last Modified On : 09-27-2013
+// ***********************************************************************
+// <summary>
+// The main form.
+//</summary>
+// ***********************************************************************
+
+#endregion Header
+
+/// <summary>
+/// The WiredIn namespace.
+/// </summary>
 namespace WiredIn
 {
+    using System;
+    using System.Drawing;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Windows.Forms;
+
+    using WiredIn.Analyzer;
+    using WiredIn.DataStructure;
+    using WiredIn.Globals;
+    using WiredIn.UserActivity;
+    using WiredIn.Visualization.Builder;
+    using WiredIn.Visualization.View;
+    using WiredIn.Visualization.Visualizer;
+
     /// <summary>
     /// Main Form
     /// </summary>
     public partial class ShowVisualizations : Form
     {
-        //The queue storing all keyboard/mouse activity
-        private ObservableCollection<Activity> activityQueue;
-
-        //A data structure for storing windows information (See MangedWinapi)
-        private WindowInfo currentWindowInfo;
-
-        //An instance of background worker
-        private Worker worker;
-
-        //Allowing dragging a windows
-        public Point lastClick;
+        #region Fields
 
         //whether dragging is allowed
+        /// <summary>
+        /// The drag
+        /// </summary>
         public bool drag = false;
 
-        //whether the timer has started
-        public bool isTimerStarted = false;
+        //Allowing dragging a windows
+        /// <summary>
+        /// The last click
+        /// </summary>
+        public Point lastClick;
 
+        /// <summary>
+        /// The builder
+        /// </summary>
+        private AbstractBuilder builder;
+
+        /// <summary>
+        /// The config
+        /// </summary>
+        private ConfigVariables config = ConfigVariables.GetConfigVariables();
+
+        /// <summary>
+        /// The orientation success
+        /// </summary>
         private bool orientationSuccess = false;
+        /// <summary>
+        /// The visualizer
+        /// </summary>
+        private AbstractVisualizer visualizer;
 
-        private SingletonConstant constant = SingletonConstant.GetSingletonConstant();
+        //An instance of background worker
+        /// <summary>
+        /// The worker
+        /// </summary>
+        private Worker worker;
+        /// <summary>
+        /// The worksphere
+        /// </summary>
+        private Worksphere worksphere = Worksphere.GetWorkSphere();
 
+        #endregion Fields
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShowVisualizations" /> class.
+        /// </summary>
         public ShowVisualizations()
         {
             InitializeComponent();
             this.Hide();
-            WiredIn.UI.Orientation orientation = new WiredIn.UI.Orientation();
-            if (orientation.ShowDialog() == DialogResult.OK)
-            {
-                orientationSuccess = true;                
-            }
-            else
-            {
-                orientationSuccess = false;
-            }
         }
 
-        public void AttachListeners()
-        {
-            this.globalEventProvider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.globalEventProvider_MouseUp);
-            this.globalEventProvider.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
-        }
+        #endregion Constructors
 
-        public void DetachListeners()
-        {
-            this.globalEventProvider.MouseUp -= new System.Windows.Forms.MouseEventHandler(this.globalEventProvider_MouseUp);
-            this.globalEventProvider.KeyUp -= new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
-        }
-
-        public void TurnOnVisualization()
-        {
-            CreateView();
-            AttachListeners();
-            activityQueue = new ObservableCollection<Activity>();
-            currentWindowInfo = new WindowInfo();
-            winWatchTimer.Enabled = false;
-            worker = new Worker(activityQueue, myView.GetTransitCommand());
-            activityQueue.CollectionChanged += worker.OnActiveQueueChange;
-            this.Show();
-        }
-
-        public void AttachView()
-        {
-            worker.TransitCommand = myView.GetTransitCommand();
-        }
+        #region Methods
 
         /// <summary>
         /// Init the view based on config setting
         /// </summary>
-        public void CreateView()
+        public void CreateVisualizer()
         {
-            string visName = constant.ActiveVisualizationName;
-            switch (constant.ActiveView)
+            switch (worksphere.ActiveView)
             {
-                case Constants.Visualization.ManyStepImages:
-                    if (this.myView is WiredIn.View.ManyStepsView)
-                    {
-                        return;
-                    }
-                    this.Controls.Remove(this.myView);
-                    this.myView = new WiredIn.View.ManyStepsView(visName);
+                case Globals.Visualizer.Rose:
+                    builder = new RoseVisualizerBuilder();
                     break;
-                case Constants.Visualization.Progressbar:
-                    if (this.myView is WiredIn.View.ProgressBarView)
-                        return;
-                    this.Controls.Remove(this.myView);
-                    this.myView = new WiredIn.View.ProgressBarView();
+                case Globals.Visualizer.Moon:
+                    builder = new MoonVisualizerBuilder();
                     break;
-                case Constants.Visualization.Empty:
-                    if (this.myView is WiredIn.View.EmptyView)
-                        return;
-                    this.Controls.Remove(this.myView);
-                    this.myView = new WiredIn.View.EmptyView();
+                case Globals.Visualizer.Progressbar:
+                    builder = new ProgressbarVisualizerBuilder();
                     break;
-                case Constants.Visualization.Custom:
-                    if (this.myView is WiredIn.View.CustomView)
-                        return;
-                    this.Controls.Remove(this.myView);
-                    this.myView = new WiredIn.View.CustomView(visName);
+                case Globals.Visualizer.Empty:
+                    builder = new EmptyVisualizerBuilder();
+                    break;
+                case Globals.Visualizer.Custom:
+                    builder = new CustomVisualizerBuilder();
                     break;
             }
 
+            builder.Build();
+            visualizer = builder.GetVisualizer();
+
+            this.Controls.Remove(this.myView);
+            this.myView = visualizer.GetView();
             this.SuspendLayout();
             this.myView.ForeColor = System.Drawing.Color.Transparent;
             this.myView.Location = new System.Drawing.Point(0, 0);
             this.myView.Name = "myView";
-            this.myView.TabIndex = 7;
-            this.myView.Load += new System.EventHandler(this.myView_Load);
             this.myView.Dock = DockStyle.Fill;
             this.myView.ContextMenuStrip = menu;
 
             this.Controls.Add(this.myView);
-            SwitchAppSize();
+            SwitchViewSize();
             this.ResumeLayout();
         }
 
         /// <summary>
-        /// Show on first extended monitor
+        /// Switches the size of the view.
         /// </summary>
-        /// <param name="monitor"></param>
-        private void ShowOnMonitor(int monitor)
+        public void SwitchViewSize()
+        {
+            if (config.WindowSize == Globals.ApplicationSize.Small)
+            {
+                ShowOnRightBottom();
+            }
+            else
+            {
+                ShowOnFullScreenMonitor(1);
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnStart control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem start = (ToolStripMenuItem)this.menu.Items[0];
+            if (!worker.IsRunning()) // not running
+            {
+                start.Text = "Stop";
+
+                worker.Start();
+                this.menu.Items[2].Enabled = false;
+                worker.EnqueueActivity(new StartUp(DateTime.Now, myView.GetScore()));
+            }
+            else //is running
+            {
+                start.Text = "Start";
+                this.menu.Items[2].Enabled = true;
+                worker.Stop();
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btn_exit control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            worker.TearDown();
+            Application.Exit();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the fullScreenToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void fullScreenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            config.WindowSize = Globals.ApplicationSize.Full;
+            SwitchViewSize();
+        }
+
+        /// <summary>
+        /// Handles the FormClosing event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (myView != null && worker != null)
+            {
+                worker.EnqueueActivity(new ShutDown(DateTime.Now, myView.GetScore()));
+                worker.Stop();
+                worker.TearDown();
+            }
+        }
+
+        /// <summary>
+        /// Handles the Load event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            WiredIn.UI.Orientation orientation = new WiredIn.UI.Orientation();
+            orientationSuccess = (orientation.ShowDialog() == DialogResult.OK);
+
+            if (orientationSuccess)
+            {
+                this.FormBorderStyle = FormBorderStyle.None;
+                CreateVisualizer();
+                worker = new Worker(visualizer);
+                worker.SetUp();
+                this.Show();
+
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        /// <summary>
+        /// Handles the MouseDown event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            drag = true;
+            lastClick = e.Location;
+        }
+
+        /// <summary>
+        /// Handles the MouseMove event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        private void MainForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (drag && e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - lastClick.X;
+                this.Top += e.Y - lastClick.Y;
+            }
+        }
+
+        /// <summary>
+        /// Handles the MouseUp event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        private void MainForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
+        }
+
+        /// <summary>
+        /// Shows the on full screen monitor.
+        /// </summary>
+        /// <param name="monitor">The monitor.</param>
+        private void ShowOnFullScreenMonitor(int monitor)
         {
             Screen[] sc;
             sc = Screen.AllScreens;
@@ -152,11 +320,11 @@ namespace WiredIn
         /// <summary>
         /// Show on right-bottom of the primary screen
         /// </summary>
-        private void showOnRightBottom()
+        private void ShowOnRightBottom()
         {
             Screen s = Screen.PrimaryScreen;
-            int het = s.WorkingArea.Height / constant.ShrinkFactor;
-            int wth = s.WorkingArea.Width / constant.ShrinkFactor;
+            int het = s.WorkingArea.Height / config.ShrinkFactor;
+            int wth = s.WorkingArea.Width / config.ShrinkFactor;
 
             this.Size = new Size(wth, het);
             this.Left = s.WorkingArea.Right - wth;
@@ -170,172 +338,6 @@ namespace WiredIn
             this.myView.SetSize(this.Size);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            if (orientationSuccess)
-            {
-                this.FormBorderStyle = FormBorderStyle.None;
-                TurnOnVisualization();
-                SwitchAppSize();
-                currentWindowInfo.update(SystemWindow.ForegroundWindow); //init Current WindowInfo
-            }
-            else
-            {
-                this.Close();
-            }
-
-        }
-
-        public void SwitchAppSize()
-        {
-            if (constant.WindowSize == Constants.ApplicationSize.Small)
-            {
-                showOnRightBottom();
-            }
-            else
-            {
-                ShowOnMonitor(1);
-            }
-        }
-
-        /// <summary>
-        ///   Put an user activity in the end of the activity queue
-        /// </summary>
-        private void EnqueueActivity(Activity a)
-        {
-            if (!isTimerStarted)
-                return;
-            try
-            {
-                lock (this)
-                {
-                    activityQueue.Add(a);
-                }
-            }
-            catch (System.Exception ex)
-            {
-                System.Console.WriteLine(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Check the topmost window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void WindowsWatcherTimerTick(object sender, EventArgs e)
-        {
-            SystemWindow window = SystemWindow.ForegroundWindow;
-            if (!currentWindowInfo.WinTitle.Equals(window.Title))
-            {
-                //EnqueueActivity(new WindowChangeActivity(window.Process.ProcessName, window.Title, DateTime.Now, myView.GetScore()));
-                EnqueueActivity(new WindowChangeActivity(new WindowInfo(window), DateTime.Now, myView.GetScore()));
-                currentWindowInfo.update(window);
-            }
-            worker.DriveView();
-        }
-
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem start = (ToolStripMenuItem)this.menu.Items[0];
-            if (start.Text.Equals("Start"))
-            {
-                start.Text = "Pause";
-                isTimerStarted = true;
-                winWatchTimer.Start();
-                worker.StartWoker();
-                EnqueueActivity(new StartUp(DateTime.Now, myView.GetScore()));
-            }
-            else
-            {
-                start.Text = "Start";
-                isTimerStarted = false;
-                winWatchTimer.Stop();
-                worker.PauseJudge();
-            }
-        }
-
-        private void btnSetting_Click(object sender, EventArgs e)
-        {
-            // Create and display an instance of the dialog box
-            Form setting = new SettingForm(this);
-
-            if (setting.ShowDialog() == DialogResult.OK)
-            {
-                // Do something here to handle data from dialog box.
-            }
-        }
-
-        private void globalEventProvider_KeyUp(object sender, KeyEventArgs e)
-        {
-            EnqueueActivity(new KeyPress(e.KeyCode, DateTime.Now, myView.GetScore()));
-        }
-
-        private void globalEventProvider_MouseUp(object sender, MouseEventArgs e)
-        {
-            EnqueueActivity(new MouseClick(DateTime.Now, myView.GetScore()));
-        }
-
-        /// <summary>
-        /// Clean up before exit
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>       
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (myView != null && winWatchTimer != null && worker != null)
-            {
-                EnqueueActivity(new ShutDown(DateTime.Now, myView.GetScore()));
-                winWatchTimer.Stop();
-                worker.StopWorker();
-            }
-        }
-
-        private void btn_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void MainForm_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (drag && e.Button == MouseButtons.Left)
-            {
-                this.Left += e.X - lastClick.X;
-                this.Top += e.Y - lastClick.Y;
-            }
-        }
-
-        private void MainForm_MouseDown(object sender, MouseEventArgs e)
-        {
-            drag = true;
-            lastClick = e.Location;
-        }
-
-        private void MainForm_MouseUp(object sender, MouseEventArgs e)
-        {
-            drag = false;
-        }
-
-        /// <summary>
-        /// Refresh the view when loaded
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void myView_Load(object sender, EventArgs e)
-        {
-            myView.UpdateView(false);
-        }
-
-        private void smallToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            constant.WindowSize = Constants.ApplicationSize.Small;
-            SwitchAppSize();
-        }
-
-        private void fullScreenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            constant.WindowSize = Constants.ApplicationSize.Full;
-            SwitchAppSize();
-        }
+        #endregion Methods
     }
 }

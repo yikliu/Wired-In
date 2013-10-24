@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-
-namespace WiredIn
+﻿namespace WiredIn
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
     static class Program
     {
+        #region Methods
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,5 +19,7 @@ namespace WiredIn
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WiredIn.ShowVisualizations());
         }
+
+        #endregion Methods
     }
 }

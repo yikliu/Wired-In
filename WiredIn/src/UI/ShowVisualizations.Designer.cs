@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
-using WiredIn;
-using Gma.UserActivityMonitor;
-using WiredIn.View;
+
+using WiredIn.Visualization.View;
 namespace WiredIn
 {
     partial class ShowVisualizations
@@ -42,7 +41,7 @@ namespace WiredIn
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param viewName="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -59,7 +58,7 @@ namespace WiredIn
             //
             //Add Mouse Event Handlers for each control added into the form,
             //if Draggable property of the form is set to true and the control
-            //name is not in the ExcludeList.Exclude list is the comma separated
+            //viewName is not in the ExcludeList.Exclude list is the comma separated
             //list of the Controls for which you do not require the mouse handler 
             //to be added. For Example a button.  
             //
@@ -83,8 +82,6 @@ namespace WiredIn
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.winWatchTimer = new System.Windows.Forms.Timer(this.components);
-            this.globalEventProvider = new Gma.UserActivityMonitor.GlobalEventProvider();
             this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuStart = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,11 +91,6 @@ namespace WiredIn
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // winWatchTimer
-            // 
-            this.winWatchTimer.Interval = 1000;
-            this.winWatchTimer.Tick += new System.EventHandler(this.WindowsWatcherTimerTick);
-            // 
             // menu
             // 
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -106,19 +98,19 @@ namespace WiredIn
             this.mnuExit,
             this.sizeToolStripMenuItem});
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(153, 92);
+            this.menu.Size = new System.Drawing.Size(110, 76);
             // 
             // mnuStart
             // 
             this.mnuStart.Name = "mnuStart";
-            this.mnuStart.Size = new System.Drawing.Size(152, 22);
+            this.mnuStart.Size = new System.Drawing.Size(109, 24);
             this.mnuStart.Text = "Start";
             this.mnuStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // mnuExit
             // 
             this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(152, 22);
+            this.mnuExit.Size = new System.Drawing.Size(109, 24);
             this.mnuExit.Text = "Exit";
             this.mnuExit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
@@ -128,29 +120,28 @@ namespace WiredIn
             this.smallToolStripMenuItem,
             this.fullScreenToolStripMenuItem});
             this.sizeToolStripMenuItem.Name = "sizeToolStripMenuItem";
-            this.sizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sizeToolStripMenuItem.Size = new System.Drawing.Size(109, 24);
             this.sizeToolStripMenuItem.Text = "Size";
             // 
             // smallToolStripMenuItem
             // 
             this.smallToolStripMenuItem.Name = "smallToolStripMenuItem";
-            this.smallToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.smallToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
             this.smallToolStripMenuItem.Text = "Small";
-            this.smallToolStripMenuItem.Click += new System.EventHandler(this.smallToolStripMenuItem_Click);
             // 
             // fullScreenToolStripMenuItem
             // 
             this.fullScreenToolStripMenuItem.Name = "fullScreenToolStripMenuItem";
-            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
             this.fullScreenToolStripMenuItem.Text = "Full Screen";
             this.fullScreenToolStripMenuItem.Click += new System.EventHandler(this.fullScreenToolStripMenuItem_Click);
             // 
             // ShowVisualizations
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lime;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(933, 600);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -174,10 +165,7 @@ namespace WiredIn
 
         #endregion
 
-        private System.Windows.Forms.Timer winWatchTimer;
-
-        private ContextMenuStrip menu;
-        private GlobalEventProvider globalEventProvider;        
+        private ContextMenuStrip menu;        
         private AbstractView myView;
         private ToolStripMenuItem mnuStart;
         private ToolStripMenuItem mnuExit;
