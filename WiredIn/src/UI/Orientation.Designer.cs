@@ -535,9 +535,9 @@ namespace WiredIn.UI
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabpageTask);
-            this.tabControl.Controls.Add(this.tabpageVis);
             this.tabControl.Controls.Add(this.tabpageEnv);
             this.tabControl.Controls.Add(this.tabWorkSphere);
+            this.tabControl.Controls.Add(this.tabpageVis);
             this.tabControl.Controls.Add(this.tabpageFinish);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.HotTrack = true;
@@ -545,7 +545,7 @@ namespace WiredIn.UI
             this.tabControl.Location = new System.Drawing.Point(20, 60);
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 3;
+            this.tabControl.SelectedIndex = 0;
             this.tabControl.ShowToolTips = true;
             this.tabControl.Size = new System.Drawing.Size(937, 620);
             this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;

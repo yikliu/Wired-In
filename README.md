@@ -4,7 +4,7 @@ Wired In is a primary task suspension reminder built for Windows Desktop.
 
 Wired In let users specify primary working sphere and recognizes primary task suspension during serious working hour. WiredIn then provides imagery feedback regarding the duration of task suspension.
 
-At this stage, WiredIn still mainly developed for human participant study in HCI.
+At this stage, WiredIn mainly developed for human participant study for research purposes.
 
 Motivation
 --------------------------------------------------

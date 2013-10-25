@@ -123,7 +123,7 @@ namespace WiredIn
         #region Methods
 
         /// <summary>
-        /// Init the view based on config setting
+        /// Create the appropriate visualizer builder 
         /// </summary>
         public void CreateVisualizer()
         {
@@ -191,13 +191,13 @@ namespace WiredIn
                 start.Text = "Stop";
 
                 worker.Start();
-                this.menu.Items[2].Enabled = false;
+                this.menu.Items[1].Enabled = false;
                 worker.EnqueueActivity(new StartUp(DateTime.Now, myView.GetScore()));
             }
             else //is running
             {
                 start.Text = "Start";
-                this.menu.Items[2].Enabled = true;
+                this.menu.Items[1].Enabled = true;
                 worker.Stop();
             }
         }
@@ -211,6 +211,16 @@ namespace WiredIn
         {
             worker.TearDown();
             Application.Exit();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the smallToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void smallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowOnRightBottom();
         }
 
         /// <summary>
@@ -317,6 +327,8 @@ namespace WiredIn
             this.myView.SetSize(this.Size);
         }
 
+        
+
         /// <summary>
         /// Show on right-bottom of the primary screen
         /// </summary>
@@ -339,5 +351,7 @@ namespace WiredIn
         }
 
         #endregion Methods
+
+       
     }
 }
