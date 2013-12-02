@@ -38,7 +38,7 @@ namespace WiredIn.Globals
     /// This is global clock of application. It is used to sync all the time-based operations such as change images, 
     /// do logs, determine dormant and procrastination states.
     /// </summary>
-    public class GlobalTimer : IRunner
+    public class GlobalTimer : IRunner, IDisposable
     {
         #region Fields
 
@@ -155,5 +155,32 @@ namespace WiredIn.Globals
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// Dispose Timer
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (null != theTimer)
+                {
+                    theTimer.Enabled = false;
+                    theTimer.Dispose();
+                    theTimer = null;
+                }
+            }
+           
+        }
+
     }
 }

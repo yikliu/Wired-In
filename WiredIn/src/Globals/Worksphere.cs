@@ -54,10 +54,22 @@ namespace WiredIn.Globals
         /// The acceptable keywords
         /// </summary>
         private HashSet<string> acceptableKeywords;
+
+        public HashSet<string> AcceptableKeywords
+        {
+            get { return acceptableKeywords; }
+            set { acceptableKeywords = value; }
+        }
         /// <summary>
         /// The acceptable proc names
         /// </summary>
         private HashSet<string> acceptableProcNames;
+
+        public HashSet<string> AcceptableProcNames
+        {
+            get { return acceptableProcNames; }
+            set { acceptableProcNames = value; }
+        }
         /// <summary>
         /// The acceptable windows infos
         /// </summary>
@@ -66,6 +78,12 @@ namespace WiredIn.Globals
         /// The acceptable window titles
         /// </summary>
         private List<String> acceptableWindowTitles;
+
+        public List<String> AcceptableWindowTitles
+        {
+            get { return acceptableWindowTitles; }
+            set { acceptableWindowTitles = value; }
+        }
         /// <summary>
         /// The active view
         /// </summary>

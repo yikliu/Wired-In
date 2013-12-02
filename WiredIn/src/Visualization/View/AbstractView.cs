@@ -63,6 +63,11 @@ namespace WiredIn.Visualization.View
         {
             InitializeComponent();
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(
+                        ControlStyles.AllPaintingInWmPaint |
+                        ControlStyles.UserPaint |
+                        ControlStyles.DoubleBuffer,
+            true);
         }
 
         #endregion Constructors

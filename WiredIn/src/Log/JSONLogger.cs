@@ -36,7 +36,7 @@ namespace WiredIn.Log
     /// <summary>
     /// Class JSONLogger.
     /// </summary>
-    class JSONLogger
+    class JSONLogger : IDisposable
     {
         #region Fields
 
@@ -106,5 +106,13 @@ namespace WiredIn.Log
         }
 
         #endregion Methods
+
+        public void Dispose()
+        {
+            if (bgWorker != null)
+            {
+                bgWorker.Dispose();
+            }
+        }
     }
 }

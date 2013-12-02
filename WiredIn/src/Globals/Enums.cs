@@ -130,7 +130,12 @@ namespace WiredIn.Globals
         /// <summary>
         /// The mirror
         /// </summary>
-        Mirror
+        Mirror,
+
+        /// <summary>
+        /// Clock
+        /// </summary>
+        Clock
     }
 
     #endregion Enumerations

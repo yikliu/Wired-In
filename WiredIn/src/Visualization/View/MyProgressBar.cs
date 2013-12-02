@@ -69,6 +69,10 @@ namespace WiredIn.Visualization.View
         public MyProgressBar()
         {
             InitializeComponent();
+            //this.DoubleBuffered = true;
+            this.SetStyle(
+                    ControlStyles.DoubleBuffer,
+            true);
         }
 
         #endregion Constructors
@@ -231,6 +235,16 @@ namespace WiredIn.Visualization.View
 
         #region Methods
 
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                var parms = base.CreateParams;
+                parms.Style &= ~0x02000000;  // Turn off WS_CLIPCHILDREN
+                return parms;
+            }
+        }
+
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.Paint" /> event.
         /// </summary>
@@ -249,7 +263,7 @@ namespace WiredIn.Visualization.View
             g.FillRectangle(brush, rect);
 
             // Draw a three-dimensional border around the control.
-            Draw3DBorder(g);
+            //Draw3DBorder(g);
 
             // Clean up.
             brush.Dispose();

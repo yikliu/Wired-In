@@ -80,6 +80,13 @@ namespace WiredIn.Visualization.View
         {
             InitializeComponent();
             this.viewName = "progressbar";
+            this.SetStyle(
+                    ControlStyles.AllPaintingInWmPaint |
+                    ControlStyles.UserPaint |
+                    ControlStyles.DoubleBuffer,
+            true);
+
+            this.DoubleBuffered = true;
         }
 
         #endregion Constructors

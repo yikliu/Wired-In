@@ -192,6 +192,12 @@ namespace WiredIn.UI
                 case "progressbar":
                     worksphere.ActiveView = Visualizer.Progressbar;
                     break;
+                case "mirror":
+                    worksphere.ActiveView = Visualizer.Mirror;
+                    break;
+                case "clock":
+                       worksphere.ActiveView = Visualizer.Clock;
+                       break;
                 default:
                     worksphere.ActiveView = Visualizer.Custom;
                     break;
@@ -213,8 +219,13 @@ namespace WiredIn.UI
                 worksphere.AppendWhiteWindowInfo(w);
             }
 
+            runIns.PrimaryTaskTitles = worksphere.AcceptableWindowTitles;
+            runIns.PrimaryTaskKeywords = worksphere.AcceptableKeywords.ToList();
+            runIns.PrimaryTaskProcesses = worksphere.AcceptableProcNames.ToList();
+
             runIns.TaskDescription = tbxTaskDesc.Text;
             runIns.ExpectedDifficulty = tbDifficulty.Value;
+            runIns.ExpectedUrgency = tbUrgency.Value;
             runIns.ExpectedFamilarity = tbFamiliarity.Value;
             runIns.NumOfToDoItems = (int) numOtherItems.Value;
             runIns.ExpectedTimeOnHour = (int)numExpectTimeOnTask.Value;
@@ -225,6 +236,9 @@ namespace WiredIn.UI
             runIns.EstimatedBusiness = tbBusiness.Value;
             runIns.EstimatedEnergy = tbEnergy.Value;
             runIns.EstimatedStresslevel = tbStress.Value;
+            runIns.EstimatedMotivation = tbMotivation.Value;
+
+            runIns.ChosenVisualization = worksphere.ActiveView.ToString();
 
             LogRunIns(runIns);
 
@@ -452,7 +466,8 @@ namespace WiredIn.UI
                 visNames.Add(s.Remove(0, visualizationFolder.Length + 1));
             }
 
-            visNames.Add("progressbar");
+            visNames.AddRange(config.vendorVisualizerNames);
+            
             visualizerCenter.UnregisterAll();
             tableLayoutPanel1.Controls.Clear();
             foreach (string name in visNames)

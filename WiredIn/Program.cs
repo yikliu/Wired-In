@@ -1,10 +1,8 @@
 ﻿namespace WiredIn
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Windows.Forms;
-
+    
     static class Program
     {
         #region Methods
@@ -17,7 +15,18 @@
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WiredIn.ShowVisualizations());
+            //Application.Run(new Demo.MainForm());
+
+            WiredIn.UI.Orientation orient = new WiredIn.UI.Orientation();
+            if (orient.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new WiredIn.ShowVisualizations());
+            }
+            else
+            {
+                Application.Exit();
+            }
+
         }
 
         #endregion Methods

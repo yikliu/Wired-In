@@ -45,19 +45,17 @@ namespace WiredIn.Visualization.View
         /// <summary>
         /// The hour color
         /// </summary>
-        private Color hourColor = Color.Black;
+        private Color hourColor = Color.Green;
         /// <summary>
         /// The minute color
         /// </summary>
-        private Color minuteColor = Color.Black;
+        private Color minuteColor = Color.Green;
         /// <summary>
         /// The second color
         /// </summary>
-        private Color secondColor = Color.Black;
-        /// <summary>
-        /// The timer
-        /// </summary>
-        private System.Windows.Forms.Timer timer;
+        private Color secondColor = Color.Green;
+        
+        private System.DateTime clockTime = DateTime.Today;
 
         #endregion Fields
 
@@ -72,8 +70,6 @@ namespace WiredIn.Visualization.View
             //Sets the rendering mode of the control to double buffer to stop flickering
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             InitializeComponent();
-            //Enables the timer so the clock refreshes every second
-            timer.Enabled = true;
             MakeRound();
             viewName = "clock";
         }
@@ -174,7 +170,7 @@ namespace WiredIn.Visualization.View
         /// <exception cref="System.Exception">The method or operation is not implemented.</exception>
         public override int GetScore()
         {
-            throw new Exception("The method or operation is not implemented.");
+            return 0;
         }
 
         /// <summary>
@@ -184,7 +180,15 @@ namespace WiredIn.Visualization.View
         /// <exception cref="System.Exception">The method or operation is not implemented.</exception>
         public override void MoveView(bool goToGood)
         {
-            throw new Exception("The method or operation is not implemented.");
+            if (goToGood)
+            {
+                clockTime = DateTime.Today; //roll back to 0:00;
+            }
+            else
+            {
+                clockTime = clockTime.AddSeconds(1.0); //increment one second
+            }
+            Invalidate();
         }
 
         /// <summary>
@@ -193,7 +197,7 @@ namespace WiredIn.Visualization.View
         /// <exception cref="System.Exception">The method or operation is not implemented.</exception>
         public override void SetUp()
         {
-            throw new Exception("The method or operation is not implemented.");
+            clockTime = DateTime.Today;
         }
 
         /// <summary>
@@ -202,7 +206,6 @@ namespace WiredIn.Visualization.View
         /// <exception cref="System.Exception">The method or operation is not implemented.</exception>
         public override void TearDown()
         {
-            throw new Exception("The method or operation is not implemented.");
         }
 
         /// <summary>
@@ -225,6 +228,10 @@ namespace WiredIn.Visualization.View
         protected override void OnPaint(PaintEventArgs e)
         {
             //base.OnPaint(e);
+
+            SolidBrush blueBrush = new SolidBrush(Color.White);
+            e.Graphics.FillRegion(blueBrush, this.Region);
+            
             //Smooths out the appearance of the control
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             //The center of the control, that is used as center for the clock
@@ -261,31 +268,31 @@ namespace WiredIn.Visualization.View
                     //Offsets the text location so it is centered in that point.
                     textPoint.X -= sz.Width / 2;
                     textPoint.Y -= sz.Height / 2;
-
                     //Draws the hour number
-                    e.Graphics.DrawString(text, Font, new SolidBrush(this.ForeColor), textPoint);
+                    e.Graphics.DrawString(text, Font, new SolidBrush(Color.Red), textPoint);
                 }
 
-                Pen pen = new Pen(new SolidBrush(this.ForeColor), 1);
+                Pen pen = new Pen(new SolidBrush(Color.Black), 1);
                 //Draws the outer dot of the clock
                 e.Graphics.DrawEllipse(pen, dotPoint.X - pointSize / 2, dotPoint.Y - pointSize / 2, pointSize, pointSize);
                 pen.Dispose();
             }
 
-            //Gets the system time
-            DateTime dt = DateTime.Now;
             //Calculates the hour offset from the large outer dot
-            float min = ((float)dt.Minute) / 60;
+            float min = ((float)clockTime.Minute) / 60;
+
+            float secondfraction = (float) clockTime.Second / 60;
             //Calculates the angle of the hour line
-            float hourAngle = GetAngle(dt.Hour + min, 12);
+            float hourAngle = GetAngle(clockTime.Hour + min, 12);
             //Calculates the angle of the minute line
-            float minuteAngle = GetAngle(dt.Minute, 60);
+            float minuteAngle = GetAngle(clockTime.Minute + secondfraction, 60);
             //Calculates the angle of the second line
-            float secondAngle = GetAngle(dt.Second, 60);
+            float secondAngle = GetAngle(clockTime.Second, 60);
             //Draws the clock lines
             DrawLine(e.Graphics, this.secondColor, 1, center, secondRadius, secondAngle);
             DrawLine(e.Graphics, this.minuteColor, 2, center, minuteRadius, minuteAngle);
             DrawLine(e.Graphics, this.hourColor, 3, center, hourRadius, hourAngle);
+
             e.Graphics.ResetTransform();
         }
 
@@ -295,7 +302,7 @@ namespace WiredIn.Visualization.View
         /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.</param>
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            //this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = System.Drawing.Color.Red;
         }
 
         /// <summary>
@@ -372,29 +379,22 @@ namespace WiredIn.Visualization.View
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timer = new System.Windows.Forms.Timer(this.components);
 
-            //
-            // timer
-            //
-            this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.HourColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.White;
+            this.HourColor = System.Drawing.Color.Green;
             this.Location = new System.Drawing.Point(67, 49);
-            this.MinuteColor = System.Drawing.Color.Black;
+            this.MinuteColor = System.Drawing.Color.Green;
             this.Name = "cloc1";
-            this.SecondColor = System.Drawing.Color.Black;
+            this.SecondColor = System.Drawing.Color.Green;
             this.Size = new System.Drawing.Size(150, 150);
-
+            
             //
             // Clock
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "Clock";
-            //this.Paint += new System.Windows.Forms.PaintEventHandler(this.Clock_Paint);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Clock_Paint);
             this.SizeChanged += new System.EventHandler(this.Clock_SizeChanged);
             this.ResumeLayout(false);
         }
@@ -410,18 +410,9 @@ namespace WiredIn.Visualization.View
             gp.AddEllipse((Width - min) / 2, (Height - min) / 2, min, min);
             //Creates the ellipse region
             Region rgn = new Region(gp);
+
             //Sets the ellipse region to the control
             this.Region = rgn;
-        }
-
-        /// <summary>
-        /// Handles the Tick event of the timer control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            Invalidate();
         }
 
         #endregion Methods

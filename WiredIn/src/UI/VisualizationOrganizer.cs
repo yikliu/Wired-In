@@ -73,17 +73,17 @@ namespace WiredIn.UI
         /// <summary>
         /// The selected
         /// </summary>
-        private int selected = -1;
+        //private int selected = -1;
 
         /// <summary>
         /// The vis names
         /// </summary>
-        private List<String> visNames;
+        //private List<String> visNames;
 
         /// <summary>
         /// The wired_in_folder
         /// </summary>
-        private String wired_in_folder;
+        //private String wired_in_folder;
 
         #endregion Fields
 
@@ -106,6 +106,7 @@ namespace WiredIn.UI
         /// Deserializes the specified filename.
         /// </summary>
         /// <param name="filename">The filename.</param>
+        /*
         public static void Deserialize(String filename)
         {
             if (File.Exists(filename))
@@ -123,7 +124,9 @@ namespace WiredIn.UI
                 }
             }
         }
+        */
 
+        /*
         /// <summary>
         /// Serializes the specified filename.
         /// </summary>
@@ -131,6 +134,7 @@ namespace WiredIn.UI
         public static void Serialize(String filename)
         {
         }
+        */
 
         /// <summary>
         /// Handles the Click event of the button1 control.

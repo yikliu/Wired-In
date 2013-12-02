@@ -17,6 +17,7 @@ namespace WiredIn.UI
             if (disposing && (components != null))
             {
                 components.Dispose();
+                j_logger.Dispose();
             }
             base.Dispose(disposing);
         }

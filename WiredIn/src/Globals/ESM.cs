@@ -94,7 +94,7 @@ namespace WiredIn.Globals
         public String Time
         {
             get { return time; }
-              set { this.time = value; }
+            set { this.time = value; }
         }
 
         /// <summary>

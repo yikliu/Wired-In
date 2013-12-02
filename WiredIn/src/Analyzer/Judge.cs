@@ -28,7 +28,6 @@
 namespace WiredIn.Analyzer
 {
     using System;
-
     using WiredIn.DataStructure;
     using WiredIn.Globals;
 

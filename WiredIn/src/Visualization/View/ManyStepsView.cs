@@ -44,7 +44,8 @@ namespace WiredIn.Visualization.View
         /// <summary>
         /// The component size
         /// </summary>
-        protected Size componentSize;
+        //protected Size componentSize;
+        
         /// <summary>
         /// The content
         /// </summary>
@@ -54,10 +55,7 @@ namespace WiredIn.Visualization.View
         /// The aspect ratio
         /// </summary>
         private double aspectRatio = 0.0;
-        /// <summary>
-        /// The configuration
-        /// </summary>
-        private ConfigVariables config = ConfigVariables.GetConfigVariables();
+        
         /// <summary>
         /// The current identifier
         /// </summary>

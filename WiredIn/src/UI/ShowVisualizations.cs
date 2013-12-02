@@ -115,12 +115,21 @@ namespace WiredIn
         public ShowVisualizations()
         {
             InitializeComponent();
-            this.Hide();
         }
 
         #endregion Constructors
 
         #region Methods
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        } 
 
         /// <summary>
         /// Create the appropriate visualizer builder 
@@ -140,6 +149,12 @@ namespace WiredIn
                     break;
                 case Globals.Visualizer.Empty:
                     builder = new EmptyVisualizerBuilder();
+                    break;
+                //case Globals.Visualizer.Mirror:
+                //   builder = new MirrorVisualizerBuilder();
+                // break;
+                case Globals.Visualizer.Clock:
+                    builder = new ClockVisualizerBuilder();
                     break;
                 case Globals.Visualizer.Custom:
                     builder = new CustomVisualizerBuilder();
@@ -189,7 +204,6 @@ namespace WiredIn
             if (!worker.IsRunning()) // not running
             {
                 start.Text = "Stop";
-
                 worker.Start();
                 this.menu.Items[1].Enabled = false;
                 worker.EnqueueActivity(new StartUp(DateTime.Now, myView.GetScore()));
@@ -256,23 +270,12 @@ namespace WiredIn
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            WiredIn.UI.Orientation orientation = new WiredIn.UI.Orientation();
-            orientationSuccess = (orientation.ShowDialog() == DialogResult.OK);
-
-            if (orientationSuccess)
-            {
-                this.FormBorderStyle = FormBorderStyle.None;
-                CreateVisualizer();
-                worker = new Worker(visualizer);
-                worker.SetUp();
-                this.Show();
-
-            }
-            else
-            {
-                this.Close();
-            }
-        }
+              this.FormBorderStyle = FormBorderStyle.None;
+              CreateVisualizer();
+              worker = new Worker(visualizer);
+              worker.SetUp();
+              this.Show();
+         }
 
         /// <summary>
         /// Handles the MouseDown event of the MainForm control.

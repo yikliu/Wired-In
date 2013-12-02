@@ -79,6 +79,36 @@ namespace WiredIn.Globals
         /// </summary>
         string taskDescription;
 
+        List<string> primaryTaskTitles;
+        public List<string> PrimaryTaskTitles
+        {
+            get { return primaryTaskTitles; }
+            set { primaryTaskTitles = value; }
+        }
+        
+        List<string> primaryTaskProcesses;
+        public List<string> PrimaryTaskProcesses
+        {
+            get { return primaryTaskProcesses; }
+            set { primaryTaskProcesses = value; }
+        }
+
+        List<string> primaryTaskKeywords;
+        public List<string> PrimaryTaskKeywords
+        {
+            get { return primaryTaskKeywords; }
+            set { primaryTaskKeywords = value; }
+        }
+        
+
+        string chosenVisualization;
+       
+        public string ChosenVisualization
+        {
+            get { return chosenVisualization; }
+            set { chosenVisualization = value; }
+        }
+
         #endregion Fields
 
         #region Properties
@@ -111,6 +141,13 @@ namespace WiredIn.Globals
         {
             get { return estimatedStresslevel; }
             set { estimatedStresslevel = value; }
+        }
+
+        int estimatedMotivation;
+        public int EstimatedMotivation
+        {
+            get { return estimatedMotivation; }
+            set { estimatedMotivation = value; }
         }
 
         /// <summary>
@@ -183,6 +220,16 @@ namespace WiredIn.Globals
             set { taskDescription = value; }
         }
 
+        int expectedUrgency = 0;
+        public int ExpectedUrgency
+        {
+            get { return expectedUrgency; }
+            set { expectedUrgency = value; }
+        }
+
         #endregion Properties
+
+        
+        
     }
 }

@@ -101,7 +101,6 @@ namespace WiredIn.Visualization.View
         public override void MoveView(bool goToGood)
         {
             int newId = -1;
-
             if (goToGood)
             {
                 newId = currentId + 1 > 2 ? 2 : currentId + 1;

@@ -34,7 +34,7 @@ namespace WiredIn.Analyzer
 
     using ManagedWinapi.Hooks;
     using ManagedWinapi.Windows;
-
+    
     using WiredIn.DataStructure;
     using WiredIn.Globals;
     using WiredIn.Log;
@@ -316,7 +316,7 @@ namespace WiredIn.Analyzer
             llMouseHook.StartHook();
             llKeyHook.StartHook();
             is_running = true;
-            ManagedWinapi.Windows.SystemWindow win = ManagedWinapi.Windows.SystemWindow.ForegroundWindow;
+            SystemWindow win = ManagedWinapi.Windows.SystemWindow.ForegroundWindow;
             judge.CheckOnTask(new WindowInfo(win));
         }
 

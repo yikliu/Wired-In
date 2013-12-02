@@ -57,7 +57,7 @@ namespace WiredIn.Log
     /// <summary>
     /// Class SqlWriter.
     /// </summary>
-    class SqlWriter
+    class SqlWriter : IDisposable
     {
         #region Fields
 
@@ -142,5 +142,10 @@ namespace WiredIn.Log
         }
 
         #endregion Methods
+
+        public void Dispose()
+        {
+            
+        }
     }
 }

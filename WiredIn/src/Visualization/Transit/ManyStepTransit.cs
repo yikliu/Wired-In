@@ -43,7 +43,8 @@ namespace WiredIn.Visualization.Transit
         /// <summary>
         /// The configuration
         /// </summary>
-        private ConfigVariables config = ConfigVariables.GetConfigVariables();
+        //private ConfigVariables config = ConfigVariables.GetConfigVariables();
+        
         /// <summary>
         /// The current step
         /// </summary>

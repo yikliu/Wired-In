@@ -13,6 +13,9 @@ namespace WiredIn
         private bool draggable = true;
         private string exclude_list = "";
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string ExcludeList
         {
             set
@@ -25,6 +28,9 @@ namespace WiredIn
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Draggable
         {
             set
@@ -53,16 +59,17 @@ namespace WiredIn
 
         #region Overriden Functions
 
+        /// <summary>
+        /// Add Mouse Event Handlers for each control added into the form,
+        /// if Draggable property of the form is set to true and the control
+        /// viewName is not in the ExcludeList.Exclude list is the comma separated
+        /// list of the Controls for which you do not require the mouse handler 
+        /// to be added. For Example a button.  
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnControlAdded(ControlEventArgs e)
         {
-            //
-            //Add Mouse Event Handlers for each control added into the form,
-            //if Draggable property of the form is set to true and the control
-            //viewName is not in the ExcludeList.Exclude list is the comma separated
-            //list of the Controls for which you do not require the mouse handler 
-            //to be added. For Example a button.  
-            //
-            if (this.Draggable && (this.ExcludeList.IndexOf(e.Control.Name) == -1))
+           if (this.Draggable && (this.ExcludeList.IndexOf(e.Control.Name) == -1))
             {
                 e.Control.MouseDown += new MouseEventHandler(MainForm_MouseDown);
                 e.Control.MouseUp += new MouseEventHandler(MainForm_MouseUp);

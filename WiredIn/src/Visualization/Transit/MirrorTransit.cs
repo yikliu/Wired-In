@@ -26,18 +26,20 @@
 /// </summary>
 namespace WiredIn.Visualization.Transit
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
-    using WiredIn.Visualization.Transit;
 
     /// <summary>
     /// Class MirrorTransit.
     /// </summary>
     class MirrorTransit : AbstractTransit
     {
+        private Globals.GlobalTimer globalTimer = Globals.GlobalTimer.GetGlobalTimer();
+        
+        private int currentIter = 0;
+        private int TurnBadCount = 10;
+
+        private bool goingToGood = false;
+
         #region Methods
 
         /// <summary>
@@ -45,7 +47,7 @@ namespace WiredIn.Visualization.Transit
         /// </summary>
         public override void ChangeToBadGear()
         {
-            ShowBadMirror();
+            goingToGood = false;
         }
 
         /// <summary>
@@ -53,7 +55,7 @@ namespace WiredIn.Visualization.Transit
         /// </summary>
         public override void ChangeToDormantGear()
         {
-            ShowBadMirror();
+            goingToGood = false;
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace WiredIn.Visualization.Transit
         /// </summary>
         public override void ChangeToGoodGear()
         {
-            ShowGoodMirror();
+            goingToGood = true;
         }
 
         /// <summary>
@@ -69,6 +71,27 @@ namespace WiredIn.Visualization.Transit
         /// </summary>
         public override void SetUp()
         {
+            globalTimer.AttachElapseEvent(this.TransitionTimerTick);
+        }
+
+        private void TransitionTimerTick(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (!is_running)
+                return;
+
+            if (goingToGood)
+            {
+                this.Transit();
+            }
+            else if (!goingToGood && currentIter >= TurnBadCount)
+            {
+                this.Transit();
+                currentIter = 0;
+            }
+           else
+            {
+                currentIter++;
+            }
         }
 
         /// <summary>
@@ -97,20 +120,7 @@ namespace WiredIn.Visualization.Transit
         /// </summary>
         public override void Transit()
         {
-        }
-
-        /// <summary>
-        /// Shows the bad mirror.
-        /// </summary>
-        private void ShowBadMirror()
-        {
-        }
-
-        /// <summary>
-        /// Shows the good mirror.
-        /// </summary>
-        private void ShowGoodMirror()
-        {
+            view.MoveView(goingToGood);
         }
 
         #endregion Methods

@@ -45,6 +45,12 @@ namespace WiredIn.Globals
         /// The browser proc names
         /// </summary>
         public readonly List<string> BrowserProcNames = new List<string>() { "firefox", "chrome", "iexplorer" };
+
+        /// <summary>
+        ///  List of names of visualizations that are created by me
+        /// </summary>
+        public readonly List<string> vendorVisualizerNames = new List<string>() { "progressbar", "clock" };
+
         /// <summary>
         /// The dormant clock iteration
         /// </summary>
@@ -94,7 +100,7 @@ namespace WiredIn.Globals
         /// <summary>
         /// The debug image number
         /// </summary>
-        public bool DebugImageNum = true;
+        public bool DebugImageNum = false;
         /// <summary>
         /// The enable SQL logging
         /// </summary>
@@ -107,12 +113,17 @@ namespace WiredIn.Globals
         /// The window size
         /// </summary>
         public ApplicationSize WindowSize = ApplicationSize.Small;
-
-       
+        
         /// <summary>
         /// The folder for storing log informations and visual images
         /// </summary>
         public string WiredInFolder = Application.StartupPath;
+        //public string WiredInFolder = Environment.SpecialFolder.MyDocuments.ToString();
+
+        /// <summary>
+        ///  Whether mirror should be enabled
+        /// </summary>
+        public bool EnableMirror = true;
 
         //make it singleton
         /// <summary>

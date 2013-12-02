@@ -40,7 +40,7 @@ namespace WiredIn.Log
     /// <summary>
     /// Logger writes user activity + time to log file
     /// </summary>
-    public class Logger : IRunner
+    public class Logger : IRunner, IDisposable
     {
         #region Fields
 
@@ -360,5 +360,25 @@ namespace WiredIn.Log
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+         protected virtual void Dispose(bool disposing)
+        {
+            if (bgWorker != null)
+            {
+                bgWorker.Dispose();
+            }
+        }
+
+        /// <summary>
+        ///  Disposal
+        /// </summary>
+         public void Dispose()
+         {
+             Dispose(true);
+             GC.SuppressFinalize(true);
+         }
     }
 }
