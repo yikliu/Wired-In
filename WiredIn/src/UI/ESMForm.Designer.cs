@@ -104,7 +104,7 @@ namespace WiredIn.UI
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(228, 54);
             this.metroButton1.TabIndex = 4;
-            this.metroButton1.Text = "Close";
+            this.metroButton1.Text = "Continue";
             this.metroButton1.UseCustomBackColor = true;
             this.metroButton1.UseSelectable = true;
             this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);

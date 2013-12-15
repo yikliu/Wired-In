@@ -67,7 +67,7 @@ namespace WiredIn.UserActivity
         /// <returns>String.</returns>
         public override String What()
         {
-            return "K";
+            return "Key";
         }
 
         #endregion Methods

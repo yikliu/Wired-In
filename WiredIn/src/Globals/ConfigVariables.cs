@@ -54,7 +54,7 @@ namespace WiredIn.Globals
         /// <summary>
         /// The dormant clock iteration
         /// </summary>
-        public readonly int DormantClockIteration = 80; // Dormant set to 20s = 20 * 1000 / 250 = 80 iters
+        public readonly long DormantClockIteration = 80; // Dormant set to 20s = 20 * 1000 / 250 = 80 iters
         /// <summary>
         /// The few step fast clock iteration
         /// </summary>
@@ -66,11 +66,11 @@ namespace WiredIn.Globals
         /// <summary>
         /// The global timer standard interval
         /// </summary>
-        public readonly int GlobalTimerStandardInterval = 250;
+        public readonly long GlobalTimerStandardInterval = 250;
         /// <summary>
         /// The logger buffer clock iteration
         /// </summary>
-        public readonly int LoggerBufferClockIteration = 40; // = 10s, buffer log entry every 10s
+        public readonly long LoggerBufferClockIteration = 40; // = 10s, buffer log entry every 10s
         /// <summary>
         /// The many step fast clock iteration
         /// </summary>
@@ -80,9 +80,9 @@ namespace WiredIn.Globals
         /// </summary>
         public readonly int ManyStepSlowClockIteration = 3; // = 750s
         /// <summary>
-        /// The procrastination threshold iteration
+        /// If off-task for more than 5 minutes, ESM will pop up when return to primary task.
         /// </summary>
-        public readonly int ProcrastinationThresholdIteration = 2400; //10 minutes = 10 * 60 * 1000 / 250 = 2400 iters
+        public readonly long ProcrastinationThresholdIteration = 1200; // 5 minutes = 5 * 60 * 1000 / 250 = 1200 iters
         /// <summary>
         /// The shrink factor
         /// </summary>

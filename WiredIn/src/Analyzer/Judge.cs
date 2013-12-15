@@ -41,7 +41,7 @@ namespace WiredIn.Analyzer
         /// <summary>
         /// const in TimeSpan construction. One milliseconds = 10,000 ticks. 
         /// </summary>
-        private readonly int millisecondTick = 10000;
+        private readonly long millisecondTick = 10000;
 
         /// <summary>
         /// The configuration instance
@@ -73,7 +73,7 @@ namespace WiredIn.Analyzer
         /// <summary>
         /// The procrastinate iteration
         /// </summary>
-        private int procrastinateIteration = 0;
+        private long procrastinateIteration = 0;
         /// <summary>
         /// The work sphere instance
         /// </summary>
@@ -142,11 +142,12 @@ namespace WiredIn.Analyzer
             {
                 curState = temp ? Globals.State.Good : Globals.State.Bad;
                 OnTask = temp;
-                System.Console.WriteLine(curState.ToString());
+                //System.Console.WriteLine(curState.ToString());
                 OnJudgeStateChange(this, new JudgeStateEventArgs(curState)); //Broadcast new state
                 if (curState == Globals.State.Good)
                 {
                     CheckProcrastinate();
+                    procrastinateIteration = 0;
                 }
             }
         }
@@ -233,7 +234,7 @@ namespace WiredIn.Analyzer
             if (procrastinateIteration >= config.ProcrastinationThresholdIteration)
             {
                 //how many ticks in this period of procrastination
-                Int64 ticks = procrastinateIteration * config.GlobalTimerStandardInterval * millisecondTick;
+                long ticks = procrastinateIteration * config.GlobalTimerStandardInterval * millisecondTick;
                 OnProcrastinate(this, new ProcrastinateEvengArgs(new TimeSpan(ticks)));
             }
         }
@@ -266,11 +267,11 @@ namespace WiredIn.Analyzer
             {
                 if (proc.Equals(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    System.Console.WriteLine("Browser");
+                    //System.Console.WriteLine("Browser");
                     return true;
                 }
             }
-            System.Console.WriteLine("Not Browser");
+            //System.Console.WriteLine("Not Browser");
             return false;
         }
 
@@ -287,6 +288,7 @@ namespace WiredIn.Analyzer
             if (curState != Globals.State.Good)
             {
                 procrastinateIteration++;
+                System.Console.WriteLine(procrastinateIteration);
             }
 
             if (OnTask)
@@ -294,7 +296,7 @@ namespace WiredIn.Analyzer
                 if (curState != Globals.State.Dormant && currentTimerIteration >= config.DormantClockIteration)
                 {
                     curState = Globals.State.Dormant;
-                    System.Console.WriteLine("Dormant State!");
+                    //System.Console.WriteLine("Dormant State!");
                     OnJudgeStateChange(this, new JudgeStateEventArgs(curState)); //notify the new dormant state
                 }
                 currentTimerIteration++;

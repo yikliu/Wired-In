@@ -74,7 +74,7 @@ namespace WiredIn.UserActivity
         /// <returns>String.</returns>
         public override String What()
         {
-            return "M";
+            return "Click";
         }
 
         #endregion Methods

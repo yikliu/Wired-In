@@ -125,6 +125,11 @@ namespace WiredIn.UI
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         public void btnGoToContext_Click(object sender, EventArgs e)
         {
+            if (tbxTaskDesc.Text == "")
+            {
+                MessageBox.Show("Please provide task description");
+                return;
+            }
             tabControl.SelectedTab = tabpageEnv;
         }
 
@@ -181,8 +186,14 @@ namespace WiredIn.UI
         {
             //setup the visualization
                worksphere.CustomVisualizerName = this.visualizerCenter.GetSelectedKey();
-               switch (worksphere.CustomVisualizerName)
-            {
+               if (worksphere.CustomVisualizerName == null)
+               {
+                   MessageBox.Show("Please select a visualizer as feedback");
+                   return;
+               }
+                
+            switch (worksphere.CustomVisualizerName)
+                {
                 case "rose":
                     worksphere.ActiveView = Visualizer.Rose;
                     break;
@@ -200,7 +211,7 @@ namespace WiredIn.UI
                        break;
                 default:
                     worksphere.ActiveView = Visualizer.Custom;
-                    break;
+                        break;
             }
 
             //setup worksphere
@@ -229,6 +240,7 @@ namespace WiredIn.UI
             runIns.ExpectedFamilarity = tbFamiliarity.Value;
             runIns.NumOfToDoItems = (int) numOtherItems.Value;
             runIns.ExpectedTimeOnHour = (int)numExpectTimeOnTask.Value;
+            
             if (tbxOther.Text.Length > 0)
                 runIns.Location = tbxOther.Text;
 
@@ -253,6 +265,12 @@ namespace WiredIn.UI
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnGoFinish_Click(object sender, EventArgs e)
         {
+            string k = this.visualizerCenter.GetSelectedKey();
+            if (null == k)
+            {
+                MessageBox.Show("Please select a visualizer as your feedback!");
+                return;
+            }
             tabControl.SelectedTab = tabpageFinish;
         }
 
@@ -263,6 +281,11 @@ namespace WiredIn.UI
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnGoToVisualzation_Click(object sender, EventArgs e)
         {
+            if (lbxWhiteWinList.Items.Count == 0)
+            {
+                MessageBox.Show("Please drag your primary task windows to the right box!");
+                return;
+            }
             tabControl.SelectedTab = tabpageVis;
         }
 
@@ -273,6 +296,16 @@ namespace WiredIn.UI
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnGoToWorkSphere_Click(object sender, EventArgs e)
         {
+            RadioButton[] rbs = new RadioButton[] { rbHome, rbOffice, rbOpenOffice, rbPublic, rbSingleRoom };
+            bool rb_check = rbs.Any(rb=>rb.Checked);
+            if (!rb_check)
+            {
+                if (tbxOther.Text == "")
+                {
+                    MessageBox.Show("Please provide your current location!");
+                    return;
+                }
+            }
             tabControl.SelectedTab = tabWorkSphere;
         }
 

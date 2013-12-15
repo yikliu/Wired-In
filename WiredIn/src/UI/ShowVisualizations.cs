@@ -206,7 +206,7 @@ namespace WiredIn
                 start.Text = "Stop";
                 worker.Start();
                 this.menu.Items[1].Enabled = false;
-                worker.EnqueueActivity(new StartUp(DateTime.Now, myView.GetScore()));
+                
             }
             else //is running
             {

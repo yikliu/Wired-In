@@ -179,7 +179,7 @@ namespace WiredIn.Analyzer
         {
             key.Catched = true;
             key.StateString = judge.CurState.ToString();
-            System.Console.WriteLine("Key Hit");
+            //System.Console.WriteLine("Key Hit");
             judge.ResetDormantTimer();
         }
 
@@ -191,7 +191,14 @@ namespace WiredIn.Analyzer
         {
             mouse.Catched = true;
             mouse.StateString = judge.CurState.ToString();
-            System.Console.WriteLine("Mouse Click");
+            //System.Console.WriteLine("Mouse Click");
+            judge.ResetDormantTimer();
+        }
+
+        public void CatchMouseWheelActivity(MouseWheel mw)
+        {
+            mw.Catched = true;
+            mw.StateString = judge.CurState.ToString();
             judge.ResetDormantTimer();
         }
 
@@ -213,6 +220,18 @@ namespace WiredIn.Analyzer
         {
             su.Catched = true;
             su.StateString = judge.CurState.ToString();
+        }
+
+        public void CatchPlayActivity(Play p)
+        {
+            p.Catched = true;
+            p.StateString = judge.CurState.ToString();
+        }
+
+        public void CatchPauseActivity(Pause p)
+        {
+            p.Catched = true;
+            p.StateString = judge.CurState.ToString();
         }
 
         /// <summary>
@@ -292,6 +311,8 @@ namespace WiredIn.Analyzer
             this.visualizer.SetUp();
             this.logger.SetUp();
 
+            this.EnqueueActivity(new StartUp(DateTime.Now, visualizer.GetScore()));
+
             is_running = false;
         }
 
@@ -312,12 +333,16 @@ namespace WiredIn.Analyzer
             this.globalTimer.Start();
             this.judge.Start();
             this.visualizer.Start();
+
             this.logger.Start();
             llMouseHook.StartHook();
             llKeyHook.StartHook();
             is_running = true;
+            this.EnqueueActivity(new Play(DateTime.Now, visualizer.GetScore()));
+
             SystemWindow win = ManagedWinapi.Windows.SystemWindow.ForegroundWindow;
             judge.CheckOnTask(new WindowInfo(win));
+
         }
 
         /// <summary>
@@ -335,6 +360,7 @@ namespace WiredIn.Analyzer
         /// </summary>
         public void Stop()
         {
+            this.EnqueueActivity(new Pause(DateTime.Now, visualizer.GetScore()));
             llMouseHook.Unhook();
             llKeyHook.Unhook();
             this.judge.Stop();
@@ -349,6 +375,7 @@ namespace WiredIn.Analyzer
         /// </summary>
         public void TearDown()
         {
+            this.EnqueueActivity(new ShutDown(DateTime.Now, visualizer.GetScore()));
             this.judge.TearDown();
             this.visualizer.TearDown();
             this.logger.TearDown();
@@ -443,14 +470,15 @@ namespace WiredIn.Analyzer
                 case WM_MOUSEHWHEEL:
                     if (!LastActionWasWheel)
                     {
-                        System.Console.WriteLine("Mouse Wheel");
+                        //System.Console.WriteLine("Mouse Wheel");
+                        this.EnqueueActivity(new MouseWheel(DateTime.Now, visualizer.GetScore()));
                         LastActionWasWheel = true;
                     }
                     break;
                 case WM_LBUTTONUP:
                 case WM_MBUTTONUP:
                 case WM_RBUTTONUP:
-                    System.Console.WriteLine("Mouse Click");
+                    //System.Console.WriteLine("Mouse Click");
                     this.EnqueueActivity(new MouseClick(DateTime.Now, visualizer.GetScore()));
                     LastActionWasWheel = false;
                     break;

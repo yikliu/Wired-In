@@ -135,7 +135,9 @@ namespace WiredIn.Globals
         /// <summary>
         /// Clock
         /// </summary>
-        Clock
+        Clock,
+
+        NOT_ASSIGNED
     }
 
     #endregion Enumerations

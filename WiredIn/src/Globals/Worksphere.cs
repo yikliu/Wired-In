@@ -87,7 +87,7 @@ namespace WiredIn.Globals
         /// <summary>
         /// The active view
         /// </summary>
-        private Visualizer activeView = Visualizer.Rose;
+        private Visualizer activeView = Visualizer.NOT_ASSIGNED;
         /// <summary>
         /// The custom visualizer name
         /// </summary>
