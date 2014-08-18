@@ -21,9 +21,6 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/// <summary>
-/// The Analyzer namespace.
-/// </summary>
 namespace WiredIn.Analyzer
 {
     using System;
@@ -35,11 +32,11 @@ namespace WiredIn.Analyzer
     using ManagedWinapi.Hooks;
     using ManagedWinapi.Windows;
     
-    using WiredIn.DataStructure;
-    using WiredIn.Globals;
-    using WiredIn.Log;
-    using WiredIn.UserActivity;
-    using WiredIn.Visualization.Visualizer;
+    using DataStructure;
+    using Globals;
+    using Log;
+    using UserActivity;
+    using Visualization.Visualizer;
 
     /// <summary>
     /// A worker is responsible for monitoring the activity queue and determining the transition direction
@@ -289,7 +286,7 @@ namespace WiredIn.Analyzer
         public void Procrastinate(object sender, ProcrastinateEvengArgs e)
         {
             this.Stop();
-            WiredIn.UI.ESMForm esm= new WiredIn.UI.ESMForm(e.span);
+            WiredIn.UI.ESMForm esm= new WiredIn.UI.ESMForm(e.Span);
             bool ESMSuccess = (esm.ShowDialog() == DialogResult.OK);
             if (ESMSuccess)
             {
@@ -352,7 +349,7 @@ namespace WiredIn.Analyzer
         /// <param name="e">The <see cref="JudgeStateEventArgs"/> instance containing the event data.</param>
         public void StateChanged(object sender, JudgeStateEventArgs e)
         {
-            visualizer.ChangeState(e.newState);
+            visualizer.ChangeState(e.NewState);
         }
 
         /// <summary>
@@ -384,7 +381,7 @@ namespace WiredIn.Analyzer
         }
 
         /// <summary>
-        /// Wins the event proc.
+        /// Event hook callback for window title change.
         /// </summary>
         /// <param name="hWinEventHook">The h win event hook.</param>
         /// <param name="eventType">Type of the event.</param>
@@ -395,7 +392,7 @@ namespace WiredIn.Analyzer
         /// <param name="dwmsEventTime">The DWMS event time.</param>
         public void WinEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
-            if (eventType == EVENT_OBJECT_NAMECHANGE)
+            if (eventType == EVENT_OBJECT_NAMECHANGE) //if this is a title-changing event
             {
                 newTitle = GetActiveWindowTitle();
                 if ((null != newTitle) && !newTitle.Equals(oldTitle))

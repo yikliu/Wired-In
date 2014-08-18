@@ -22,9 +22,6 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/// <summary>
-/// The Analyzer namespace.
-/// </summary>
 namespace WiredIn.Analyzer
 {
     using System;
@@ -41,17 +38,17 @@ namespace WiredIn.Analyzer
         /// <summary>
         /// const in TimeSpan construction. One milliseconds = 10,000 ticks. 
         /// </summary>
-        private readonly long millisecondTick = 10000;
+        private const long MillisecondTick = 10000;
 
         /// <summary>
         /// The configuration instance
         /// </summary>
-        private ConfigVariables config = ConfigVariables.GetConfigVariables();
+        private readonly ConfigVariables _config = ConfigVariables.GetConfigVariables();
         
         /// <summary>
         /// The current timer iteration, used for time the clock
         /// </summary>
-        private int currentTimerIteration = 0;
+        private int _currentTimerIteration = 0;
         
         /// <summary>
         /// The current state
@@ -61,23 +58,23 @@ namespace WiredIn.Analyzer
         /// <summary>
         /// Get the global clock
         /// </summary>
-        private GlobalTimer globalTimer = GlobalTimer.GetGlobalTimer();
+        private readonly GlobalTimer _globalTimer = GlobalTimer.GetGlobalTimer();
         /// <summary>
         /// flag if this judge is running
         /// </summary>
-        private bool is_running = false;
+        private bool _isRunning = false;
         /// <summary>
         /// A bool flag indicate whether current state is On or Off task, If "On", further analysis is needed to determine "dormant"
         /// </summary>
-        private bool OnTask = false;
+        private bool _onTask = false;
         /// <summary>
         /// The procrastinate iteration
         /// </summary>
-        private long procrastinateIteration = 0;
+        private long _procrastinateIteration = 0;
         /// <summary>
         /// The work sphere instance
         /// </summary>
-        private Worksphere workSphere = Worksphere.GetWorkSphere();
+        private readonly Worksphere _workSphere = Worksphere.GetWorkSphere();
 
         #endregion Fields
 
@@ -138,16 +135,16 @@ namespace WiredIn.Analyzer
                                            CheckKeyWords(newWinInfo.WinTitle) //if it's a browser, disregard handle, title or proc, just look at keywords matching
                                          : CheckWindows(newWinInfo); //if it's not a browser, then don't check title, only Check proc and handle normally
 
-            if (OnTask != temp) //different than before
+            if (_onTask != temp) //different than before
             {
                 curState = temp ? Globals.State.Good : Globals.State.Bad;
-                OnTask = temp;
+                _onTask = temp;
                 //System.Console.WriteLine(curState.ToString());
                 OnJudgeStateChange(this, new JudgeStateEventArgs(curState)); //Broadcast new state
                 if (curState == Globals.State.Good)
                 {
                     CheckProcrastinate();
-                    procrastinateIteration = 0;
+                    _procrastinateIteration = 0;
                 }
             }
         }
@@ -158,7 +155,7 @@ namespace WiredIn.Analyzer
         /// <returns><c>true</c> if this instance is running; otherwise, <c>false</c>.</returns>
         public bool IsRunning()
         {
-            return is_running;
+            return _isRunning;
         }
 
         /// <summary>
@@ -166,9 +163,9 @@ namespace WiredIn.Analyzer
         /// </summary>
         public void ResetDormantTimer()
         {
-            if (OnTask)
+            if (_onTask)
             {
-                currentTimerIteration = 0;
+                _currentTimerIteration = 0;
                 if(curState == Globals.State.Dormant)
                 {
                     curState = Globals.State.Good;
@@ -184,8 +181,8 @@ namespace WiredIn.Analyzer
         /// </summary>
         public void SetUp()
         {
-            globalTimer.AttachElapseEvent(this.JudgeTimer_Elapse);
-            is_running = false;
+            _globalTimer.AttachElapseEvent(this.JudgeTimer_Elapse);
+            _isRunning = false;
         }
 
         /// <summary>
@@ -193,7 +190,7 @@ namespace WiredIn.Analyzer
         /// </summary>
         public void Start()
         {
-            is_running = true;
+            _isRunning = true;
         }
 
         /// <summary>
@@ -201,7 +198,7 @@ namespace WiredIn.Analyzer
         /// </summary>
         public void Stop()
         {
-            is_running = false;
+            _isRunning = false;
         }
 
         /// <summary>
@@ -209,8 +206,8 @@ namespace WiredIn.Analyzer
         /// </summary>
         public void TearDown()
         {
-            globalTimer.DetachElapseEvent(this.JudgeTimer_Elapse);
-            is_running = false;
+            _globalTimer.DetachElapseEvent(this.JudgeTimer_Elapse);
+            _isRunning = false;
         }
 
         //this is only called for browser process
@@ -222,7 +219,7 @@ namespace WiredIn.Analyzer
         private bool CheckKeyWords(String title)
         {
             title = title.ToLowerInvariant();
-            int intersection = workSphere.SizeOfIntersectionWithKeywords(title);
+            int intersection = _workSphere.SizeOfIntersectionWithKeywords(title);
             return intersection > 0;
         }
 
@@ -231,10 +228,10 @@ namespace WiredIn.Analyzer
         /// </summary>
         private void CheckProcrastinate()
         {
-            if (procrastinateIteration >= config.ProcrastinationThresholdIteration)
+            if (_procrastinateIteration >= _config.ProcrastinationThresholdIteration)
             {
                 //how many ticks in this period of procrastination
-                long ticks = procrastinateIteration * config.GlobalTimerStandardInterval * millisecondTick;
+                long ticks = _procrastinateIteration * _config.GlobalTimerStandardInterval * MillisecondTick;
                 OnProcrastinate(this, new ProcrastinateEvengArgs(new TimeSpan(ticks)));
             }
         }
@@ -248,12 +245,12 @@ namespace WiredIn.Analyzer
         private bool CheckWindows(WindowInfo curWin)
         {
             //if handle matches, return yes.
-            if (workSphere.ContainsHandle(curWin.WindowHandle))
+            if (_workSphere.ContainsHandle(curWin.WindowHandle))
             {
                 return true;
             }
             //if not, then check if it's a legit proc
-            return workSphere.ContainsProcName(curWin.ProcName);
+            return _workSphere.ContainsProcName(curWin.ProcName);
         }
 
         /// <summary>
@@ -263,7 +260,7 @@ namespace WiredIn.Analyzer
         /// <returns><c>true</c> if [is proc a browser] [the specified proc]; otherwise, <c>false</c>.</returns>
         private bool IsProcABrowser(string proc)
         {
-            foreach (string name in config.BrowserProcNames)
+            foreach (string name in _config.BrowserProcNames)
             {
                 if (proc.Equals(name, StringComparison.OrdinalIgnoreCase))
                 {
@@ -282,24 +279,24 @@ namespace WiredIn.Analyzer
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void JudgeTimer_Elapse(object sender, EventArgs e)
         {
-            if (!is_running)
+            if (!_isRunning)
                 return;
 
             if (curState != Globals.State.Good)
             {
-                procrastinateIteration++;
-                System.Console.WriteLine(procrastinateIteration);
+                _procrastinateIteration++;
+                System.Console.WriteLine(_procrastinateIteration);
             }
 
-            if (OnTask)
+            if (_onTask)
             {
-                if (curState != Globals.State.Dormant && currentTimerIteration >= config.DormantClockIteration)
+                if (curState != Globals.State.Dormant && _currentTimerIteration >= _config.DormantClockIteration)
                 {
                     curState = Globals.State.Dormant;
                     //System.Console.WriteLine("Dormant State!");
                     OnJudgeStateChange(this, new JudgeStateEventArgs(curState)); //notify the new dormant state
                 }
-                currentTimerIteration++;
+                _currentTimerIteration++;
             }
         }
 
@@ -316,7 +313,7 @@ namespace WiredIn.Analyzer
         /// <summary>
         /// The new state
         /// </summary>
-        public readonly Globals.State newState;
+        public readonly Globals.State NewState;
 
         #endregion Fields
 
@@ -328,7 +325,7 @@ namespace WiredIn.Analyzer
         /// <param name="s">The s.</param>
         public JudgeStateEventArgs(Globals.State s)
         {
-            this.newState = s;
+            this.NewState = s;
         }
 
         #endregion Constructors
@@ -344,7 +341,9 @@ namespace WiredIn.Analyzer
         /// <summary>
         /// The span
         /// </summary>
-        public readonly TimeSpan span;
+        public readonly TimeSpan Span;
+
+
 
         #endregion Fields
 
@@ -356,7 +355,7 @@ namespace WiredIn.Analyzer
         /// <param name="sp">The sp.</param>
         public ProcrastinateEvengArgs(TimeSpan sp)
         {
-            this.span = sp;
+            this.Span = sp;
         }
 
         #endregion Constructors

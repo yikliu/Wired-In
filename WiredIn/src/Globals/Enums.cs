@@ -105,7 +105,7 @@ namespace WiredIn.Globals
     /// <summary>
     /// Enum Visualizer
     /// </summary>
-    public enum Visualizer
+    public enum   Visualizer
     {
         /// <summary>
         /// The rose

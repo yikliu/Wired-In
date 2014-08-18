@@ -121,6 +121,9 @@ namespace WiredIn
 
         #region Methods
 
+        /// <summary>
+        /// Double-buffering entire form, including child controls.
+        /// </summary>
         protected override CreateParams CreateParams
         {
             get
@@ -136,6 +139,7 @@ namespace WiredIn
         /// </summary>
         public void CreateVisualizer()
         {
+            //Choose the visualizer builder 
             switch (worksphere.ActiveView)
             {
                 case Globals.Visualizer.Rose:
@@ -150,9 +154,6 @@ namespace WiredIn
                 case Globals.Visualizer.Empty:
                     builder = new EmptyVisualizerBuilder();
                     break;
-                //case Globals.Visualizer.Mirror:
-                //   builder = new MirrorVisualizerBuilder();
-                // break;
                 case Globals.Visualizer.Clock:
                     builder = new ClockVisualizerBuilder();
                     break;
@@ -166,6 +167,7 @@ namespace WiredIn
 
             this.Controls.Remove(this.myView);
             this.myView = visualizer.GetView();
+            
             this.SuspendLayout();
             this.myView.ForeColor = System.Drawing.Color.Transparent;
             this.myView.Location = new System.Drawing.Point(0, 0);
@@ -179,7 +181,8 @@ namespace WiredIn
         }
 
         /// <summary>
-        /// Switches the size of the view.
+        ///  Switches the size of the view.
+        ///  If "small" is selected, form will be placed at right-bottom corner.
         /// </summary>
         public void SwitchViewSize()
         {
@@ -205,8 +208,7 @@ namespace WiredIn
             {
                 start.Text = "Stop";
                 worker.Start();
-                this.menu.Items[1].Enabled = false;
-                
+                this.menu.Items[1].Enabled = false;  
             }
             else //is running
             {
@@ -270,10 +272,11 @@ namespace WiredIn
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-              this.FormBorderStyle = FormBorderStyle.None;
+              this.FormBorderStyle = FormBorderStyle.None; //this is a border-less form
               CreateVisualizer();
-              worker = new Worker(visualizer);
-              worker.SetUp();
+              
+              worker = new Worker(visualizer); //create the worker
+              worker.SetUp(); //set up worker
               this.Show();
          }
 

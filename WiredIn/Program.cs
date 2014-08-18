@@ -1,4 +1,6 @@
-﻿namespace WiredIn
+﻿using WiredIn.Mirror;
+
+namespace WiredIn
 {
     using System;
     using System.Windows.Forms;
@@ -15,17 +17,18 @@
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Demo.MainForm());
-
-            WiredIn.UI.Orientation orient = new WiredIn.UI.Orientation();
+            
+            var orient = new UI.Orientation();
             if (orient.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new WiredIn.ShowVisualizations());
+                Application.Run(new ShowVisualizations());
             }
             else
             {
                 Application.Exit();
             }
+
+            //Application.Run(new MainForm());
 
         }
 

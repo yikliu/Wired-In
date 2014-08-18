@@ -21,40 +21,19 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/// <summary>
-/// The Builder namespace.
-/// </summary>
+
 namespace WiredIn.Visualization.Builder
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    using WiredIn.Analyzer;
-    using WiredIn.Visualization.Transit;
-    using WiredIn.Visualization.View;
-    using WiredIn.Visualization.Visualizer;
+    using Visualizer;
 
     /// <summary>
     /// Class AbstractBuilder.
     /// </summary>
     abstract class AbstractBuilder
     {
-        #region Fields
-
-        /// <summary>
-        /// The visualizer
-        /// </summary>
         protected AbstractVisualizer visualizer;
 
-        #endregion Fields
-
-        #region Methods
-
-        /// <summary>
-        /// Builds this instance.
-        /// </summary>
         public void Build()
         {
             CreateVisualizer();
@@ -62,26 +41,12 @@ namespace WiredIn.Visualization.Builder
             BuildTransit();
         }
 
-        /// <summary>
-        /// Builds the transit.
-        /// </summary>
         public abstract void BuildTransit();
 
-        /// <summary>
-        /// Builds the view.
-        /// </summary>
         public abstract void BuildView();
 
-        /// <summary>
-        /// Creates the visualizer.
-        /// </summary>
         public abstract void CreateVisualizer();
 
-        /// <summary>
-        /// Gets the visualizer.
-        /// </summary>
-        /// <returns>AbstractVisualizer.</returns>
-        /// <exception cref="System.Exception">Visualizer Not Built</exception>
         public virtual AbstractVisualizer GetVisualizer()
         {
             if (null == visualizer || null == visualizer.GetTransit() || null == visualizer.GetView())
@@ -89,9 +54,7 @@ namespace WiredIn.Visualization.Builder
                 throw new Exception("Visualizer Not Built");
             }
 
-            return this.visualizer;
+            return visualizer;
         }
-
-        #endregion Methods
     }
 }
