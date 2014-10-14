@@ -1,0 +1,22 @@
+﻿Build started 10/6/2014 8:52:54 AM.
+     1>Project "C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\WebCamLib.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W4 /WX- /O2 /Oy- /GL /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\\" /Fd"C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib WebCamLib.cpp
+         WebCamLib.cpp
+     1>c:\users\yikun.liu\dropbox\work\code\c#\wiredin\webcamlib\WebCamLib.h(151): warning C4100: 'pSample' : unreferenced formal parameter
+     1>c:\users\yikun.liu\dropbox\work\code\c#\wiredin\webcamlib\WebCamLib.h(151): warning C4100: 'SampleTime' : unreferenced formal parameter
+     1>c:\users\yikun.liu\dropbox\work\code\c#\wiredin\webcamlib\WebCamLib.h(156): warning C4100: 'SampleTime' : unreferenced formal parameter
+     1>c:\users\yikun.liu\dropbox\work\code\c#\wiredin\webcamlib\WebCamLib.h(166): warning C4100: 'ppvObject' : unreferenced formal parameter
+     1>c:\users\yikun.liu\dropbox\work\code\c#\wiredin\webcamlib\WebCamLib.h(166): warning C4100: 'riid' : unreferenced formal parameter
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /clr /nologo /W4 /WX- /O2 /Oy- /GL /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\\" /Fd"C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\vc120.pdb" /TP /analyze- /errorReport:prompt "C:\Users\Yikun.Liu\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\WebCamLib.dll" /INCREMENTAL:NO /NOLOGO Strmiids.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\WebCamLib.pdb" /LTCG /TLBID:1 /DYNAMICBASE:NO /FIXED:NO /MACHINE:X86 /SAFESEH /DLL "C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\WebCamLib.obj"
+         "C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
+         WebCamLib.vcxproj -> C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\bin\Release\WebCamLib.dll
+     1>Done Building Project "C:\Users\Yikun.Liu\Dropbox\Work\Code\C#\WiredIn\WebCamLib\WebCamLib.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.99

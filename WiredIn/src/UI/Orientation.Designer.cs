@@ -41,10 +41,13 @@ namespace WiredIn.UI
             this.tabpageVis = new MetroFramework.Controls.MetroTabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.lnkAddNew = new MetroFramework.Drawing.Html.HtmlLabel();
+            this.tableLayoutPanel = new WiredIn.DoubleBufferedTableLayoutPanel();
             this.tabControl = new MetroFramework.Controls.MetroTabControl();
             this.tabpageTask = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button6 = new System.Windows.Forms.Button();
             this.lblDate = new System.Windows.Forms.Label();
             this.numOtherItems = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -58,8 +61,12 @@ namespace WiredIn.UI
             this.tbFamiliarity = new MetroFramework.Controls.MetroTrackBar();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.tabpageFinish = new MetroFramework.Controls.MetroTabPage();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnFinalize = new System.Windows.Forms.Button();
             this.tabpageEnv = new MetroFramework.Controls.MetroTabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnGoToWorkSphere = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -93,6 +100,7 @@ namespace WiredIn.UI
             this.label31 = new System.Windows.Forms.Label();
             this.tabWorkSphere = new MetroFramework.Controls.MetroTabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.button3 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnOpenWindowUpdate = new MetroFramework.Controls.MetroButton();
@@ -106,14 +114,6 @@ namespace WiredIn.UI
             this.btnAddWindow = new MetroFramework.Controls.MetroButton();
             this.label10 = new System.Windows.Forms.Label();
             this.keywordsTable = new System.Windows.Forms.TableLayoutPanel();
-            this.tabpageFinish = new MetroFramework.Controls.MetroTabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnFinalize = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnGoToWorkSphere = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel = new WiredIn.DoubleBufferedTableLayoutPanel();
             label28 = new System.Windows.Forms.Label();
             label16 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
@@ -130,6 +130,8 @@ namespace WiredIn.UI
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numExpectTimeOnTask)).BeginInit();
             this.panel10.SuspendLayout();
+            this.tabpageFinish.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tabpageEnv.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -141,8 +143,6 @@ namespace WiredIn.UI
             this.tabWorkSphere.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tabpageFinish.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // label28
@@ -223,7 +223,7 @@ namespace WiredIn.UI
             // 
             this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.Size = new System.Drawing.Size(200, 100);
+            this.metroTabControl1.Padding = new System.Drawing.Point(6, 8);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -231,13 +231,13 @@ namespace WiredIn.UI
             // 
             this.metroButton1.Location = new System.Drawing.Point(0, 0);
             this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 23);
             this.metroButton1.TabIndex = 0;
             this.metroButton1.UseSelectable = true;
             // 
             // tabpageVis
             // 
             this.tabpageVis.Controls.Add(this.tableLayoutPanel5);
+            this.tabpageVis.Enabled = true;
             this.tabpageVis.HorizontalScrollbarBarColor = true;
             this.tabpageVis.HorizontalScrollbarHighlightOnWheel = false;
             this.tabpageVis.HorizontalScrollbarSize = 10;
@@ -250,6 +250,7 @@ namespace WiredIn.UI
             this.tabpageVis.VerticalScrollbarBarColor = true;
             this.tabpageVis.VerticalScrollbarHighlightOnWheel = false;
             this.tabpageVis.VerticalScrollbarSize = 10;
+            this.tabpageVis.Visible = false;
             // 
             // tableLayoutPanel5
             // 
@@ -283,6 +284,21 @@ namespace WiredIn.UI
             this.label5.TabIndex = 4;
             this.label5.Text = "Choose a visualization as feedback";
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(1358, 648);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 51);
+            this.button2.TabIndex = 6;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.btnGoFinish_Click);
+            // 
             // lnkAddNew
             // 
             this.lnkAddNew.AutoScroll = true;
@@ -299,6 +315,27 @@ namespace WiredIn.UI
             this.lnkAddNew.Text = "Or make a new visualization";
             this.lnkAddNew.Click += new System.EventHandler(this.htmlLabel1_Click);
             // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.AutoSize = true;
+            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel.ColumnCount = 3;
+            this.tableLayoutPanel5.SetColumnSpan(this.tableLayoutPanel, 2);
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(3, 88);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 1;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.Size = new System.Drawing.Size(1430, 483);
+            this.tableLayoutPanel.TabIndex = 2;
+            // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabpageTask);
@@ -312,6 +349,7 @@ namespace WiredIn.UI
             this.tabControl.Location = new System.Drawing.Point(20, 60);
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
+            this.tabControl.Padding = new System.Drawing.Point(6, 8);
             this.tabControl.SelectedIndex = 0;
             this.tabControl.ShowToolTips = true;
             this.tabControl.Size = new System.Drawing.Size(1444, 750);
@@ -364,6 +402,21 @@ namespace WiredIn.UI
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1436, 702);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.BackColor = System.Drawing.Color.Transparent;
+            this.button6.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(1363, 629);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(70, 70);
+            this.button6.TabIndex = 51;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.btnGoToContext_Click);
             // 
             // lblDate
             // 
@@ -525,9 +578,62 @@ namespace WiredIn.UI
             this.label13.TabIndex = 28;
             this.label13.Text = "Not at all";
             // 
+            // tabpageFinish
+            // 
+            this.tabpageFinish.Controls.Add(this.tableLayoutPanel6);
+            this.tabpageFinish.Enabled = true;
+            this.tabpageFinish.HorizontalScrollbarBarColor = true;
+            this.tabpageFinish.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabpageFinish.HorizontalScrollbarSize = 10;
+            this.tabpageFinish.Location = new System.Drawing.Point(4, 44);
+            this.tabpageFinish.Name = "tabpageFinish";
+            this.tabpageFinish.Size = new System.Drawing.Size(1436, 702);
+            this.tabpageFinish.TabIndex = 3;
+            this.tabpageFinish.Text = "Finish";
+            this.tabpageFinish.VerticalScrollbarBarColor = true;
+            this.tabpageFinish.VerticalScrollbarHighlightOnWheel = false;
+            this.tabpageFinish.VerticalScrollbarSize = 10;
+            this.tabpageFinish.Visible = false;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.Controls.Add(this.btnFinalize, 1, 1);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1436, 702);
+            this.tableLayoutPanel6.TabIndex = 3;
+            // 
+            // btnFinalize
+            // 
+            this.btnFinalize.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFinalize.BackColor = System.Drawing.Color.Transparent;
+            this.btnFinalize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.AliceBlue;
+            this.btnFinalize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFinalize.Font = new System.Drawing.Font("Segoe UI Light", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFinalize.Location = new System.Drawing.Point(242, 120);
+            this.btnFinalize.Name = "btnFinalize";
+            this.btnFinalize.Size = new System.Drawing.Size(951, 461);
+            this.btnFinalize.TabIndex = 2;
+            this.btnFinalize.Text = "Go";
+            this.btnFinalize.UseVisualStyleBackColor = false;
+            this.btnFinalize.Click += new System.EventHandler(this.btnFinalizeOrientation);
+            // 
             // tabpageEnv
             // 
             this.tabpageEnv.Controls.Add(this.tableLayoutPanel4);
+            this.tabpageEnv.Enabled = true;
             this.tabpageEnv.HorizontalScrollbarBarColor = true;
             this.tabpageEnv.HorizontalScrollbarHighlightOnWheel = false;
             this.tabpageEnv.HorizontalScrollbarSize = 10;
@@ -539,6 +645,7 @@ namespace WiredIn.UI
             this.tabpageEnv.VerticalScrollbarBarColor = true;
             this.tabpageEnv.VerticalScrollbarHighlightOnWheel = false;
             this.tabpageEnv.VerticalScrollbarSize = 10;
+            this.tabpageEnv.Visible = false;
             // 
             // tableLayoutPanel4
             // 
@@ -572,6 +679,21 @@ namespace WiredIn.UI
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.86072F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1436, 702);
             this.tableLayoutPanel4.TabIndex = 2;
+            // 
+            // btnGoToWorkSphere
+            // 
+            this.btnGoToWorkSphere.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGoToWorkSphere.BackColor = System.Drawing.Color.Transparent;
+            this.btnGoToWorkSphere.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
+            this.btnGoToWorkSphere.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGoToWorkSphere.FlatAppearance.BorderSize = 0;
+            this.btnGoToWorkSphere.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGoToWorkSphere.Location = new System.Drawing.Point(1363, 629);
+            this.btnGoToWorkSphere.Name = "btnGoToWorkSphere";
+            this.btnGoToWorkSphere.Size = new System.Drawing.Size(70, 70);
+            this.btnGoToWorkSphere.TabIndex = 37;
+            this.btnGoToWorkSphere.UseVisualStyleBackColor = false;
+            this.btnGoToWorkSphere.Click += new System.EventHandler(this.btnGoToWorkSphere_Click);
             // 
             // panel5
             // 
@@ -973,6 +1095,7 @@ namespace WiredIn.UI
             // tabWorkSphere
             // 
             this.tabWorkSphere.Controls.Add(this.tableLayoutPanel2);
+            this.tabWorkSphere.Enabled = true;
             this.tabWorkSphere.HorizontalScrollbarBarColor = true;
             this.tabWorkSphere.HorizontalScrollbarHighlightOnWheel = false;
             this.tabWorkSphere.HorizontalScrollbarSize = 10;
@@ -984,6 +1107,7 @@ namespace WiredIn.UI
             this.tabWorkSphere.VerticalScrollbarBarColor = true;
             this.tabWorkSphere.VerticalScrollbarHighlightOnWheel = false;
             this.tabWorkSphere.VerticalScrollbarSize = 10;
+            this.tabWorkSphere.Visible = false;
             // 
             // tableLayoutPanel2
             // 
@@ -1014,6 +1138,22 @@ namespace WiredIn.UI
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1436, 702);
             this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tableLayoutPanel2.SetColumnSpan(this.button3, 2);
+            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(1363, 640);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(70, 59);
+            this.button3.TabIndex = 33;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.btnGoToVisualization_Click);
             // 
             // label6
             // 
@@ -1049,6 +1189,7 @@ namespace WiredIn.UI
             this.btnOpenWindowUpdate.Text = "Update";
             this.btnOpenWindowUpdate.UseCustomBackColor = true;
             this.btnOpenWindowUpdate.UseSelectable = true;
+            this.btnOpenWindowUpdate.UseVisualStyleBackColor = false;
             this.btnOpenWindowUpdate.Click += new System.EventHandler(this.btnOpenWindowUpdate_Click);
             // 
             // label8
@@ -1156,6 +1297,7 @@ namespace WiredIn.UI
             this.btnDelWindow.Text = "<- Delete";
             this.btnDelWindow.UseCustomBackColor = true;
             this.btnDelWindow.UseSelectable = true;
+            this.btnDelWindow.UseVisualStyleBackColor = false;
             this.btnDelWindow.Click += new System.EventHandler(this.btnDelWindow_Click);
             // 
             // btnAddWindow
@@ -1171,6 +1313,7 @@ namespace WiredIn.UI
             this.btnAddWindow.Text = "Add ->";
             this.btnAddWindow.UseCustomBackColor = true;
             this.btnAddWindow.UseSelectable = true;
+            this.btnAddWindow.UseVisualStyleBackColor = false;
             this.btnAddWindow.Click += new System.EventHandler(this.btnAddWindow_Click);
             // 
             // label10
@@ -1207,138 +1350,6 @@ namespace WiredIn.UI
             this.keywordsTable.Size = new System.Drawing.Size(1430, 105);
             this.keywordsTable.TabIndex = 31;
             // 
-            // tabpageFinish
-            // 
-            this.tabpageFinish.Controls.Add(this.tableLayoutPanel6);
-            this.tabpageFinish.HorizontalScrollbarBarColor = true;
-            this.tabpageFinish.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabpageFinish.HorizontalScrollbarSize = 10;
-            this.tabpageFinish.Location = new System.Drawing.Point(4, 44);
-            this.tabpageFinish.Name = "tabpageFinish";
-            this.tabpageFinish.Size = new System.Drawing.Size(1436, 702);
-            this.tabpageFinish.TabIndex = 3;
-            this.tabpageFinish.Text = "Finish";
-            this.tabpageFinish.VerticalScrollbarBarColor = true;
-            this.tabpageFinish.VerticalScrollbarHighlightOnWheel = false;
-            this.tabpageFinish.VerticalScrollbarSize = 10;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.Controls.Add(this.btnFinalize, 1, 1);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 3;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1436, 702);
-            this.tableLayoutPanel6.TabIndex = 3;
-            // 
-            // btnFinalize
-            // 
-            this.btnFinalize.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFinalize.BackColor = System.Drawing.Color.Transparent;
-            this.btnFinalize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.AliceBlue;
-            this.btnFinalize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFinalize.Font = new System.Drawing.Font("Segoe UI Light", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFinalize.Location = new System.Drawing.Point(242, 120);
-            this.btnFinalize.Name = "btnFinalize";
-            this.btnFinalize.Size = new System.Drawing.Size(951, 461);
-            this.btnFinalize.TabIndex = 2;
-            this.btnFinalize.Text = "Go";
-            this.btnFinalize.UseVisualStyleBackColor = false;
-            this.btnFinalize.Click += new System.EventHandler(this.btnFinalizeOrientation);
-            // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.BackColor = System.Drawing.Color.Transparent;
-            this.button6.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(1363, 629);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(70, 70);
-            this.button6.TabIndex = 51;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.btnGoToContext_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(1358, 648);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 51);
-            this.button2.TabIndex = 6;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.btnGoFinish_Click);
-            // 
-            // btnGoToWorkSphere
-            // 
-            this.btnGoToWorkSphere.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGoToWorkSphere.BackColor = System.Drawing.Color.Transparent;
-            this.btnGoToWorkSphere.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
-            this.btnGoToWorkSphere.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnGoToWorkSphere.FlatAppearance.BorderSize = 0;
-            this.btnGoToWorkSphere.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGoToWorkSphere.Location = new System.Drawing.Point(1363, 629);
-            this.btnGoToWorkSphere.Name = "btnGoToWorkSphere";
-            this.btnGoToWorkSphere.Size = new System.Drawing.Size(70, 70);
-            this.btnGoToWorkSphere.TabIndex = 37;
-            this.btnGoToWorkSphere.UseVisualStyleBackColor = false;
-            this.btnGoToWorkSphere.Click += new System.EventHandler(this.btnGoToWorkSphere_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.tableLayoutPanel2.SetColumnSpan(this.button3, 2);
-            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(1363, 640);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 59);
-            this.button3.TabIndex = 33;
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.btnGoToVisualization_Click);
-            // 
-            // tableLayoutPanel
-            // 
-            this.tableLayoutPanel.AutoSize = true;
-            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel.ColumnCount = 3;
-            this.tableLayoutPanel5.SetColumnSpan(this.tableLayoutPanel, 2);
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(3, 88);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 1;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1430, 483);
-            this.tableLayoutPanel.TabIndex = 2;
-            // 
             // Orientation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1370,6 +1381,8 @@ namespace WiredIn.UI
             ((System.ComponentModel.ISupportInitialize)(this.numExpectTimeOnTask)).EndInit();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            this.tabpageFinish.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
             this.tabpageEnv.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -1390,8 +1403,6 @@ namespace WiredIn.UI
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.tabpageFinish.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
