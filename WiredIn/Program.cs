@@ -1,6 +1,4 @@
-﻿using WiredIn.Mirror;
-
-namespace WiredIn
+﻿namespace WiredIn
 {
     using System;
     using System.Windows.Forms;
@@ -27,9 +25,6 @@ namespace WiredIn
             {
                 Application.Exit();
             }
-
-            //Application.Run(new MainForm());
-
         }
 
         #endregion Methods
