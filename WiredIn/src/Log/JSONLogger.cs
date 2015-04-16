@@ -21,9 +21,7 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/// <summary>
-/// The Log namespace.
-/// </summary>
+
 namespace WiredIn.Log
 {
     using System;
@@ -36,7 +34,7 @@ namespace WiredIn.Log
     /// <summary>
     /// Class JSONLogger.
     /// </summary>
-    class JSONLogger : IDisposable
+    class JsonLogger : IDisposable
     {
         #region Fields
 
@@ -58,9 +56,9 @@ namespace WiredIn.Log
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JSONLogger"/> class.
+        /// Initializes a new instance of the <see cref="JsonLogger"/> class.
         /// </summary>
-        public JSONLogger()
+        public JsonLogger()
         {
             bgWorker = new BackgroundWorker();
             bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);

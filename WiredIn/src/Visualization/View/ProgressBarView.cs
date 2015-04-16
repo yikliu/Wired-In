@@ -41,6 +41,8 @@
 /// <summary>
 /// The View namespace.
 /// </summary>
+using System.Diagnostics;
+
 namespace WiredIn.Visualization.View
 {
     using System;
@@ -120,7 +122,7 @@ namespace WiredIn.Visualization.View
             {
                 double r = (double)currentStep / (double)numOfSteps;
                 this.bar.Value = (int)(r * numOfSteps);
-                System.Console.WriteLine(this.bar.Value);
+                Debug.WriteLine(this.bar.Value);
             }
             this.bar.Invalidate();
         }
@@ -148,7 +150,7 @@ namespace WiredIn.Visualization.View
         /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.</param>
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = SystemColors.ControlLightLight;
         }
 
         /// <summary>

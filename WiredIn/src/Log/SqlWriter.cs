@@ -45,9 +45,8 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/// <summary>
-/// The Log namespace.
-/// </summary>
+using System.Diagnostics;
+
 namespace WiredIn.Log
 {
     using System;
@@ -103,7 +102,7 @@ namespace WiredIn.Log
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Error: {0}", ex.ToString());
+                Debug.WriteLine("Error: {0}", ex.ToString());
             }
         }
 
@@ -137,7 +136,7 @@ namespace WiredIn.Log
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Error: {0}", ex.ToString());
+                Debug.WriteLine("Error: {0}", ex.ToString());
             }
         }
 

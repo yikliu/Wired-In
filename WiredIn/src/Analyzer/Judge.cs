@@ -139,7 +139,6 @@ namespace WiredIn.Analyzer
             {
                 curState = temp ? Globals.State.Good : Globals.State.Bad;
                 _onTask = temp;
-                //System.Console.WriteLine(curState.ToString());
                 OnJudgeStateChange(this, new JudgeStateEventArgs(curState)); //Broadcast new state
                 if (curState == Globals.State.Good)
                 {
@@ -169,7 +168,6 @@ namespace WiredIn.Analyzer
                 if(curState == Globals.State.Dormant)
                 {
                     curState = Globals.State.Good;
-                    System.Console.WriteLine("Good State!");
                     OnJudgeStateChange(this, new JudgeStateEventArgs(curState)); //notify the new dormant state
                     CheckProcrastinate();
                 }
@@ -264,11 +262,9 @@ namespace WiredIn.Analyzer
             {
                 if (proc.Equals(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    //System.Console.WriteLine("Browser");
                     return true;
                 }
             }
-            //System.Console.WriteLine("Not Browser");
             return false;
         }
 
@@ -285,7 +281,6 @@ namespace WiredIn.Analyzer
             if (curState != Globals.State.Good)
             {
                 _procrastinateIteration++;
-                System.Console.WriteLine(_procrastinateIteration);
             }
 
             if (_onTask)
@@ -293,7 +288,6 @@ namespace WiredIn.Analyzer
                 if (curState != Globals.State.Dormant && _currentTimerIteration >= _config.DormantClockIteration)
                 {
                     curState = Globals.State.Dormant;
-                    //System.Console.WriteLine("Dormant State!");
                     OnJudgeStateChange(this, new JudgeStateEventArgs(curState)); //notify the new dormant state
                 }
                 _currentTimerIteration++;

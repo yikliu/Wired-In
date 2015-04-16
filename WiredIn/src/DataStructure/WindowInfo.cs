@@ -36,9 +36,6 @@
 
 #endregion Header
 
-/// <summary>
-/// The DataStructure namespace.
-/// </summary>
 namespace WiredIn.DataStructure
 {
     using System;

@@ -21,15 +21,11 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/// <summary>
-/// The Globals namespace.
-/// </summary>
+
 namespace WiredIn.Globals
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     using WiredIn.DataStructure;
 
@@ -38,7 +34,6 @@ namespace WiredIn.Globals
     /// </summary>
     public class Worksphere
     {
-        #region Fields
 
         //make it singleton
         /// <summary>
@@ -50,52 +45,36 @@ namespace WiredIn.Globals
         /// The acceptable handles
         /// </summary>
         private HashSet<IntPtr> acceptableHandles;
+
         /// <summary>
         /// The acceptable keywords
         /// </summary>
         private HashSet<string> acceptableKeywords;
 
-        public HashSet<string> AcceptableKeywords
-        {
-            get { return acceptableKeywords; }
-            set { acceptableKeywords = value; }
-        }
         /// <summary>
         /// The acceptable proc names
         /// </summary>
         private HashSet<string> acceptableProcNames;
 
-        public HashSet<string> AcceptableProcNames
-        {
-            get { return acceptableProcNames; }
-            set { acceptableProcNames = value; }
-        }
         /// <summary>
         /// The acceptable windows infos
         /// </summary>
         private List<WindowInfo> acceptableWindowsInfos;
+
         /// <summary>
         /// The acceptable window titles
         /// </summary>
         private List<String> acceptableWindowTitles;
 
-        public List<String> AcceptableWindowTitles
-        {
-            get { return acceptableWindowTitles; }
-            set { acceptableWindowTitles = value; }
-        }
         /// <summary>
         /// The active view
         /// </summary>
         private Visualizer activeView = Visualizer.NOT_ASSIGNED;
+
         /// <summary>
         /// The custom visualizer name
         /// </summary>
         private string customVisualizerName = "N/A";
-
-        #endregion Fields
-
-        #region Constructors
 
         /// <summary>
         /// Prevents a default instance of the <see cref="Worksphere"/> class from being created.
@@ -109,10 +88,21 @@ namespace WiredIn.Globals
             this.acceptableWindowTitles = new List<string>();
         }
 
-        #endregion Constructors
-
-        #region Properties
-
+        public HashSet<string> AcceptableKeywords
+        {
+            get { return acceptableKeywords; }
+            set { acceptableKeywords = value; }
+        }
+        public HashSet<string> AcceptableProcNames
+        {
+            get { return acceptableProcNames; }
+            set { acceptableProcNames = value; }
+        }
+        public List<String> AcceptableWindowTitles
+        {
+            get { return acceptableWindowTitles; }
+            set { acceptableWindowTitles = value; }
+        }
         /// <summary>
         /// Gets or sets the active view.
         /// </summary>
@@ -132,10 +122,6 @@ namespace WiredIn.Globals
             get { return customVisualizerName; }
             set { customVisualizerName = value; }
         }
-
-        #endregion Properties
-
-        #region Methods
 
         /// <summary>
         /// Gets the work sphere.
@@ -222,6 +208,5 @@ namespace WiredIn.Globals
             return size;
         }
 
-        #endregion Methods
     }
 }

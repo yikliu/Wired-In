@@ -87,10 +87,6 @@ namespace WiredIn
         private ConfigVariables config = ConfigVariables.GetConfigVariables();
 
         /// <summary>
-        /// The orientation success
-        /// </summary>
-        private bool orientationSuccess = false;
-        /// <summary>
         /// The visualizer
         /// </summary>
         private AbstractVisualizer visualizer;

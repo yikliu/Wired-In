@@ -21,9 +21,7 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/// <summary>
-/// The UserActivity namespace.
-/// </summary>
+
 namespace WiredIn.UserActivity
 {
     using System;

@@ -179,14 +179,12 @@ namespace WiredIn.UI
             this.Controls.Add(this.imagePanel);
             this.Name = "VisualizationOrganizer";
             this.Text = "Make Your Own Visual Feedback";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImageImport_FormClosing);
             this.imagePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBox_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_0)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

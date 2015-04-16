@@ -21,7 +21,6 @@ using System.Diagnostics;
 namespace WiredIn.UI
 {
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;
@@ -43,21 +42,6 @@ namespace WiredIn.UI
         /// </summary>
         private int[] image_set = {0,0,0};
 
-        /// <summary>
-        /// The selected
-        /// </summary>
-        private int selected = -1;
-
-        /// <summary>
-        /// The vis names
-        /// </summary>
-        private List<String> visNames;
-
-        /// <summary>
-        /// The wired_in_folder
-        /// </summary>
-        private String wired_in_folder;
-
         #endregion Fields
 
         #region Constructors
@@ -66,7 +50,7 @@ namespace WiredIn.UI
         /// Initializes a new instance of the <see cref="VisualizationOrganizer"/> class.
         /// </summary>
         /// <returns></returns>
-        public VisualizationOrganizer()
+        public VisualizationOrganizer() 
         {
             InitializeComponent();
         }
@@ -86,7 +70,7 @@ namespace WiredIn.UI
                 try
                 {
                     Stream stream = File.Open(filename, FileMode.Open);
-                    BinaryFormatter bformater = new BinaryFormatter();
+                    var bformater = new BinaryFormatter();
 
                     stream.Close();
                 }
@@ -121,7 +105,7 @@ namespace WiredIn.UI
                 }
             }
             string name = tbox_name.Text;
-            string folder = Path.Combine(constants.WiredInFolder, "visualizations");
+            string folder = Path.Combine(constants.WiredInFolder, "images");
             DirectoryInfo dir = Directory.CreateDirectory(Path.Combine(folder, name));
             foreach (Control c in imagePanel.Controls)
             {
@@ -133,14 +117,7 @@ namespace WiredIn.UI
             this.Close();
         }
 
-        /// <summary>
-        /// Handles the FormClosing event of the ImageImport control.
-        /// </summary>
-        /// <param viewName="sender">The source of the event.</param>
-        /// <param viewName="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
-        private void ImageImport_FormClosing(object sender, FormClosingEventArgs e)
-        {
-        }
+        
 
         /// <summary>
         /// Handles the Click event of the picBox control.

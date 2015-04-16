@@ -21,9 +21,7 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/// <summary>
-/// The UI namespace.
-/// </summary>
+
 namespace WiredIn.UI
 {
     using System;
@@ -49,7 +47,7 @@ namespace WiredIn.UI
         /// <summary>
         /// The configuration
         /// </summary>
-        ConfigVariables config = ConfigVariables.GetConfigVariables();
+        readonly ConfigVariables config = ConfigVariables.GetConfigVariables();
         /// <summary>
         /// The esm
         /// </summary>
@@ -57,7 +55,7 @@ namespace WiredIn.UI
         /// <summary>
         /// The j_logger
         /// </summary>
-        JSONLogger j_logger;
+        JsonLogger _jsonLogger;
         /// <summary>
         /// The log file
         /// </summary>
@@ -150,9 +148,9 @@ namespace WiredIn.UI
             }
 
             logFile = Path.Combine(folder, "esm.json");
-            j_logger = new JSONLogger();
+            _jsonLogger = new JsonLogger();
             string json_content = JsonConvert.SerializeObject(aESM);
-            j_logger.LogThisToHere(json_content, logFile);
+            _jsonLogger.LogThisToHere(json_content, logFile);
         }
 
         /// <summary>
@@ -203,5 +201,10 @@ namespace WiredIn.UI
         }
 
         #endregion Methods
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

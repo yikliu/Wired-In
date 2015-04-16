@@ -117,8 +117,7 @@ namespace WiredIn.Globals
         /// <summary>
         /// The folder for storing log informations and visual images
         /// </summary>
-        public string WiredInFolder = Application.StartupPath;
-        //public string WiredInFolder = Environment.SpecialFolder.MyDocuments.ToString();
+        public readonly string WiredInFolder = Application.StartupPath;
 
         /// <summary>
         ///  Whether mirror should be enabled

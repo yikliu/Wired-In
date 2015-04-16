@@ -21,9 +21,7 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/// <summary>
-/// The RadioButtonTile namespace.
-/// </summary>
+
 namespace WiredIn.UI.RadioButtonTile
 {
     using System;
@@ -39,7 +37,7 @@ namespace WiredIn.UI.RadioButtonTile
         #region Methods
 
         /// <summary>
-        /// Updates the specified b.
+        /// Updates the subscribers
         /// </summary>
         /// <param name="b">if set to <c>true</c> [b].</param>
         void Update(bool b);

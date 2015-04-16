@@ -36,34 +36,12 @@ namespace WiredIn.UI
             System.Windows.Forms.Label label17;
             System.Windows.Forms.Label label11;
             System.Windows.Forms.Label label36;
-            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.tabpageVis = new MetroFramework.Controls.MetroTabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.lnkAddNew = new MetroFramework.Drawing.Html.HtmlLabel();
-            this.tableLayoutPanel = new WiredIn.DoubleBufferedTableLayoutPanel();
             this.tabControl = new MetroFramework.Controls.MetroTabControl();
-            this.tabpageTask = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.numOtherItems = new System.Windows.Forms.NumericUpDown();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.tbDifficulty = new MetroFramework.Controls.MetroTrackBar();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.tbxTaskDesc = new MetroFramework.Controls.MetroTextBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.numExpectTimeOnTask = new System.Windows.Forms.NumericUpDown();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.tbFamiliarity = new MetroFramework.Controls.MetroTrackBar();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tabpageFinish = new MetroFramework.Controls.MetroTabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnFinalize = new System.Windows.Forms.Button();
             this.tabpageEnv = new MetroFramework.Controls.MetroTabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnGoToWorkSphere = new System.Windows.Forms.Button();
@@ -98,6 +76,22 @@ namespace WiredIn.UI
             this.label30 = new System.Windows.Forms.Label();
             this.tbStress = new MetroFramework.Controls.MetroTrackBar();
             this.label31 = new System.Windows.Forms.Label();
+            this.tabpageTask = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button6 = new System.Windows.Forms.Button();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.numOtherItems = new System.Windows.Forms.NumericUpDown();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tbDifficulty = new MetroFramework.Controls.MetroTrackBar();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tbxTaskDesc = new MetroFramework.Controls.MetroTextBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.numExpectTimeOnTask = new System.Windows.Forms.NumericUpDown();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.tbFamiliarity = new MetroFramework.Controls.MetroTrackBar();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabWorkSphere = new MetroFramework.Controls.MetroTabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
@@ -114,6 +108,10 @@ namespace WiredIn.UI
             this.btnAddWindow = new MetroFramework.Controls.MetroButton();
             this.label10 = new System.Windows.Forms.Label();
             this.keywordsTable = new System.Windows.Forms.TableLayoutPanel();
+            this.tabpageFinish = new MetroFramework.Controls.MetroTabPage();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnFinalize = new System.Windows.Forms.Button();
+            this.tableLayoutPanel = new WiredIn.DoubleBufferedTableLayoutPanel();
             label28 = new System.Windows.Forms.Label();
             label16 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
@@ -123,15 +121,6 @@ namespace WiredIn.UI
             this.tabpageVis.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.tabpageTask.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOtherItems)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numExpectTimeOnTask)).BeginInit();
-            this.panel10.SuspendLayout();
-            this.tabpageFinish.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.tabpageEnv.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -140,9 +129,18 @@ namespace WiredIn.UI
             this.pnlOfficeDetails.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.tabpageTask.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numOtherItems)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numExpectTimeOnTask)).BeginInit();
+            this.panel10.SuspendLayout();
             this.tabWorkSphere.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tabpageFinish.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // label28
@@ -165,7 +163,7 @@ namespace WiredIn.UI
             label16.Location = new System.Drawing.Point(0, 350);
             label16.Margin = new System.Windows.Forms.Padding(0);
             label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(640, 75);
+            label16.Size = new System.Drawing.Size(487, 75);
             label16.TabIndex = 30;
             label16.Text = "How much time do you want to spend on this task today?";
             // 
@@ -190,7 +188,7 @@ namespace WiredIn.UI
             label17.Location = new System.Drawing.Point(0, 200);
             label17.Margin = new System.Windows.Forms.Padding(0);
             label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(718, 40);
+            label17.Size = new System.Drawing.Size(488, 40);
             label17.TabIndex = 10;
             label17.Text = "How difficult is this task to you ?";
             // 
@@ -202,7 +200,7 @@ namespace WiredIn.UI
             label11.Location = new System.Drawing.Point(0, 125);
             label11.Margin = new System.Windows.Forms.Padding(0, 0, 0, 10);
             label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(570, 40);
+            label11.Size = new System.Drawing.Size(486, 65);
             label11.TabIndex = 8;
             label11.Text = "How many other items are on your to do list?";
             // 
@@ -215,24 +213,9 @@ namespace WiredIn.UI
             label36.Location = new System.Drawing.Point(0, 50);
             label36.Margin = new System.Windows.Forms.Padding(0, 0, 0, 10);
             label36.Name = "label36";
-            label36.Size = new System.Drawing.Size(718, 53);
+            label36.Size = new System.Drawing.Size(488, 53);
             label36.TabIndex = 42;
             label36.Text = "What are you going to do today?";
-            // 
-            // metroTabControl1
-            // 
-            this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.Padding = new System.Drawing.Point(6, 8);
-            this.metroTabControl1.TabIndex = 0;
-            this.metroTabControl1.UseSelectable = true;
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Location = new System.Drawing.Point(0, 0);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.TabIndex = 0;
-            this.metroButton1.UseSelectable = true;
             // 
             // tabpageVis
             // 
@@ -243,7 +226,7 @@ namespace WiredIn.UI
             this.tabpageVis.HorizontalScrollbarSize = 10;
             this.tabpageVis.Location = new System.Drawing.Point(4, 44);
             this.tabpageVis.Name = "tabpageVis";
-            this.tabpageVis.Size = new System.Drawing.Size(1436, 702);
+            this.tabpageVis.Size = new System.Drawing.Size(976, 472);
             this.tabpageVis.TabIndex = 1;
             this.tabpageVis.Text = "Visualizer";
             this.tabpageVis.UseStyleColors = true;
@@ -270,7 +253,7 @@ namespace WiredIn.UI
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85.19164F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1436, 702);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(976, 472);
             this.tableLayoutPanel5.TabIndex = 7;
             // 
             // label5
@@ -280,7 +263,7 @@ namespace WiredIn.UI
             this.label5.Font = new System.Drawing.Font("Segoe UI Light", 23F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(637, 57);
+            this.label5.Size = new System.Drawing.Size(476, 51);
             this.label5.TabIndex = 4;
             this.label5.Text = "Choose a visualization as feedback";
             // 
@@ -292,7 +275,7 @@ namespace WiredIn.UI
             this.button2.Dock = System.Windows.Forms.DockStyle.Right;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(1358, 648);
+            this.button2.Location = new System.Drawing.Point(898, 418);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 51);
             this.button2.TabIndex = 6;
@@ -308,41 +291,20 @@ namespace WiredIn.UI
             this.tableLayoutPanel5.SetColumnSpan(this.lnkAddNew, 2);
             this.lnkAddNew.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkAddNew.Font = new System.Drawing.Font("Segoe UI Light", 23F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkAddNew.Location = new System.Drawing.Point(3, 577);
+            this.lnkAddNew.Location = new System.Drawing.Point(3, 347);
             this.lnkAddNew.Name = "lnkAddNew";
-            this.lnkAddNew.Size = new System.Drawing.Size(1430, 65);
+            this.lnkAddNew.Size = new System.Drawing.Size(970, 65);
             this.lnkAddNew.TabIndex = 5;
             this.lnkAddNew.Text = "Or make a new visualization";
             this.lnkAddNew.Click += new System.EventHandler(this.htmlLabel1_Click);
             // 
-            // tableLayoutPanel
-            // 
-            this.tableLayoutPanel.AutoSize = true;
-            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel.ColumnCount = 3;
-            this.tableLayoutPanel5.SetColumnSpan(this.tableLayoutPanel, 2);
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(3, 88);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 1;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1430, 483);
-            this.tableLayoutPanel.TabIndex = 2;
-            // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabpageTask);
-            this.tabControl.Controls.Add(this.tabpageFinish);
-            this.tabControl.Controls.Add(this.tabpageVis);
             this.tabControl.Controls.Add(this.tabpageEnv);
+            this.tabControl.Controls.Add(this.tabpageTask);
             this.tabControl.Controls.Add(this.tabWorkSphere);
+            this.tabControl.Controls.Add(this.tabpageVis);
+            this.tabControl.Controls.Add(this.tabpageFinish);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.HotTrack = true;
             this.tabControl.ItemSize = new System.Drawing.Size(200, 40);
@@ -352,283 +314,12 @@ namespace WiredIn.UI
             this.tabControl.Padding = new System.Drawing.Point(6, 8);
             this.tabControl.SelectedIndex = 0;
             this.tabControl.ShowToolTips = true;
-            this.tabControl.Size = new System.Drawing.Size(1444, 750);
+            this.tabControl.Size = new System.Drawing.Size(984, 520);
             this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl.TabIndex = 0;
             this.tabControl.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tabControl.UseSelectable = true;
             this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
-            // 
-            // tabpageTask
-            // 
-            this.tabpageTask.Controls.Add(this.tableLayoutPanel1);
-            this.tabpageTask.Location = new System.Drawing.Point(4, 44);
-            this.tabpageTask.Name = "tabpageTask";
-            this.tabpageTask.Size = new System.Drawing.Size(1436, 702);
-            this.tabpageTask.TabIndex = 5;
-            this.tabpageTask.Text = "Task";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.button6, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(label36, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblDate, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(label11, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.numOtherItems, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(label17, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(label12, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(label16, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tbxTaskDesc, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel7, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel10, 1, 4);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1436, 702);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.BackColor = System.Drawing.Color.Transparent;
-            this.button6.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(1363, 629);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(70, 70);
-            this.button6.TabIndex = 51;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.btnGoToContext_Click);
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblDate.Font = new System.Drawing.Font("Segoe UI Light", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.lblDate.Location = new System.Drawing.Point(3, 0);
-            this.lblDate.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(79, 40);
-            this.lblDate.TabIndex = 6;
-            this.lblDate.Text = "Date";
-            this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // numOtherItems
-            // 
-            this.numOtherItems.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numOtherItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numOtherItems.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numOtherItems.Location = new System.Drawing.Point(721, 128);
-            this.numOtherItems.Name = "numOtherItems";
-            this.numOtherItems.Size = new System.Drawing.Size(712, 36);
-            this.numOtherItems.TabIndex = 9;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.tbDifficulty);
-            this.panel2.Controls.Add(this.label19);
-            this.panel2.Controls.Add(this.label18);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(721, 203);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(712, 69);
-            this.panel2.TabIndex = 25;
-            // 
-            // tbDifficulty
-            // 
-            this.tbDifficulty.BackColor = System.Drawing.Color.Transparent;
-            this.tbDifficulty.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tbDifficulty.Location = new System.Drawing.Point(92, 0);
-            this.tbDifficulty.Name = "tbDifficulty";
-            this.tbDifficulty.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbDifficulty.Size = new System.Drawing.Size(481, 23);
-            this.tbDifficulty.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tbDifficulty.TabIndex = 21;
-            this.tbDifficulty.Text = "metroTrackBar1";
-            this.tbDifficulty.UseCustomBackColor = true;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.BackColor = System.Drawing.Color.Transparent;
-            this.label19.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label19.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(573, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(139, 28);
-            this.label19.TabIndex = 24;
-            this.label19.Text = "Extremely Hard";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.BackColor = System.Drawing.Color.Transparent;
-            this.label18.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label18.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(0, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(92, 28);
-            this.label18.TabIndex = 23;
-            this.label18.Text = "Very Easy";
-            // 
-            // tbxTaskDesc
-            // 
-            this.tbxTaskDesc.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbxTaskDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbxTaskDesc.FontSize = MetroFramework.MetroTextBoxSize.Tall;
-            this.tbxTaskDesc.Location = new System.Drawing.Point(721, 53);
-            this.tbxTaskDesc.MaxLength = 32767;
-            this.tbxTaskDesc.Multiline = true;
-            this.tbxTaskDesc.Name = "tbxTaskDesc";
-            this.tbxTaskDesc.PasswordChar = '\0';
-            this.tbxTaskDesc.PromptText = "Brief description about your work ...";
-            this.tbxTaskDesc.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tbxTaskDesc.SelectedText = "";
-            this.tbxTaskDesc.Size = new System.Drawing.Size(712, 69);
-            this.tbxTaskDesc.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tbxTaskDesc.TabIndex = 33;
-            this.tbxTaskDesc.UseCustomBackColor = true;
-            this.tbxTaskDesc.UseCustomForeColor = true;
-            this.tbxTaskDesc.UseSelectable = true;
-            this.tbxTaskDesc.UseStyleColors = true;
-            this.tbxTaskDesc.UseSystemPasswordChar = true;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.numExpectTimeOnTask);
-            this.panel7.Controls.Add(label28);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(721, 353);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(712, 69);
-            this.panel7.TabIndex = 43;
-            // 
-            // numExpectTimeOnTask
-            // 
-            this.numExpectTimeOnTask.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numExpectTimeOnTask.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numExpectTimeOnTask.Location = new System.Drawing.Point(3, 0);
-            this.numExpectTimeOnTask.Name = "numExpectTimeOnTask";
-            this.numExpectTimeOnTask.Size = new System.Drawing.Size(88, 36);
-            this.numExpectTimeOnTask.TabIndex = 31;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.tbFamiliarity);
-            this.panel10.Controls.Add(this.label14);
-            this.panel10.Controls.Add(this.label13);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(721, 278);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(712, 69);
-            this.panel10.TabIndex = 44;
-            // 
-            // tbFamiliarity
-            // 
-            this.tbFamiliarity.BackColor = System.Drawing.Color.Transparent;
-            this.tbFamiliarity.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tbFamiliarity.Location = new System.Drawing.Point(87, 0);
-            this.tbFamiliarity.Name = "tbFamiliarity";
-            this.tbFamiliarity.Size = new System.Drawing.Size(468, 23);
-            this.tbFamiliarity.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tbFamiliarity.TabIndex = 27;
-            this.tbFamiliarity.Text = "metroTrackBar2";
-            this.tbFamiliarity.UseCustomBackColor = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label14.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(555, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(157, 28);
-            this.label14.TabIndex = 29;
-            this.label14.Text = "Extremely Familar";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label13.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(0, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 28);
-            this.label13.TabIndex = 28;
-            this.label13.Text = "Not at all";
-            // 
-            // tabpageFinish
-            // 
-            this.tabpageFinish.Controls.Add(this.tableLayoutPanel6);
-            this.tabpageFinish.Enabled = true;
-            this.tabpageFinish.HorizontalScrollbarBarColor = true;
-            this.tabpageFinish.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabpageFinish.HorizontalScrollbarSize = 10;
-            this.tabpageFinish.Location = new System.Drawing.Point(4, 44);
-            this.tabpageFinish.Name = "tabpageFinish";
-            this.tabpageFinish.Size = new System.Drawing.Size(1436, 702);
-            this.tabpageFinish.TabIndex = 3;
-            this.tabpageFinish.Text = "Finish";
-            this.tabpageFinish.VerticalScrollbarBarColor = true;
-            this.tabpageFinish.VerticalScrollbarHighlightOnWheel = false;
-            this.tabpageFinish.VerticalScrollbarSize = 10;
-            this.tabpageFinish.Visible = false;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.Controls.Add(this.btnFinalize, 1, 1);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 3;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1436, 702);
-            this.tableLayoutPanel6.TabIndex = 3;
-            // 
-            // btnFinalize
-            // 
-            this.btnFinalize.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFinalize.BackColor = System.Drawing.Color.Transparent;
-            this.btnFinalize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.AliceBlue;
-            this.btnFinalize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFinalize.Font = new System.Drawing.Font("Segoe UI Light", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFinalize.Location = new System.Drawing.Point(242, 120);
-            this.btnFinalize.Name = "btnFinalize";
-            this.btnFinalize.Size = new System.Drawing.Size(951, 461);
-            this.btnFinalize.TabIndex = 2;
-            this.btnFinalize.Text = "Go";
-            this.btnFinalize.UseVisualStyleBackColor = false;
-            this.btnFinalize.Click += new System.EventHandler(this.btnFinalizeOrientation);
             // 
             // tabpageEnv
             // 
@@ -639,13 +330,13 @@ namespace WiredIn.UI
             this.tabpageEnv.HorizontalScrollbarSize = 10;
             this.tabpageEnv.Location = new System.Drawing.Point(4, 44);
             this.tabpageEnv.Name = "tabpageEnv";
-            this.tabpageEnv.Size = new System.Drawing.Size(1436, 702);
+            this.tabpageEnv.Size = new System.Drawing.Size(976, 472);
             this.tabpageEnv.TabIndex = 7;
             this.tabpageEnv.Text = "Context";
             this.tabpageEnv.VerticalScrollbarBarColor = true;
             this.tabpageEnv.VerticalScrollbarHighlightOnWheel = false;
             this.tabpageEnv.VerticalScrollbarSize = 10;
-            this.tabpageEnv.Visible = false;
+            this.tabpageEnv.Visible = true;
             // 
             // tableLayoutPanel4
             // 
@@ -670,14 +361,14 @@ namespace WiredIn.UI
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 7;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.62786F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 0F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.62786F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.62786F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.62786F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.62786F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.86072F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1436, 702);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(976, 472);
             this.tableLayoutPanel4.TabIndex = 2;
             // 
             // btnGoToWorkSphere
@@ -688,9 +379,9 @@ namespace WiredIn.UI
             this.btnGoToWorkSphere.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnGoToWorkSphere.FlatAppearance.BorderSize = 0;
             this.btnGoToWorkSphere.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGoToWorkSphere.Location = new System.Drawing.Point(1363, 629);
+            this.btnGoToWorkSphere.Location = new System.Drawing.Point(903, 414);
             this.btnGoToWorkSphere.Name = "btnGoToWorkSphere";
-            this.btnGoToWorkSphere.Size = new System.Drawing.Size(70, 70);
+            this.btnGoToWorkSphere.Size = new System.Drawing.Size(70, 55);
             this.btnGoToWorkSphere.TabIndex = 37;
             this.btnGoToWorkSphere.UseVisualStyleBackColor = false;
             this.btnGoToWorkSphere.Click += new System.EventHandler(this.btnGoToWorkSphere_Click);
@@ -702,10 +393,10 @@ namespace WiredIn.UI
             this.panel5.Controls.Add(this.label23);
             this.panel5.Controls.Add(this.tbBusiness);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(601, 179);
+            this.panel5.Location = new System.Drawing.Point(409, 199);
             this.panel5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(832, 65);
+            this.panel5.Size = new System.Drawing.Size(564, 63);
             this.panel5.TabIndex = 32;
             // 
             // label20
@@ -714,7 +405,7 @@ namespace WiredIn.UI
             this.label20.BackColor = System.Drawing.Color.Transparent;
             this.label20.Dock = System.Windows.Forms.DockStyle.Right;
             this.label20.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(672, 23);
+            this.label20.Location = new System.Drawing.Point(404, 23);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(160, 23);
             this.label20.TabIndex = 23;
@@ -738,7 +429,7 @@ namespace WiredIn.UI
             this.tbBusiness.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbBusiness.Location = new System.Drawing.Point(0, 0);
             this.tbBusiness.Name = "tbBusiness";
-            this.tbBusiness.Size = new System.Drawing.Size(832, 23);
+            this.tbBusiness.Size = new System.Drawing.Size(564, 23);
             this.tbBusiness.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbBusiness.TabIndex = 19;
             this.tbBusiness.Text = "metroTrackBar4";
@@ -751,10 +442,10 @@ namespace WiredIn.UI
             this.panel4.Controls.Add(this.label32);
             this.panel4.Controls.Add(this.tbNoisy);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(601, 91);
+            this.panel4.Location = new System.Drawing.Point(409, 56);
             this.panel4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(832, 65);
+            this.panel4.Size = new System.Drawing.Size(564, 120);
             this.panel4.TabIndex = 30;
             // 
             // label1
@@ -763,7 +454,7 @@ namespace WiredIn.UI
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Dock = System.Windows.Forms.DockStyle.Right;
             this.label1.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(737, 23);
+            this.label1.Location = new System.Drawing.Point(469, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 23);
             this.label1.TabIndex = 23;
@@ -787,7 +478,7 @@ namespace WiredIn.UI
             this.tbNoisy.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbNoisy.Location = new System.Drawing.Point(0, 0);
             this.tbNoisy.Name = "tbNoisy";
-            this.tbNoisy.Size = new System.Drawing.Size(832, 23);
+            this.tbNoisy.Size = new System.Drawing.Size(564, 23);
             this.tbNoisy.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbNoisy.TabIndex = 19;
             this.tbNoisy.Text = "metroTrackBar3";
@@ -797,11 +488,11 @@ namespace WiredIn.UI
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(241, 45);
+            this.label2.Size = new System.Drawing.Size(158, 30);
             this.label2.TabIndex = 15;
             this.label2.Text = "Where are you?";
             // 
@@ -813,11 +504,10 @@ namespace WiredIn.UI
             this.panel1.Controls.Add(this.rbPublic);
             this.panel1.Controls.Add(this.rbOffice);
             this.panel1.Controls.Add(this.rbHome);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(601, 3);
+            this.panel1.Location = new System.Drawing.Point(409, 3);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(832, 75);
+            this.panel1.Size = new System.Drawing.Size(564, 40);
             this.panel1.TabIndex = 24;
             // 
             // tbxOther
@@ -848,7 +538,7 @@ namespace WiredIn.UI
             this.rbOther.FontSize = MetroFramework.MetroCheckBoxSize.Tall;
             this.rbOther.Location = new System.Drawing.Point(227, 0);
             this.rbOther.Name = "rbOther";
-            this.rbOther.Size = new System.Drawing.Size(73, 75);
+            this.rbOther.Size = new System.Drawing.Size(73, 40);
             this.rbOther.TabIndex = 20;
             this.rbOther.Text = "Other";
             this.rbOther.UseSelectable = true;
@@ -861,7 +551,7 @@ namespace WiredIn.UI
             this.rbPublic.FontSize = MetroFramework.MetroCheckBoxSize.Tall;
             this.rbPublic.Location = new System.Drawing.Point(152, 0);
             this.rbPublic.Name = "rbPublic";
-            this.rbPublic.Size = new System.Drawing.Size(75, 75);
+            this.rbPublic.Size = new System.Drawing.Size(75, 40);
             this.rbPublic.TabIndex = 17;
             this.rbPublic.Text = "Public";
             this.rbPublic.UseSelectable = true;
@@ -873,7 +563,7 @@ namespace WiredIn.UI
             this.rbOffice.FontSize = MetroFramework.MetroCheckBoxSize.Tall;
             this.rbOffice.Location = new System.Drawing.Point(77, 0);
             this.rbOffice.Name = "rbOffice";
-            this.rbOffice.Size = new System.Drawing.Size(75, 75);
+            this.rbOffice.Size = new System.Drawing.Size(75, 40);
             this.rbOffice.TabIndex = 16;
             this.rbOffice.Text = "Office";
             this.rbOffice.UseSelectable = true;
@@ -886,7 +576,7 @@ namespace WiredIn.UI
             this.rbHome.FontSize = MetroFramework.MetroCheckBoxSize.Tall;
             this.rbHome.Location = new System.Drawing.Point(0, 0);
             this.rbHome.Name = "rbHome";
-            this.rbHome.Size = new System.Drawing.Size(77, 75);
+            this.rbHome.Size = new System.Drawing.Size(77, 40);
             this.rbHome.TabIndex = 15;
             this.rbHome.Text = "Home";
             this.rbHome.UseSelectable = true;
@@ -896,10 +586,10 @@ namespace WiredIn.UI
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 88);
+            this.label3.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 53);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(592, 1);
+            this.label3.Size = new System.Drawing.Size(400, 1);
             this.label3.TabIndex = 25;
             this.label3.Text = "Is it an open office or single room?";
             // 
@@ -908,15 +598,14 @@ namespace WiredIn.UI
             this.pnlOfficeDetails.BackColor = System.Drawing.Color.Transparent;
             this.pnlOfficeDetails.Controls.Add(this.rbSingleRoom);
             this.pnlOfficeDetails.Controls.Add(this.rbOpenOffice);
-            this.pnlOfficeDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOfficeDetails.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnlOfficeDetails.HorizontalScrollbarBarColor = true;
             this.pnlOfficeDetails.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlOfficeDetails.HorizontalScrollbarSize = 10;
-            this.pnlOfficeDetails.Location = new System.Drawing.Point(601, 91);
+            this.pnlOfficeDetails.Location = new System.Drawing.Point(409, 56);
             this.pnlOfficeDetails.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.pnlOfficeDetails.Name = "pnlOfficeDetails";
-            this.pnlOfficeDetails.Size = new System.Drawing.Size(832, 1);
+            this.pnlOfficeDetails.Size = new System.Drawing.Size(564, 1);
             this.pnlOfficeDetails.Style = MetroFramework.MetroColorStyle.Orange;
             this.pnlOfficeDetails.TabIndex = 26;
             this.pnlOfficeDetails.UseCustomBackColor = true;
@@ -954,10 +643,10 @@ namespace WiredIn.UI
             // 
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Segoe UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(3, 88);
+            this.label15.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(3, 53);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(470, 45);
+            this.label15.Size = new System.Drawing.Size(312, 30);
             this.label15.TabIndex = 27;
             this.label15.Text = "How noisy is your surroundings?";
             // 
@@ -965,10 +654,10 @@ namespace WiredIn.UI
             // 
             this.label24.AutoSize = true;
             this.label24.BackColor = System.Drawing.Color.Transparent;
-            this.label24.Font = new System.Drawing.Font("Segoe UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(3, 176);
+            this.label24.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(3, 196);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(584, 88);
+            this.label24.Size = new System.Drawing.Size(396, 30);
             this.label24.TabIndex = 31;
             this.label24.Text = "How busy were you for the past 2 hours ?";
             // 
@@ -976,10 +665,10 @@ namespace WiredIn.UI
             // 
             this.label27.AutoSize = true;
             this.label27.BackColor = System.Drawing.Color.Transparent;
-            this.label27.Font = new System.Drawing.Font("Segoe UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(3, 264);
+            this.label27.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(3, 282);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(427, 45);
+            this.label27.Size = new System.Drawing.Size(282, 30);
             this.label27.TabIndex = 33;
             this.label27.Text = "How energetic are you now ?";
             // 
@@ -990,10 +679,10 @@ namespace WiredIn.UI
             this.panel6.Controls.Add(this.label26);
             this.panel6.Controls.Add(this.tbEnergy);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(601, 267);
+            this.panel6.Location = new System.Drawing.Point(409, 285);
             this.panel6.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(832, 65);
+            this.panel6.Size = new System.Drawing.Size(564, 47);
             this.panel6.TabIndex = 34;
             // 
             // label25
@@ -1002,7 +691,7 @@ namespace WiredIn.UI
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Dock = System.Windows.Forms.DockStyle.Right;
             this.label25.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(723, 23);
+            this.label25.Location = new System.Drawing.Point(455, 23);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(109, 23);
             this.label25.TabIndex = 23;
@@ -1026,7 +715,7 @@ namespace WiredIn.UI
             this.tbEnergy.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbEnergy.Location = new System.Drawing.Point(0, 0);
             this.tbEnergy.Name = "tbEnergy";
-            this.tbEnergy.Size = new System.Drawing.Size(832, 23);
+            this.tbEnergy.Size = new System.Drawing.Size(564, 23);
             this.tbEnergy.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbEnergy.TabIndex = 19;
             this.tbEnergy.Text = "metroTrackBar5";
@@ -1039,10 +728,10 @@ namespace WiredIn.UI
             this.panel9.Controls.Add(this.label30);
             this.panel9.Controls.Add(this.tbStress);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(601, 355);
+            this.panel9.Location = new System.Drawing.Point(409, 355);
             this.panel9.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(832, 65);
+            this.panel9.Size = new System.Drawing.Size(564, 36);
             this.panel9.TabIndex = 36;
             // 
             // label29
@@ -1051,7 +740,7 @@ namespace WiredIn.UI
             this.label29.BackColor = System.Drawing.Color.Transparent;
             this.label29.Dock = System.Windows.Forms.DockStyle.Right;
             this.label29.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(681, 23);
+            this.label29.Location = new System.Drawing.Point(413, 23);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(151, 23);
             this.label29.TabIndex = 23;
@@ -1075,7 +764,7 @@ namespace WiredIn.UI
             this.tbStress.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbStress.Location = new System.Drawing.Point(0, 0);
             this.tbStress.Name = "tbStress";
-            this.tbStress.Size = new System.Drawing.Size(832, 23);
+            this.tbStress.Size = new System.Drawing.Size(564, 23);
             this.tbStress.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbStress.TabIndex = 19;
             this.tbStress.Text = "metroTrackBar1";
@@ -1085,12 +774,231 @@ namespace WiredIn.UI
             // 
             this.label31.AutoSize = true;
             this.label31.BackColor = System.Drawing.Color.Transparent;
-            this.label31.Font = new System.Drawing.Font("Segoe UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.Location = new System.Drawing.Point(3, 352);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(461, 45);
+            this.label31.Size = new System.Drawing.Size(305, 30);
             this.label31.TabIndex = 35;
             this.label31.Text = "How stressed do you feel now ?";
+            // 
+            // tabpageTask
+            // 
+            this.tabpageTask.Controls.Add(this.tableLayoutPanel1);
+            this.tabpageTask.Location = new System.Drawing.Point(4, 44);
+            this.tabpageTask.Name = "tabpageTask";
+            this.tabpageTask.Size = new System.Drawing.Size(976, 472);
+            this.tabpageTask.TabIndex = 5;
+            this.tabpageTask.Text = "Task";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.button6, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(label36, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblDate, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(label11, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.numOtherItems, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(label17, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(label12, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(label16, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tbxTaskDesc, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel7, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.panel10, 1, 4);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(976, 472);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.BackColor = System.Drawing.Color.Transparent;
+            this.button6.BackgroundImage = global::WiredIn.Properties.Resources.arrow;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(921, 428);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(52, 41);
+            this.button6.TabIndex = 51;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.btnGoToContext_Click);
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblDate.Font = new System.Drawing.Font("Segoe UI Light", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.lblDate.Location = new System.Drawing.Point(3, 0);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(79, 40);
+            this.lblDate.TabIndex = 6;
+            this.lblDate.Text = "Date";
+            this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numOtherItems
+            // 
+            this.numOtherItems.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numOtherItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numOtherItems.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numOtherItems.Location = new System.Drawing.Point(491, 128);
+            this.numOtherItems.Name = "numOtherItems";
+            this.numOtherItems.Size = new System.Drawing.Size(482, 36);
+            this.numOtherItems.TabIndex = 9;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.tbDifficulty);
+            this.panel2.Controls.Add(this.label19);
+            this.panel2.Controls.Add(this.label18);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(491, 203);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(482, 69);
+            this.panel2.TabIndex = 25;
+            // 
+            // tbDifficulty
+            // 
+            this.tbDifficulty.BackColor = System.Drawing.Color.Transparent;
+            this.tbDifficulty.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tbDifficulty.Location = new System.Drawing.Point(92, 0);
+            this.tbDifficulty.Name = "tbDifficulty";
+            this.tbDifficulty.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbDifficulty.Size = new System.Drawing.Size(251, 23);
+            this.tbDifficulty.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tbDifficulty.TabIndex = 21;
+            this.tbDifficulty.Text = "metroTrackBar1";
+            this.tbDifficulty.UseCustomBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.BackColor = System.Drawing.Color.Transparent;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label19.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(343, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(139, 28);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "Extremely Hard";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label18.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(0, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(92, 28);
+            this.label18.TabIndex = 23;
+            this.label18.Text = "Very Easy";
+            // 
+            // tbxTaskDesc
+            // 
+            this.tbxTaskDesc.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbxTaskDesc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxTaskDesc.FontSize = MetroFramework.MetroTextBoxSize.Tall;
+            this.tbxTaskDesc.Location = new System.Drawing.Point(491, 53);
+            this.tbxTaskDesc.MaxLength = 32767;
+            this.tbxTaskDesc.Multiline = true;
+            this.tbxTaskDesc.Name = "tbxTaskDesc";
+            this.tbxTaskDesc.PasswordChar = '\0';
+            this.tbxTaskDesc.PromptText = "Brief description about your work ...";
+            this.tbxTaskDesc.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tbxTaskDesc.SelectedText = "";
+            this.tbxTaskDesc.Size = new System.Drawing.Size(482, 69);
+            this.tbxTaskDesc.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tbxTaskDesc.TabIndex = 33;
+            this.tbxTaskDesc.UseCustomBackColor = true;
+            this.tbxTaskDesc.UseCustomForeColor = true;
+            this.tbxTaskDesc.UseSelectable = true;
+            this.tbxTaskDesc.UseStyleColors = true;
+            this.tbxTaskDesc.UseSystemPasswordChar = true;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.numExpectTimeOnTask);
+            this.panel7.Controls.Add(label28);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(491, 353);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(482, 69);
+            this.panel7.TabIndex = 43;
+            // 
+            // numExpectTimeOnTask
+            // 
+            this.numExpectTimeOnTask.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numExpectTimeOnTask.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numExpectTimeOnTask.Location = new System.Drawing.Point(3, 0);
+            this.numExpectTimeOnTask.Name = "numExpectTimeOnTask";
+            this.numExpectTimeOnTask.Size = new System.Drawing.Size(88, 36);
+            this.numExpectTimeOnTask.TabIndex = 31;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.tbFamiliarity);
+            this.panel10.Controls.Add(this.label14);
+            this.panel10.Controls.Add(this.label13);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(491, 278);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(482, 69);
+            this.panel10.TabIndex = 44;
+            // 
+            // tbFamiliarity
+            // 
+            this.tbFamiliarity.BackColor = System.Drawing.Color.Transparent;
+            this.tbFamiliarity.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tbFamiliarity.Location = new System.Drawing.Point(87, 0);
+            this.tbFamiliarity.Name = "tbFamiliarity";
+            this.tbFamiliarity.Size = new System.Drawing.Size(238, 23);
+            this.tbFamiliarity.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tbFamiliarity.TabIndex = 27;
+            this.tbFamiliarity.Text = "metroTrackBar2";
+            this.tbFamiliarity.UseCustomBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label14.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(325, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(157, 28);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "Extremely Familar";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label13.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(0, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(87, 28);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "Not at all";
             // 
             // tabWorkSphere
             // 
@@ -1101,7 +1009,7 @@ namespace WiredIn.UI
             this.tabWorkSphere.HorizontalScrollbarSize = 10;
             this.tabWorkSphere.Location = new System.Drawing.Point(4, 44);
             this.tabWorkSphere.Name = "tabWorkSphere";
-            this.tabWorkSphere.Size = new System.Drawing.Size(1436, 702);
+            this.tabWorkSphere.Size = new System.Drawing.Size(976, 472);
             this.tabWorkSphere.TabIndex = 6;
             this.tabWorkSphere.Text = "WorkSphere";
             this.tabWorkSphere.VerticalScrollbarBarColor = true;
@@ -1136,7 +1044,7 @@ namespace WiredIn.UI
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 103F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1436, 702);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(976, 472);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // button3
@@ -1148,9 +1056,9 @@ namespace WiredIn.UI
             this.button3.Dock = System.Windows.Forms.DockStyle.Right;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(1363, 640);
+            this.button3.Location = new System.Drawing.Point(903, 640);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 59);
+            this.button3.Size = new System.Drawing.Size(70, 14);
             this.button3.TabIndex = 33;
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.btnGoToVisualization_Click);
@@ -1173,7 +1081,7 @@ namespace WiredIn.UI
             this.label4.Font = new System.Drawing.Font("Segoe UI Light", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(3, 46);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(775, 40);
+            this.label4.Size = new System.Drawing.Size(544, 44);
             this.label4.TabIndex = 17;
             this.label4.Text = "1. Open all the applications you need to do your work and hit ";
             // 
@@ -1182,7 +1090,7 @@ namespace WiredIn.UI
             this.btnOpenWindowUpdate.BackColor = System.Drawing.Color.Transparent;
             this.btnOpenWindowUpdate.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnOpenWindowUpdate.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btnOpenWindowUpdate.Location = new System.Drawing.Point(816, 49);
+            this.btnOpenWindowUpdate.Location = new System.Drawing.Point(555, 49);
             this.btnOpenWindowUpdate.Name = "btnOpenWindowUpdate";
             this.btnOpenWindowUpdate.Size = new System.Drawing.Size(78, 36);
             this.btnOpenWindowUpdate.TabIndex = 27;
@@ -1199,7 +1107,7 @@ namespace WiredIn.UI
             this.label8.Font = new System.Drawing.Font("Segoe UI Light", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(3, 90);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(563, 40);
+            this.label8.Size = new System.Drawing.Size(519, 43);
             this.label8.TabIndex = 28;
             this.label8.Text = "2. Add primary task windows to the right box";
             // 
@@ -1227,7 +1135,7 @@ namespace WiredIn.UI
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 74F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1430, 346);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(970, 346);
             this.tableLayoutPanel3.TabIndex = 29;
             // 
             // lbxAllWindows
@@ -1238,11 +1146,11 @@ namespace WiredIn.UI
             this.lbxAllWindows.Font = new System.Drawing.Font("Segoe UI Light", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxAllWindows.FormattingEnabled = true;
             this.lbxAllWindows.ItemHeight = 19;
-            this.lbxAllWindows.Location = new System.Drawing.Point(160, 30);
+            this.lbxAllWindows.Location = new System.Drawing.Point(109, 30);
             this.lbxAllWindows.Margin = new System.Windows.Forms.Padding(2);
             this.lbxAllWindows.Name = "lbxAllWindows";
             this.tableLayoutPanel3.SetRowSpan(this.lbxAllWindows, 4);
-            this.lbxAllWindows.Size = new System.Drawing.Size(472, 314);
+            this.lbxAllWindows.Size = new System.Drawing.Size(319, 314);
             this.lbxAllWindows.TabIndex = 28;
             // 
             // label7
@@ -1251,7 +1159,7 @@ namespace WiredIn.UI
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(422, 0);
+            this.label7.Location = new System.Drawing.Point(218, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(209, 28);
             this.label7.TabIndex = 29;
@@ -1265,11 +1173,11 @@ namespace WiredIn.UI
             this.lbxWhiteWinList.Font = new System.Drawing.Font("Segoe UI Light", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxWhiteWinList.FormattingEnabled = true;
             this.lbxWhiteWinList.ItemHeight = 19;
-            this.lbxWhiteWinList.Location = new System.Drawing.Point(794, 30);
+            this.lbxWhiteWinList.Location = new System.Drawing.Point(539, 30);
             this.lbxWhiteWinList.Margin = new System.Windows.Forms.Padding(2);
             this.lbxWhiteWinList.Name = "lbxWhiteWinList";
             this.tableLayoutPanel3.SetRowSpan(this.lbxWhiteWinList, 4);
-            this.lbxWhiteWinList.Size = new System.Drawing.Size(472, 314);
+            this.lbxWhiteWinList.Size = new System.Drawing.Size(319, 314);
             this.lbxWhiteWinList.TabIndex = 30;
             // 
             // label9
@@ -1278,7 +1186,7 @@ namespace WiredIn.UI
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(795, 0);
+            this.label9.Location = new System.Drawing.Point(540, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(208, 28);
             this.label9.TabIndex = 31;
@@ -1290,9 +1198,9 @@ namespace WiredIn.UI
             this.btnDelWindow.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnDelWindow.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnDelWindow.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btnDelWindow.Location = new System.Drawing.Point(637, 213);
+            this.btnDelWindow.Location = new System.Drawing.Point(433, 213);
             this.btnDelWindow.Name = "btnDelWindow";
-            this.btnDelWindow.Size = new System.Drawing.Size(152, 50);
+            this.btnDelWindow.Size = new System.Drawing.Size(101, 50);
             this.btnDelWindow.TabIndex = 33;
             this.btnDelWindow.Text = "<- Delete";
             this.btnDelWindow.UseCustomBackColor = true;
@@ -1306,9 +1214,9 @@ namespace WiredIn.UI
             this.btnAddWindow.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnAddWindow.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnAddWindow.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btnAddWindow.Location = new System.Drawing.Point(637, 130);
+            this.btnAddWindow.Location = new System.Drawing.Point(433, 130);
             this.btnAddWindow.Name = "btnAddWindow";
-            this.btnAddWindow.Size = new System.Drawing.Size(152, 47);
+            this.btnAddWindow.Size = new System.Drawing.Size(101, 47);
             this.btnAddWindow.TabIndex = 32;
             this.btnAddWindow.Text = "Add ->";
             this.btnAddWindow.UseCustomBackColor = true;
@@ -1347,15 +1255,88 @@ namespace WiredIn.UI
             this.tableLayoutPanel2.SetRowSpan(this.keywordsTable, 2);
             this.keywordsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.keywordsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.keywordsTable.Size = new System.Drawing.Size(1430, 105);
+            this.keywordsTable.Size = new System.Drawing.Size(970, 105);
             this.keywordsTable.TabIndex = 31;
+            // 
+            // tabpageFinish
+            // 
+            this.tabpageFinish.Controls.Add(this.tableLayoutPanel6);
+            this.tabpageFinish.Enabled = true;
+            this.tabpageFinish.HorizontalScrollbarBarColor = true;
+            this.tabpageFinish.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabpageFinish.HorizontalScrollbarSize = 10;
+            this.tabpageFinish.Location = new System.Drawing.Point(4, 44);
+            this.tabpageFinish.Name = "tabpageFinish";
+            this.tabpageFinish.Size = new System.Drawing.Size(976, 472);
+            this.tabpageFinish.TabIndex = 3;
+            this.tabpageFinish.Text = "Finish";
+            this.tabpageFinish.VerticalScrollbarBarColor = true;
+            this.tabpageFinish.VerticalScrollbarHighlightOnWheel = false;
+            this.tabpageFinish.VerticalScrollbarSize = 10;
+            this.tabpageFinish.Visible = false;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.Controls.Add(this.btnFinalize, 1, 1);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(976, 472);
+            this.tableLayoutPanel6.TabIndex = 3;
+            // 
+            // btnFinalize
+            // 
+            this.btnFinalize.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFinalize.BackColor = System.Drawing.Color.Transparent;
+            this.btnFinalize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.AliceBlue;
+            this.btnFinalize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFinalize.Font = new System.Drawing.Font("Segoe UI Light", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFinalize.Location = new System.Drawing.Point(165, 81);
+            this.btnFinalize.Name = "btnFinalize";
+            this.btnFinalize.Size = new System.Drawing.Size(644, 308);
+            this.btnFinalize.TabIndex = 2;
+            this.btnFinalize.Text = "Go";
+            this.btnFinalize.UseVisualStyleBackColor = false;
+            this.btnFinalize.Click += new System.EventHandler(this.btnFinalizeOrientation);
+            // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.AutoSize = true;
+            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel.ColumnCount = 3;
+            this.tableLayoutPanel5.SetColumnSpan(this.tableLayoutPanel, 2);
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(3, 54);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 1;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.Size = new System.Drawing.Size(970, 287);
+            this.tableLayoutPanel.TabIndex = 2;
             // 
             // Orientation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1484, 830);
+            this.ClientSize = new System.Drawing.Size(1024, 600);
             this.Controls.Add(this.tabControl);
             this.Font = new System.Drawing.Font("Segoe UI Light", 7.471698F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
@@ -1369,20 +1350,6 @@ namespace WiredIn.UI
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.tabControl.ResumeLayout(false);
-            this.tabpageTask.ResumeLayout(false);
-            this.tabpageTask.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOtherItems)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numExpectTimeOnTask)).EndInit();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.tabpageFinish.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
             this.tabpageEnv.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -1398,19 +1365,31 @@ namespace WiredIn.UI
             this.panel6.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.tabpageTask.ResumeLayout(false);
+            this.tabpageTask.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numOtherItems)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numExpectTimeOnTask)).EndInit();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.tabWorkSphere.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tabpageFinish.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private MetroFramework.Controls.MetroTabControl metroTabControl1;
-        private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroTabPage tabpageVis;
         private MetroFramework.Controls.MetroTabControl tabControl;
         private DoubleBufferedTableLayoutPanel tableLayoutPanel;

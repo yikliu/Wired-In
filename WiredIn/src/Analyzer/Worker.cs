@@ -39,7 +39,7 @@ namespace WiredIn.Analyzer
     using Visualization.Visualizer;
 
     /// <summary>
-    /// A worker is responsible for monitoring the activity queue and determining the transition direction
+    /// A worker is responsible for monitoring the activity queue and determine the transition direction
     /// and speed of the visualization
     /// </summary>
     public class Worker : IRunner
@@ -176,7 +176,6 @@ namespace WiredIn.Analyzer
         {
             key.Catched = true;
             key.StateString = judge.CurState.ToString();
-            //System.Console.WriteLine("Key Hit");
             judge.ResetDormantTimer();
         }
 
@@ -188,7 +187,6 @@ namespace WiredIn.Analyzer
         {
             mouse.Catched = true;
             mouse.StateString = judge.CurState.ToString();
-            //System.Console.WriteLine("Mouse Click");
             judge.ResetDormantTimer();
         }
 
@@ -467,7 +465,6 @@ namespace WiredIn.Analyzer
                 case WM_MOUSEHWHEEL:
                     if (!LastActionWasWheel)
                     {
-                        //System.Console.WriteLine("Mouse Wheel");
                         this.EnqueueActivity(new MouseWheel(DateTime.Now, visualizer.GetScore()));
                         LastActionWasWheel = true;
                     }
@@ -475,7 +472,6 @@ namespace WiredIn.Analyzer
                 case WM_LBUTTONUP:
                 case WM_MBUTTONUP:
                 case WM_RBUTTONUP:
-                    //System.Console.WriteLine("Mouse Click");
                     this.EnqueueActivity(new MouseClick(DateTime.Now, visualizer.GetScore()));
                     LastActionWasWheel = false;
                     break;

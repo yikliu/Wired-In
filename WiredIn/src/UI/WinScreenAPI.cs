@@ -21,14 +21,12 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/// <summary>
-/// The WiredIn namespace.
-/// </summary>
-namespace WiredIn
-{
-    using System;
-    using System.Runtime.InteropServices;
 
+using System;
+using System.Runtime.InteropServices;
+
+namespace WiredIn.UI
+{
     /// <summary>
     /// Class WinScreenAPI.
     /// </summary>

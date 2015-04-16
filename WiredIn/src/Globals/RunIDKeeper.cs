@@ -22,9 +22,6 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/// <summary>
-/// The Globals namespace.
-/// </summary>
 namespace WiredIn.Globals
 {
     using System;
@@ -37,7 +34,6 @@ namespace WiredIn.Globals
     /// </summary>
     class RunIDKeeper
     {
-        #region Fields
 
         /// <summary>
         /// The _instance
@@ -48,10 +44,6 @@ namespace WiredIn.Globals
         /// The identifier
         /// </summary>
         private string id;
-
-        #endregion Fields
-
-        #region Constructors
 
         /// <summary>
         /// Prevents a default instance of the <see cref="RunIDKeeper"/> class from being created.
@@ -66,10 +58,6 @@ namespace WiredIn.Globals
                 + now.Hour.ToString() + "-"
                 + now.Minute.ToString();
         }
-
-        #endregion Constructors
-
-        #region Methods
 
         /// <summary>
         /// Gets the identifier keeper.
@@ -94,6 +82,5 @@ namespace WiredIn.Globals
             return id;
         }
 
-        #endregion Methods
     }
 }

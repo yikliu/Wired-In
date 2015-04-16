@@ -26,18 +26,18 @@
     {
         #region Fields
 
-        private ConfigVariables config = ConfigVariables.GetConfigVariables();
-        private Worksphere worksphere = Worksphere.GetWorkSphere();
-        private RunInstance runIns;
-        private JSONLogger jLog;
-        private List<string> visNames;
+        private readonly ConfigVariables _config = ConfigVariables.GetConfigVariables();
+        private readonly Worksphere _worksphere = Worksphere.GetWorkSphere();
+        private readonly RunInstance _runIns;
+        private readonly JsonLogger _jLog;
+        private List<string> _visNames;
 
-        private RadioButtonTileSubject visualizerCenter = new RadioButtonTileSubject();
+        private readonly RadioButtonTileSubject _visualizerCenter = new RadioButtonTileSubject();
 
-        private List<WindowInfo> allWindows;
-        private List<WindowInfo> whiteWindowInfos;
+        private readonly List<WindowInfo> _allWindows;
+        private readonly List<WindowInfo> _whiteWindowInfos;
 
-        private BackgroundWorker bgWorker;
+        private readonly BackgroundWorker _bgWorker;
 
         #endregion Fields
 
@@ -49,24 +49,24 @@
         public Orientation()
         {
             InitializeComponent();
-            allWindows = new List<WindowInfo>();
-            whiteWindowInfos = new List<WindowInfo>();
+            _allWindows = new List<WindowInfo>();
+            _whiteWindowInfos = new List<WindowInfo>();
 
-            lbxAllWindows.DataSource = allWindows;
-            lbxWhiteWinList.DataSource = whiteWindowInfos;
+            lbxAllWindows.DataSource = _allWindows;
+            lbxWhiteWinList.DataSource = _whiteWindowInfos;
 
-            runIns = new RunInstance();
-            jLog = new JSONLogger();
+            _runIns = new RunInstance();
+            _jLog = new JsonLogger();
 
-            bgWorker = new BackgroundWorker();
-            bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
-            bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorker_RunWorkerCompleted);
+            _bgWorker = new BackgroundWorker();
+            _bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
+            _bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorker_RunWorkerCompleted);
             tabControl.SelectedTab = tabpageTask;
         }
 
         void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            ((CurrencyManager)lbxAllWindows.BindingContext[allWindows]).Refresh();
+            ((CurrencyManager)lbxAllWindows.BindingContext[_allWindows]).Refresh();
         }
 
         void bgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -78,7 +78,7 @@
 
         #region Methods
 
-        public void btnGoToContext_Click(object sender, EventArgs e)
+        private void btnGoToContext_Click(object sender, EventArgs e)
         {
             tabControl.SelectedTab = tabpageEnv;
         }
@@ -86,67 +86,67 @@
         private void btnAddWindow_Click(object sender, EventArgs e)
         {
             IEnumerable<WindowInfo> list = this.lbxAllWindows.SelectedItems.Cast<WindowInfo>();
-            whiteWindowInfos.AddRange(list);
-            ((CurrencyManager)lbxAllWindows.BindingContext[whiteWindowInfos]).Refresh();
+            _whiteWindowInfos.AddRange(list);
+            ((CurrencyManager)lbxAllWindows.BindingContext[_whiteWindowInfos]).Refresh();
         }
 
         private void btnDelWindow_Click(object sender, EventArgs e)
         {
             WindowInfo wi = (WindowInfo)this.lbxWhiteWinList.SelectedItem;
-            whiteWindowInfos.Remove(wi);
-            ((CurrencyManager)lbxWhiteWinList.BindingContext[whiteWindowInfos]).Refresh();
+            _whiteWindowInfos.Remove(wi);
+            ((CurrencyManager)lbxWhiteWinList.BindingContext[_whiteWindowInfos]).Refresh();
         }
 
         private void btnFinalizeOrientation(object sender, EventArgs e)
         {
             //setup the visualization
-            worksphere.CustomVisualizerName = this.visualizerCenter.GetSelectedKey();
-            switch (worksphere.CustomVisualizerName)
+            _worksphere.CustomVisualizerName = this._visualizerCenter.GetSelectedKey();
+            switch (_worksphere.CustomVisualizerName)
             {
                 case "rose":
-                    worksphere.ActiveView = Visualizer.Rose;
+                    _worksphere.ActiveView = Visualizer.Rose;
                     break;
                 case "moon":
-                    worksphere.ActiveView = Visualizer.Moon;
+                    _worksphere.ActiveView = Visualizer.Moon;
                     break;
                 case "progressbar":
-                    worksphere.ActiveView = Visualizer.Progressbar;
+                    _worksphere.ActiveView = Visualizer.Progressbar;
                     break;
                 default:
-                    worksphere.ActiveView = Visualizer.Custom;
+                    _worksphere.ActiveView = Visualizer.Custom;
                     break;
             }
 
             //setup worksphere
-            worksphere.ClearAll(); //clear first
+            _worksphere.ClearAll(); //clear first
 
             //store keywords
             foreach (Control c in keywordsTable.Controls)
             {
                 string word = ((MetroTextBox)c.Controls[2]).Text;
-                worksphere.AddKeyword(word.ToLowerInvariant());
+                _worksphere.AddKeyword(word.ToLowerInvariant());
             }
 
             //store titles;
-            foreach (WindowInfo w in whiteWindowInfos)
+            foreach (WindowInfo w in _whiteWindowInfos)
             {
-                worksphere.AppendWhiteWindowInfo(w);
+                _worksphere.AppendWhiteWindowInfo(w);
             }
 
-            runIns.TaskDescription = tbxTaskDesc.Text;
-            runIns.ExpectedDifficulty = tbDifficulty.Value;
-            runIns.ExpectedFamilarity = tbFamiliarity.Value;
-            runIns.NumOfToDoItems = (int)numOtherItems.Value;
-            runIns.ExpectedTimeOnHour = (int)numExpectTimeOnTask.Value;
+            _runIns.TaskDescription = tbxTaskDesc.Text;
+            _runIns.ExpectedDifficulty = tbDifficulty.Value;
+            _runIns.ExpectedFamilarity = tbFamiliarity.Value;
+            _runIns.NumOfToDoItems = (int)numOtherItems.Value;
+            _runIns.ExpectedTimeOnHour = (int)numExpectTimeOnTask.Value;
             if (tbxOther.Text.Length > 0)
-                runIns.Location = tbxOther.Text;
+                _runIns.Location = tbxOther.Text;
 
-            runIns.NoisyLevel = tbNoisy.Value;
-            runIns.EstimatedBusiness = tbBusiness.Value;
-            runIns.EstimatedEnergy = tbEnergy.Value;
-            runIns.EstimatedStresslevel = tbStress.Value;
+            _runIns.NoisyLevel = tbNoisy.Value;
+            _runIns.EstimatedBusiness = tbBusiness.Value;
+            _runIns.EstimatedEnergy = tbEnergy.Value;
+            _runIns.EstimatedStresslevel = tbStress.Value;
 
-            LogRunIns(runIns);
+            LogRunIns(_runIns);
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -154,14 +154,14 @@
 
         private void LogRunIns(RunInstance ins)
         {
-            string dir = Path.Combine(config.WiredInFolder, "log", RunIDKeeper.GetIDKeeper().GetRunID());
+            string dir = Path.Combine(_config.WiredInFolder, "log", RunIDKeeper.GetIDKeeper().GetRunID());
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
             }
             string content = JsonConvert.SerializeObject(ins);
             string fileName = Path.Combine(dir, "run.json");
-            jLog.LogThisToHere(content, fileName);
+            _jLog.LogThisToHere(content, fileName);
         }
 
         private void btnGoFinish_Click(object sender, EventArgs e)
@@ -255,31 +255,31 @@
 
         private void ShowVisualizationTiles()
         {
-            String visualizationFolder = Path.Combine(config.WiredInFolder, "visualizations");
-            bool folder_exists = Directory.Exists(visualizationFolder);
-            if (!folder_exists)
+            String visualizationFolder = Path.Combine(_config.WiredInFolder, "images");
+            bool folderExists = Directory.Exists(visualizationFolder);
+            if (!folderExists)
             {
                 Directory.CreateDirectory(visualizationFolder);
             }
 
-            visNames = new List<string>();
+            _visNames = new List<string>();
             foreach (string s in Directory.GetDirectories(visualizationFolder))
             {
-                visNames.Add(s.Remove(0, visualizationFolder.Length + 1));
+                _visNames.Add(s.Remove(0, visualizationFolder.Length + 1));
             }
 
-            visNames.Add("progressbar");
-            tableLayoutPanel.ColumnCount = visNames.Count;
-            visualizerCenter.UnregisterAll();
+            _visNames.Add("progressbar");
+            tableLayoutPanel.ColumnCount = _visNames.Count;
+            _visualizerCenter.UnregisterAll();
             tableLayoutPanel.Controls.Clear();
-            foreach (string name in visNames)
+            foreach (string name in _visNames)
             {
                 MyTile tile = new MyTile();
-                tile.SetTileSubject(visualizerCenter);
+                tile.SetTileSubject(_visualizerCenter);
                 tile.Name = name;
                 tile.Register();
                 tile.Text = name;
-                tile.TileImage = global::WiredIn.Properties.Resources.selection;
+                tile.TileImage = Properties.Resources.selection;
                 tile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 tableLayoutPanel.Controls.Add(tile);
             }
@@ -319,12 +319,12 @@
 
         private void EnumAllWindows()
         {
-            Predicate<SystemWindow> filterVisibleWnd = new Predicate<SystemWindow>(this.VisbleWindows);
+            var filterVisibleWnd = new Predicate<SystemWindow>(this.VisbleWindows);
             SystemWindow[] filtered = SystemWindow.FilterToplevelWindows(filterVisibleWnd);
-            allWindows.Clear();
-            foreach (SystemWindow sw in filtered)
+            _allWindows.Clear();
+            foreach (var sw in filtered)
             {
-                allWindows.Add(new WindowInfo(sw));
+                _allWindows.Add(new WindowInfo(sw));
             }
         }
 
@@ -397,12 +397,12 @@
 
         private void Orientation_Load(object sender, EventArgs e)
         {
-            bgWorker.RunWorkerAsync();
+            _bgWorker.RunWorkerAsync();
         }
 
         private void btnOpenWindowUpdate_Click(object sender, EventArgs e)
         {
-            bgWorker.RunWorkerAsync();
+            _bgWorker.RunWorkerAsync();
         }
 
         private void rbLocation_CheckedChanged(object sender, EventArgs e)
@@ -413,16 +413,16 @@
                 switch (rb.Name)
                 {
                     case "rbHome":
-                        runIns.Location = "Home";
+                        _runIns.Location = "Home";
                         break;
                     case "rbPublic":
-                        runIns.Location = "Public";
+                        _runIns.Location = "Public";
                         break;
                     case "rbOpenOffice":
-                        runIns.Location = "Open Office";
+                        _runIns.Location = "Open Office";
                         break;
                     case "rbSingleRoom":
-                        runIns.Location = "Single Office Room";
+                        _runIns.Location = "Single Office Room";
                         break;
                 }
             }
