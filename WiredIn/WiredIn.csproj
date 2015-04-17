@@ -77,6 +77,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ManagedWinapi, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ManagedWinapi.0.3\ManagedWinapi.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.3.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -4340,16 +4344,6 @@
     <Content Include="images\rose\999.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="lib\ManagedWinapi.dll" />
-    <Content Include="lib\ManagedWinapiNativeHelper.dll" />
-    <Content Include="lib\MetroFramework.Design.dll" />
-    <Content Include="lib\MetroFramework.dll" />
-    <Content Include="lib\MySql.Data.CF.dll" />
-    <Content Include="lib\MySql.Data.dll" />
-    <Content Include="lib\MySql.Data.Entity.dll" />
-    <Content Include="lib\MySql.Web.dll" />
-    <Content Include="lib\Newtonsoft.Json.dll" />
-    <Content Include="lib\System.ComponentModel.Composition.dll" />
     <Content Include="Resources\Arrows-Right-round-icon.png" />
     <Content Include="Resources\blockiu_rgb_lg.jpg" />
     <Content Include="Resources\img-thing.jpg" />
