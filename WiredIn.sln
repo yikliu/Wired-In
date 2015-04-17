@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiredIn", "WiredIn\WiredIn.
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WiredInInstaller", "WiredInInstaller\WiredInInstaller.vdproj", "{7F5EF2F1-A9B9-4E82-8A7E-9290C9864D1B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{62CC4529-5ABB-4FCA-96F8-C1BCACEEB358}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
