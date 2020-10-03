@@ -1,0 +1,8 @@
+.DS_Store
+.vs/
+UpgradeLog.htm
+*.GhostDoc.xml
+*.suo
+.v12.suo
+WiredIn/Properties/app.manifest
+WiredIn/WiredIn.csproj.user
